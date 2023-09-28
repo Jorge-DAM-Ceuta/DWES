@@ -39,7 +39,7 @@ $decimaPalabraEspanol = "Probar";
     <title>Ejercicio 1</title>
 </head>
 <body>
-    <table>
+    <table border="3">
         <tr>
             <th>Inglés</th>
             <th>Español</th>
