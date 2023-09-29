@@ -2,7 +2,7 @@
 
 - [Tema2](./Tema2)
   
-  - [Actividades Entregables](./Tema2/Actividades/Actividades_entregables)
+  - [Ejercicios de Programación nº1](./Tema2/Actividades/EjerciciosProgramacion_1)
     
   - [Actividades del Temario](./Tema2/Actividades/Actividades_temario)
     
