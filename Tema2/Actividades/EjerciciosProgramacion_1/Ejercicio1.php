@@ -44,7 +44,6 @@ $decimaPalabraEspanol = "Probar";
             <th>Inglés</th>
             <th>Español</th>
         </tr>
-        
         <tr>
             <td><?php echo $primeraPalabraIngles?></td>
             <td><?php echo $primeraPalabraEspanol?></td>
