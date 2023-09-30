@@ -5,9 +5,9 @@
     <title>Pirámide de asteriscos</title>
 </head>
 <body>
-    <p><?php print("*")?></p>
-    <p><?php print(" * *") ?></p>
-    <p><?php print("* * *") ?></p>
-    <p><?php print("*  *  *"); ?></p>
+    <p><?php echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp * "; ?></p>
+    <p><?php echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp * &nbsp&nbsp&nbsp&nbsp *  " ?></p>
+    <p><?php echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp * &nbsp&nbsp&nbsp * &nbsp&nbsp&nbsp * "; ?></p>
+    <p><?php echo "&nbsp&nbsp&nbsp * &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp * &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp *"; ?></p>
 </body>
 </html>
