@@ -4,7 +4,7 @@
   
   - [Ejercicios de Programación nº1](./Tema2/Actividades/EjerciciosProgramacion_1)
     
-  - [Actividades del Temario](./Tema2/Actividades/Actividades_temario)
+  - [Actividades del Temario](https://github.com/Jorge-DAM-Ceuta/DWES/tree/main/Tema2/Actividades/Actividades_temario)
     
   - [Practica](./Tema2/Practica) 
 
