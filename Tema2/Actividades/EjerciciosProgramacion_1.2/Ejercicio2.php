@@ -16,7 +16,7 @@ $horarioList = ["08:25 - 9:20", "9:20 - 10:15", "10:15 - 11:10", "11:10 - 11:30"
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>Horario de clase</title>
+        <title>Horario de clase v2</title>
     </head>
     <body>
 

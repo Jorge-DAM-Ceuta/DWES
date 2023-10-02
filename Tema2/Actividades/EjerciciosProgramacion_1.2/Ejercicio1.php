@@ -11,7 +11,7 @@ $palabrasEspanol = ["Tortuga", "Piscina", "Lápiz", "Lenguaje", "Editar", "Dibuj
 <html lang = "es">
     <head>
         <meta charset="UTF-8">
-        <title>Ejercicio1.2</title>
+        <title>Ejercicio 1 v2</title>
     </head>
     <body>
 
