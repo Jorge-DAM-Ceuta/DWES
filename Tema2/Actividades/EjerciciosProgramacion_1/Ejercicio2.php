@@ -34,7 +34,7 @@ $sextaHora = "13:20 - 14:15";
         En algunas de las filas <td> se usa el atributo rowspan para 
         las clases que duran 2 horas, además del atributo align 
         con el valor center para centrar el contenido. -->
-        <table border=3>
+        <table border=3 width="50%">
             <tr>
                 <th></th>
                 <th>Lunes</th>
