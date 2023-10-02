@@ -8,6 +8,6 @@
  
   - [Ejercicios de Programación nº1 v2](https://github.com/JorgeBackendProjects/DWES/tree/main/Tema2/Actividades/EjerciciosProgramacion_1.2)
    
-  - [Practica](./Tema2/Practica) 
+  - [Práctica](./Tema2/Practica) 
 
 ## Aquí se realizarán todos los proyectos PHP de la asignatura.
