@@ -1,5 +1,9 @@
 <?php
 
+/* En este bloque PHP se han declarado las variables necesarias para
+crear una tabla con el horario de clase. He usado una variable para 
+cada asignatura y una variable para cada horario de la clase. */
+
 $asignaturaDWES = "Desarrollo de Web en Entorno Servidor (DWES)";
 $asignaturaDWEC = "Desarrollo de Web en Entorno Cliente (DWEC)";
 $asignaturaDAW = "Despliegue de Aplicaciones Web (DAW)";
@@ -17,70 +21,78 @@ $sextaHora = "13:20 - 14:15";
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Horario de clase</title>
-</head>
-<body>
-    <table border=3>
-        <tr>
-            <th></th>
-            <th>Lunes</th>
-            <th>Martes</th>
-            <th>Miércoles</th>
-            <th>Jueves</th>
-            <th>Viernes</th>
-        </tr>
-        <tr>
-            <th><?php echo $primeraHora ?></th>
-            <td rowspan="2" align="center"><?php echo $asignaturaDIW ?></td>
-            <td align="center"><?php echo $asignaturaEIEM ?></td>
-            <td rowspan="2" align="center"><?php echo $asignaturaDAW ?></td>
-            <td align="center"><?php echo $asignaturaDWEC ?></td>
-            <td rowspan="2" align="center"><?php echo $asignaturaDWES ?></td>
+    <head>
+        <meta charset="UTF-8">
+        <title>Horario de clase</title>
+    </head>
+    <body>
 
-        </tr>
-        <tr>
-            <th><?php echo $segundaHora ?></th>
-            <td rowspan="2" align="center"><?php echo $asignaturaDWES ?></td>
-            <td rowspan="2" align="center"><?php echo $asignaturaDIW ?></td>
-        </tr>
-        <tr>
-            <th><?php echo $terceraHora ?></th>
-            <td align="center"><?php echo $asignaturaDWES ?></td>
-            <td align="center"><?php echo $asignaturaDWEC ?></td>
-            <td align="center"><?php echo $asignaturaDIW ?></td>
-        </tr>
-        <tr>
-            <th>R</th>
-            <th>E</th>
-            <th>C</th>
-            <th>R</th>
-            <th>E</th>
-            <th>O</th>
-        </tr>
-        <tr>
-            <th><?php echo $cuartaHora ?></th>
-            <td align="center"><?php echo $asignaturaDWES ?></td>
-            <td rowspan="2" align="center"><?php echo $asignaturaDAW ?></td>
-            <td align="center"><?php echo $asignaturaDWEC ?></td>
-            <td rowspan="2" align="center"><?php echo $asignaturaDWES ?></td>
-            <td align="center"><?php echo $asignaturaDIW ?></td>
-        </tr>
-        <tr>
-            <th><?php echo $quintaHora ?></th>
-            <td align="center"><?php echo $asignaturaEIEM ?></td>
-            <td rowspan="2" align="center"><?php echo $asignaturaDIW ?></td>
-            <td rowspan="2" align="center"><?php echo $asignaturaDWEC ?></td>
-        </tr>
-        <tr>
-            <th><?php echo $sextaHora ?></th>
-            <td align="center"><?php echo $asignaturaDAW ?></td>
-            <td align="center"><?php echo $asignaturaDWEC ?></td>
-            <td align="center"><?php echo $asignaturaEIEM ?></td>
-        </tr>
+        <!-- En este bloque se crea una tabla que mediante apertura 
+        de bloques PHP para mostrar los valores correspondientes al
+        horario de clase mediante echo. 
+        
+        En algunas de las filas <td> se usa el atributo rowspan para 
+        las clases que duran 2 horas, además del atributo align 
+        con el valor center para centrar el contenido. -->
+        <table border=3>
+            <tr>
+                <th></th>
+                <th>Lunes</th>
+                <th>Martes</th>
+                <th>Miércoles</th>
+                <th>Jueves</th>
+                <th>Viernes</th>
+            </tr>
+            <tr>
+                <th><?php echo $primeraHora ?></th>
+                <td rowspan="2" align="center"><?php echo $asignaturaDIW ?></td>
+                <td align="center"><?php echo $asignaturaEIEM ?></td>
+                <td rowspan="2" align="center"><?php echo $asignaturaDAW ?></td>
+                <td align="center"><?php echo $asignaturaDWEC ?></td>
+                <td rowspan="2" align="center"><?php echo $asignaturaDWES ?></td>
 
-    </table>
-</body>
+            </tr>
+            <tr>
+                <th><?php echo $segundaHora ?></th>
+                <td rowspan="2" align="center"><?php echo $asignaturaDWES ?></td>
+                <td rowspan="2" align="center"><?php echo $asignaturaDIW ?></td>
+            </tr>
+            <tr>
+                <th><?php echo $terceraHora ?></th>
+                <td align="center"><?php echo $asignaturaDWES ?></td>
+                <td align="center"><?php echo $asignaturaDWEC ?></td>
+                <td align="center"><?php echo $asignaturaDIW ?></td>
+            </tr>
+            <tr>
+                <th>R</th>
+                <th>E</th>
+                <th>C</th>
+                <th>R</th>
+                <th>E</th>
+                <th>O</th>
+            </tr>
+            <tr>
+                <th><?php echo $cuartaHora ?></th>
+                <td align="center"><?php echo $asignaturaDWES ?></td>
+                <td rowspan="2" align="center"><?php echo $asignaturaDAW ?></td>
+                <td align="center"><?php echo $asignaturaDWEC ?></td>
+                <td rowspan="2" align="center"><?php echo $asignaturaDWES ?></td>
+                <td align="center"><?php echo $asignaturaDIW ?></td>
+            </tr>
+            <tr>
+                <th><?php echo $quintaHora ?></th>
+                <td align="center"><?php echo $asignaturaEIEM ?></td>
+                <td rowspan="2" align="center"><?php echo $asignaturaDIW ?></td>
+                <td rowspan="2" align="center"><?php echo $asignaturaDWEC ?></td>
+            </tr>
+            <tr>
+                <th><?php echo $sextaHora ?></th>
+                <td align="center"><?php echo $asignaturaDAW ?></td>
+                <td align="center"><?php echo $asignaturaDWEC ?></td>
+                <td align="center"><?php echo $asignaturaEIEM ?></td>
+            </tr>
+
+        </table>
+    </body>
 </html>
 
