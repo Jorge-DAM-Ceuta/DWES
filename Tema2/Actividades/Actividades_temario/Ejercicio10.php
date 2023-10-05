@@ -27,4 +27,8 @@ foreach(count_chars($cadenaCaracteres, 1) as $valor => $contador){
 echo "<br><br><br><h3>Reemplazar todas las 'a' por '*' en la cadena:</h3>";
 echo str_replace("a", "*", $cadenaCaracteres);
 
+//10.4)
+echo "<br><br><br><h3>Mostrar la cadena a partir de la palabra completo sin incluirla:</h3>";
+echo substr($cadenaCaracteres, 22, strlen($cadenaCaracteres)-1);
+
 ?>
