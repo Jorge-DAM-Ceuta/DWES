@@ -1,17 +1,11 @@
 <?php
 
 date_default_timezone_set("Europe/Madrid");
-setlocale(LC_TIME, "es_ES", "es_ES.UTF-8");
+setlocale(LC_TIME, "es_ES.UTF-8");
 
-$fechaActual = getdate();
+$fechaActual = strftime("%A, %d de %B de %Y");
 
-$nombreDia = $fechaActual["weekday"];
-$numeroDia = $fechaActual["mday"];
-$mes = $fechaActual["month"];
-$anio = $fechaActual["year"];
+echo $fechaActual;
 
-echo `${nombreDia}, ${numeroDia} ${mes} ${anio} `;
-
-$fecha = date("l,  F  Y");
-echo $fecha;
+//Se muestra la fecha actual en ingles. ??
 ?>
