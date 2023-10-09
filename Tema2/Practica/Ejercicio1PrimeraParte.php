@@ -20,54 +20,62 @@ for($i = 0; $i<count($preguntas); $i++){
         $respuesta = readline($preguntas[$i]);
 
         if(strtolower($respuesta) == "si" || strtolower($respuesta) == "s" || strtolower($respuesta) == "yes" || strtolower($respuesta) == "y"){
-            echo $respuesta;
             switch($i){
                 case 0;
-                $nivelDeInfidelidad = $nivelDeInfidelidad + 1;
+                $nivelDeInfidelidad += 1;
                     break;
                 
                 case 1;
-                $nivelDeInfidelidad = $nivelDeInfidelidad + 2;
+                $nivelDeInfidelidad += 2;
                     break;
 
                 case 2;
-                $nivelDeInfidelidad = $nivelDeInfidelidad + 3;
+                $nivelDeInfidelidad += + 3;
                     break;
 
                 case 3;
-                $nivelDeInfidelidad = $nivelDeInfidelidad + 4;
+                $nivelDeInfidelidad += + 4;
                     break;
 
                 case 4;
-                $nivelDeInfidelidad = $nivelDeInfidelidad + 5;
+                $nivelDeInfidelidad += + 5;
                     break;
 
                 case 5;
-                $nivelDeInfidelidad = $nivelDeInfidelidad + 6;
+                $nivelDeInfidelidad += 6;
                     break;
 
                 case 6;
-                $nivelDeInfidelidad = $nivelDeInfidelidad + 7;
+                $nivelDeInfidelidad += 7;
                     break;
 
                 case 7;
-                $nivelDeInfidelidad = $nivelDeInfidelidad + 8;
+                $nivelDeInfidelidad += 8;
                     break;
 
                 case 8;
-                $nivelDeInfidelidad = $nivelDeInfidelidad + 9;
+                $nivelDeInfidelidad += 9;
                     break;
 
                 case 9;
-                $nivelDeInfidelidad = $nivelDeInfidelidad + 10;
+                $nivelDeInfidelidad += 10;
                     break;
             }
-            echo $nivelDeInfidelidad;
         }
-    }while((strtolower($respuesta) == "si") || (strtolower($respuesta) != "s") || (strtolower($respuesta) != "yes") || (strtolower($respuesta) != "y") || (strtolower($respuesta) != "no") || (strtolower($respuesta) != "n"));
+    }while(!(strtolower($respuesta) == "si" || strtolower($respuesta) == "s" || strtolower($respuesta) == "yes" || strtolower($respuesta) == "y" || strtolower($respuesta) == "no" || strtolower($respuesta) == "n"));
 
 }
 
-echo "El nivel de infidelidad de tu pareja es de " . $nivelDeInfidelidad . "/55.";
+echo "El nivel de infidelidad de tu pareja es de " . $nivelDeInfidelidad . "/55.\n";
+    
+if($nivelDeInfidelidad >= 0 && $nivelDeInfidelidad <=10){
+    echo "¡Enhorabuena! tu pareja parece ser totalmente fiel.";
+}else if($nivelDeInfidelidad >= 11 && $nivelDeInfidelidad <=21){
+    echo "Quizás exista el peligro de otra persona en su vida o en su mente, aunque seguramente será algo sin importancia. No bajes la guardia.";
+}else if($nivelDeInfidelidad >= 22 && $nivelDeInfidelidad <=30){
+    echo "Tu pareja tiene todos los ingredientes para estar viviendo un romance con otra persona. Te aconsejamos que indagues un poco más y averigües que es lo que está pasando por su cabeza.";
+}else if($nivelDeInfidelidad >= 31 && $nivelDeInfidelidad <=55){
+    echo "Deberías contratar un investigador privado...";
+}
 
 ?>
