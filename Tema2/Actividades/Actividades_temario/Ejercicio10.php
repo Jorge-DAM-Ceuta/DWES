@@ -15,10 +15,8 @@ echo "<h4>Numero de vocales contenidas en la cadena:</h4> A: " . $vocalesA_Encon
 //10.2)
 echo "<br><h4>Consonantes y número de apariciones:</h4>";
 
-foreach(count_chars($cadenaCaracteres, 1) as $valor => $contador){
-    if(chr($valor) == ' ' || chr($valor) == 'a' || chr($valor) == 'A' || chr($valor) == 'e' || chr($valor) == 'E' || chr($valor) == 'i' || chr($valor) == 'I' || chr($valor) == 'o' || chr($valor) == 'O' || chr($valor) == 'u' || chr($valor) == 'U'){
-
-    }else{
+foreach(count_chars(strtolower($cadenaCaracteres), 1) as $valor => $contador){
+    if(!(chr($valor) == ' ' || chr($valor) == 'a' || chr($valor) == 'e' || chr($valor) == 'i' || chr($valor) == 'o' || chr($valor) == 'u')){
         echo "<br>Hay $contador instancias de '" . chr($valor) . "' en la cadena.";    
     }
 }
@@ -29,6 +27,6 @@ echo str_replace("a", "*", $cadenaCaracteres);
 
 //10.4)
 echo "<br><br><br><h3>Mostrar la cadena a partir de la palabra completo sin incluirla:</h3>";
-echo substr($cadenaCaracteres, 22, strlen($cadenaCaracteres)-1);
-
+$texto_Array = explode("completo", $cadenaCaracteres);
+echo $texto_Array[1];
 ?>
