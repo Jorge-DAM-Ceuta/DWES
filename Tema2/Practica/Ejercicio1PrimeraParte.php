@@ -70,12 +70,10 @@ echo "El nivel de infidelidad de tu pareja es de " . $nivelDeInfidelidad . "/55.
     
 if($nivelDeInfidelidad >= 0 && $nivelDeInfidelidad <=10){
     echo "¡Enhorabuena! tu pareja parece ser totalmente fiel.";
-}else if($nivelDeInfidelidad >= 11 && $nivelDeInfidelidad <=21){
+}else if($nivelDeInfidelidad >= 11 && $nivelDeInfidelidad <=22){
     echo "Quizás exista el peligro de otra persona en su vida o en su mente, aunque seguramente será algo sin importancia. No bajes la guardia.";
 }else if($nivelDeInfidelidad >= 22 && $nivelDeInfidelidad <=30){
     echo "Tu pareja tiene todos los ingredientes para estar viviendo un romance con otra persona. Te aconsejamos que indagues un poco más y averigües que es lo que está pasando por su cabeza.";
-}else if($nivelDeInfidelidad >= 31 && $nivelDeInfidelidad <=55){
-    echo "Deberías contratar un investigador privado...";
 }
 
 ?>

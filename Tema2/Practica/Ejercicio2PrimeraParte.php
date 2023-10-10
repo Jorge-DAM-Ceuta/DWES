@@ -1,53 +1,80 @@
 <?php
 
-$listaDeTareas = ["Lista de tareas"][""];
-$operacion = "";
+//cd /xampp/htdocs/DWES/DWES/Tema2/Practica
 
-echo "Menú:\n";
-echo "1. Mostrar lista\n";
-echo "2. Crear lista\n";
-echo "3. Añadir nueva tarea en una lista\n";
-echo "4. Marcar como completada una tarea de una lista\n";
-echo "5. Eliminar tarea de una lista\n";
-echo "6. Eliminar lista\n";
-echo "7. Mostrar tareas pendientes\n";
-
+$listaDeTareas = array();
 
 do{
 
-    echo $listaDeTareas;
+    echo "Menú:\n";
+    echo "1. Mostrar lista\n";
+    echo "2. Crear lista\n";
+    echo "3. Añadir nueva tarea en una lista\n";
+    echo "4. Marcar como completada una tarea de una lista\n";
+    echo "5. Eliminar tarea de una lista\n";
+    echo "6. Eliminar lista\n";
+    echo "7. Mostrar tareas pendientes\n";
+    echo "8. Finalizar ejecución\n";
+
+    $operacion = readline("Elige la operación a realizar:");
 
     switch($operacion){
-        case "Mostrar listas":
-           
-            break;
+        case 1: //Mostrar listas
+            print_r($listaDeTareas);
+            var_dump($listaDeTareas);
 
-        case "Crear lista":
+            /*foreach($listaDeTareas as $lista){
+                foreach($lista as $tarea){
+                    print_r($tarea);
+                }
+            }*/
             
             break;
 
-        case "Añadir nueva tarea en una lista":
-            $listaDeTareas [count($listaDeTareas)] = readline("Escribe el nombre de la tarea:");
+        case 2: //Crear lista
+            $nombreDeLista = readline("Dale un nombre a la lista:");
+            
+            array_push($listaDeTareas, $nombreDeLista);
+
             break;
 
-        case "Marcar como completada una tarea de una lista":
+        case 3: //Añadir nueva tarea en una lista
+            $nombreLista = readline("¿En qué lista quieres añadir una tarea?");
+            $nombreDeTarea = readline("Dale un nombre a la tarea:");
+
+            if(in_array($nombreLista, $listaDeTareas)){
+                foreach($listaDeTareas as $lista){
+                    if($lista[0] == $nombreLista){
+                        array_push($lista, array($nombreDeTarea));
+                    }
+                }
+            }else{
+                echo "La lista de tareas '" . $nombreLista . "' no existe..."; 
+            }
+
+            break;
+
+        case 4: //Marcar como completada una tarea de una lista
             
             break;
 
-        case "Eliminar tarea de una lista":
+        case 5: //Eliminar tarea de una lista
 
             break;
         
-        case "Elminiar lista":
+        case 6: //Elminiar lista
 
             break;
 
-        case "Mostrar tareas pendientes":
+        case 7: //Mostrar tareas pendientes
             
+            break;
+
+        case 8:
+
             break;
     }
 
-}while(strtolower($operacion) != "exit");
-
+}while($operacion != 8);
 
 ?>
