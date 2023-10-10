@@ -21,7 +21,6 @@ do{
     switch($operacion){
         case 1: //Mostrar listas
             print_r($listaDeTareas);
-            var_dump($listaDeTareas);
 
             /*foreach($listaDeTareas as $lista){
                 foreach($lista as $tarea){
@@ -34,31 +33,67 @@ do{
         case 2: //Crear lista
             $nombreDeLista = readline("Dale un nombre a la lista:");
             
-            array_push($listaDeTareas, $nombreDeLista);
+            $listaDeTareas[$nombreDeLista] = array();
+
+            print_r($listaDeTareas);
 
             break;
 
         case 3: //Añadir nueva tarea en una lista
-            $nombreLista = readline("¿En qué lista quieres añadir una tarea?");
+            $nombreDeLista = readline("¿En qué lista quieres añadir una tarea?");
             $nombreDeTarea = readline("Dale un nombre a la tarea:");
 
-            if(in_array($nombreLista, $listaDeTareas)){
-                foreach($listaDeTareas as $lista){
-                    if($lista[0] == $nombreLista){
-                        array_push($lista, array($nombreDeTarea));
+            if(array_key_exists($nombreDeLista, $listaDeTareas)){
+                foreach($listaDeTareas as $clave => $lista){
+                    if($clave == $nombreDeLista ){//&& (in_array($nombreDeTarea . " - (Sin terminar)", $lista) == false || in_array($nombreDeTarea . " - (Terminada)", $lista) == false)){
+                        array_push($listaDeTareas[$clave], $nombreDeTarea . " - (Sin terminar)");
+                    }else{
+                        echo "Ya existe una tarea con ese nombre en la lista.";
                     }
                 }
             }else{
-                echo "La lista de tareas '" . $nombreLista . "' no existe..."; 
+                echo "La lista de tareas '" . $nombreDeLista . "' no existe..."; 
             }
+
+            print_r($listaDeTareas);
 
             break;
 
         case 4: //Marcar como completada una tarea de una lista
-            
+            $nombreDeLista = readline("¿En qué lista se va a marcar la tarea completada?");
+            $nombreDeTarea = readline("¿Qué tarea se va a marcar completada?");
+
+            if(array_key_exists($nombreDeLista, $listaDeTareas)){
+                foreach($listaDeTareas[$nombreDeLista] as $clave => $tarea){
+                    if($tarea == $nombreDeTarea . " - (Terminada)"){
+                        echo "La tarea ya está marcada como completa.";
+                    }else if($tarea == $nombreDeTarea . " - (Sin terminar)"){
+                        $listaDeTareas[$nombreDeLista][$clave] = $nombreDeTarea . " - (Terminada)";
+                    }
+                }
+            }else{
+                echo "La lista de tareas '" . $nombreDeLista . "' no existe..."; 
+            }
+
+            print_r($listaDeTareas);
+
             break;
 
         case 5: //Eliminar tarea de una lista
+            $nombreDeLista = readline("¿En qué lista se va a eliminar la tarea?");
+            $nombreDeTarea = readline("¿Qué tarea se va a eliminar?");
+
+            if(array_key_exists($nombreDeLista, $listaDeTareas)){
+                foreach($listaDeTareas[$nombreDeLista] as $clave => $tarea){
+                    if($tarea == $nombreDeTarea . " - (Terminada)" || $tarea == $nombreDeTarea . " - (Sin terminar)"){
+                        unset($listaDeTareas[$nombreDeLista][$clave]); //Eliminar posición
+                    }
+                }
+            }else{
+                echo "La lista de tareas '" . $nombreDeLista . "' no existe..."; 
+            }
+
+            print_r($listaDeTareas);
 
             break;
         
