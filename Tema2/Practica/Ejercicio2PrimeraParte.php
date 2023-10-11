@@ -20,14 +20,8 @@ do{
 
     switch($operacion){
         case 1: //Mostrar listas
-            print_r($listaDeTareas);
+            mostrarListaDeTareas($listaDeTareas);
 
-            /*foreach($listaDeTareas as $lista){
-                foreach($lista as $tarea){
-                    print_r($tarea);
-                }
-            }*/
-            
             break;
 
         case 2: //Crear lista
@@ -35,7 +29,7 @@ do{
             
             $listaDeTareas[$nombreDeLista] = array();
 
-            print_r($listaDeTareas);
+            mostrarListaDeTareas($listaDeTareas);
 
             break;
 
@@ -45,17 +39,17 @@ do{
 
             if(array_key_exists($nombreDeLista, $listaDeTareas)){
                 foreach($listaDeTareas as $clave => $lista){
-                    if($clave == $nombreDeLista ){//&& (in_array($nombreDeTarea . " - (Sin terminar)", $lista) == false || in_array($nombreDeTarea . " - (Terminada)", $lista) == false)){
+                    if($clave == $nombreDeLista && (in_array($nombreDeTarea . " - (Sin terminar)", $lista) == false) && (in_array($nombreDeTarea . " - (Terminada)", $lista) == false)){
                         array_push($listaDeTareas[$clave], $nombreDeTarea . " - (Sin terminar)");
                     }else{
-                        echo "Ya existe una tarea con ese nombre en la lista.";
+                        echo "Ya existe una tarea con ese nombre en la lista.\n";
                     }
                 }
             }else{
                 echo "La lista de tareas '" . $nombreDeLista . "' no existe..."; 
             }
 
-            print_r($listaDeTareas);
+            mostrarListaDeTareas($listaDeTareas);
 
             break;
 
@@ -75,7 +69,7 @@ do{
                 echo "La lista de tareas '" . $nombreDeLista . "' no existe..."; 
             }
 
-            print_r($listaDeTareas);
+            mostrarListaDeTareas($listaDeTareas);
 
             break;
 
@@ -93,23 +87,59 @@ do{
                 echo "La lista de tareas '" . $nombreDeLista . "' no existe..."; 
             }
 
-            print_r($listaDeTareas);
+            mostrarListaDeTareas($listaDeTareas);
 
             break;
         
         case 6: //Elminiar lista
+            $nombreDeLista = readline("¿Qué lista deseas eliminar?");
 
+            if(array_key_exists($nombreDeLista, $listaDeTareas)){
+                unset($listaDeTareas[$nombreDeLista]);
+            }else{
+                echo "No existe ninguna lista con ese nombre...";
+            }
+
+            mostrarListaDeTareas($listaDeTareas);
             break;
 
-        case 7: //Mostrar tareas pendientes
-            
+        case 7: //Mostrar tareas pendientes de una lista
+            $nombreDeLista = readline("¿De qué lista quieres ver las tareas pendientes?");
+
+            if(array_key_exists($nombreDeLista, $listaDeTareas)){
+                foreach($listaDeTareas[$nombreDeLista] as $tarea){
+                    $informacionDeTarea = explode(" - ", $tarea);
+                    $estado = $informacionDeTarea[1];
+
+                    echo "\n";
+
+                    if($estado == "(Sin terminar)"){
+                        echo $tarea . "\n";
+                    }
+                }
+            }else{
+                echo "La lista de tareas '" . $nombreDeLista . "' no existe..."; 
+            }
             break;
 
-        case 8:
-
+        default:
+            echo "Elige una operación...";
             break;
     }
 
 }while($operacion != 8);
+
+function mostrarListaDeTareas($listaDeTareas){
+    echo "Lista de tareas: \n";
+
+    for($i = 0; $i<count($listaDeTareas); $i++){
+        $nombreDeLista = array_keys($listaDeTareas)[$i];
+        echo $nombreDeLista . ": \n";
+
+        for($j = 0; $j<count($listaDeTareas[$nombreDeLista]); $j++){
+            echo "  - " . $listaDeTareas[$nombreDeLista][$j] . "\n";
+        }
+    }
+}
 
 ?>
