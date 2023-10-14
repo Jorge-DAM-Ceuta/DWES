@@ -29,8 +29,8 @@
                     $temp = $_FILES['archivo']['tmp_name'];
 
                     /*Se comprueba el tipo de archivo mediante su extensión y su tamaño*/
-                    if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 2000000))) {
-                        echo "<strong>Error, el archivo debe ser .gif, .jpg o .png y debe pesar 2 MB como máximo.</strong>";
+                    if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "svg")) && ($tamano < 2000000))) {
+                        echo "<strong>Error, el archivo debe ser .gif, .jpg o .svg y debe pesar 2 MB como máximo.</strong>";
                     
                     }else {
                         /*Se intenta subir la imagen al archivo Imagen.php del servidor*/
