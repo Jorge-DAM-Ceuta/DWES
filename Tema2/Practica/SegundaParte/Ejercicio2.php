@@ -14,7 +14,9 @@ do{
     echo "5. Eliminar tarea de una lista\n";
     echo "6. Eliminar lista\n";
     echo "7. Mostrar tareas pendientes\n";
-    echo "8. Finalizar ejecución\n";
+    echo "8. Crear una nota en una lista\n";
+    echo "9. Leer nota de una lista\n";
+    echo "10. Finalizar ejecución\n";
 
     $operacion = readline("Elige la operación a realizar:");
 
@@ -124,13 +126,28 @@ do{
 
             break;
 
+        case 8:
+            $nombreDeLista = readline("¿A qué lista quieres asignarle una nota?");
+            $nombreDeNota = readline("¿Cómo se va a llamar tu nota?");
+            
+            crearNota($listaDeTareas, $nombreDeLista, $nombreDeNota);
+
+            mostrarListaDeTareas($listaDeTareas);
+
+            break;
+
+        case 9:
+            
+            
+            break;
+    
         default:
             echo "Elige una operación...";
             
             break;
     }
 
-}while($operacion != 8);
+}while($operacion != 10);
 
 function mostrarListaDeTareas($listaDeTareas){
     echo "Lista de tareas: \n";
@@ -143,6 +160,23 @@ function mostrarListaDeTareas($listaDeTareas){
             echo "  - " . $listaDeTareas[$nombreDeLista][$j] . "\n";
         }
     }
+}
+
+function crearNota($listaDeTareas, $nombreDeLista, $nombreArchivo){
+    $fichero = fopen("./Notas/" . $nombreArchivo . ".txt", "w");
+
+    $contenido = readline("Escribe el contenido de la nota:");
+    fwrite($fichero, $contenido);
+
+    fclose($fichero);
+
+    if(array_key_exists($nombreDeLista, $listaDeTareas)){
+        array_push($listaDeTareas[$nombreDeLista]["Nota"], "./Notas/" . $nombreArchivo . ".txt"); 
+        var_dump($listaDeTareas);
+    }else{
+        echo "La lista de tareas '" . $nombreDeLista . "' no existe..."; 
+    }
+
 }
 
 ?>
