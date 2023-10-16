@@ -126,7 +126,7 @@ do{
 
             break;
 
-        case 8:
+        case 8: //Crear una nota asociativa a una lista
             $nombreDeLista = readline("¿A qué lista quieres asignarle una nota?");
             $nombreDeNota = readline("¿Cómo se va a llamar tu nota?");
             
@@ -136,9 +136,11 @@ do{
 
             break;
 
-        case 9:
+        case 9: //Visualizar una nota asociativa de una lista
+            $nombreDeLista = readline("¿De qué lista quieres mostrar su nota?");
             
-            
+            mostrarNota($listaDeTareas, $nombreDeLista);
+
             break;
     
         default:
@@ -171,12 +173,30 @@ function crearNota($listaDeTareas, $nombreDeLista, $nombreArchivo){
     fclose($fichero);
 
     if(array_key_exists($nombreDeLista, $listaDeTareas)){
-        array_push($listaDeTareas[$nombreDeLista]["Nota"], "./Notas/" . $nombreArchivo . ".txt"); 
+        $listaDeTareas[$nombreDeLista]["Nota"] = "./Notas/" . $nombreArchivo . ".txt";
         var_dump($listaDeTareas);
     }else{
         echo "La lista de tareas '" . $nombreDeLista . "' no existe..."; 
     }
 
+}
+
+function mostrarNota($listaDeTareas, $nombreDeLista){
+    if(array_key_exists($nombreDeLista, $listaDeTareas)){
+        if(array_key_exists("Nota", $listaDeTareas[$nombreDeLista])){
+            $ruta = $listaDeTareas[$nombreDeLista]["Nota"];
+
+            if(file_exists($ruta)){
+                $contenido = file_get_contents($ruta);
+                echo "Contenido de la nota de la lista " . $nombreDeLista . "\n";
+                echo $contenido;
+            }
+        }else{
+            echo "La lista " . $nombreDeLista . " no tiene ninguna nota.";
+        }
+    }else{
+        echo "La lista de tareas '" . $nombreDeLista . "' no existe..."; 
+    }
 }
 
 ?>

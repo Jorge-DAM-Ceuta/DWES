@@ -15,6 +15,16 @@ $preguntas = [$primeraPregunta, $segundaPregunta, $terceraPregunta, $cuartaPregu
 
 $nivelDeInfidelidad = 0;
 
+/*En este bucle se recorre el array que contiene las preguntas, en su 
+interior mediante otro bucle do-while se comprueba que la respuesta 
+recogida por el usuario debe ser si, s, yes, y, no o n no.
+
+Mientras eso no se cumpla se seguirá preguntando lo mismo hasta que la 
+respuesta sea válida, así se pasará a la siguiente vuelta del bucle for 
+y se preguntará la siguiente de la lista. 
+
+Si las respuestas son afirmativas se sumarán puntos al nivel de infidelidad.
+*/
 for($i = 0; $i<count($preguntas); $i++){
     do{
         $respuesta = readline($preguntas[$i]);
@@ -67,7 +77,8 @@ for($i = 0; $i<count($preguntas); $i++){
 }
 
 echo "El nivel de infidelidad de tu pareja es de " . $nivelDeInfidelidad . "/55.\n";
-    
+
+/*Según el valor del nivel de infidelidad se mostrará un mensaje u otro por pantalla. */
 if($nivelDeInfidelidad >= 0 && $nivelDeInfidelidad <=10){
     echo "¡Enhorabuena! tu pareja parece ser totalmente fiel.";
 }else if($nivelDeInfidelidad >= 11 && $nivelDeInfidelidad <=22){
