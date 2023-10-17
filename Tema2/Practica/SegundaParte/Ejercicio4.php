@@ -7,6 +7,9 @@
     </head>
     <body>
         <?php
+
+            /*Se usa la include_once para llamar a la función deseada a la
+            que se le pasará por parámetros un array de nombres. */
             include_once "./Funciones.inc.php";
             
             $nombres = array("Jorge Muñoz", "Iván Núnez", "Alfredo Pérez", "Julio Ximenez", "Javier Almenta");

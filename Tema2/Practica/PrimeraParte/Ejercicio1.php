@@ -23,8 +23,7 @@ Mientras eso no se cumpla se seguirá preguntando lo mismo hasta que la
 respuesta sea válida, así se pasará a la siguiente vuelta del bucle for 
 y se preguntará la siguiente de la lista. 
 
-Si las respuestas son afirmativas se sumarán puntos al nivel de infidelidad.
-*/
+Si las respuestas son afirmativas se sumarán puntos al nivel de infidelidad. */
 for($i = 0; $i<count($preguntas); $i++){
     do{
         $respuesta = readline($preguntas[$i]);

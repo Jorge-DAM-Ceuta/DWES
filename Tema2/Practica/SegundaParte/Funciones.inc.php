@@ -73,6 +73,8 @@
         De la que se toma el contenido de cada elemento para recorrerlo en otro foreach y añadir
         las opciones mediante <select> para el desplegable y <option> para cada valor/provincia.*/
 
+        echo "<form>";
+
         foreach($comunidadesAutonomas as $comunidad => $provincias){
             echo "<label>" . $comunidad . ":</label>";
             echo "<select name='" . $comunidad . "'>";
@@ -84,5 +86,6 @@
             echo "</select><br><br>";
         }
 
+        echo "</form>";
     }
 ?>
