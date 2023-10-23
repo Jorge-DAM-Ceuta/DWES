@@ -106,12 +106,18 @@ do{
 
 }while($operacion != 10);
 
+/*Esta función lista los array que contiene el array 'listas' y cada uno de sus 
+elementos con un formato legible por el usuario. Solo se muestra la clave de los 
+subarrays y el valor de sus elementos sin la clave, excepto el elemento Nota. 
+
+El paso por valor de la variable se debe a que no se modificará nada de su interior,
+en los demás casos se requiere el paso del array 'listas' por referencia. */
 function mostrarListaDeTareas($listas){
     echo "Lista de tareas: \n";
 
     for($i = 0; $i<count($listas); $i++){
         $nombreDeLista = array_keys($listas)[$i];
-        echo $nombreDeLista . ": \n";
+        echo $nombreDeLista . ": \n"; //Mostrar nombre de la lista.
 
         foreach($listas[$nombreDeLista] as $tareas => $tarea){
             if($tareas == "Nota"){
@@ -123,6 +129,11 @@ function mostrarListaDeTareas($listas){
     }
 }
 
+/*Esta función permite crear una tarea dentro de una lista concreta dentro del array 'listas'.
+Se comprueba que la lista exista en el array y se recorren las listas hasta comprobar que el
+nombre de la lista coincida con el nombre en la clave del array y que no exista una tarea con
+el mismo nombre en su interior. Si se cumplen las dos condiciones se añade el elemento en esa
+lista con el nombre que ha introducido el usuario. */
 function crearTarea(&$listas, $nombreDeLista, $nombreDeTarea){
     if(array_key_exists($nombreDeLista, $listas)){
         foreach($listas as $clave => $lista){
@@ -137,13 +148,20 @@ function crearTarea(&$listas, $nombreDeLista, $nombreDeTarea){
     }
 }
 
+/*Esta función permite marcar como completada una tarea en una lista. Se comprueba que exista
+esa lista y se recorre sus elementos hasta comprobar que coindice el nombre de la tarea que
+ha introducido el usuario con el valor de una de sus posiciones para cambiar su valor. En
+caso de que la tarea ya esté marcada como completa se informará al usuario y en caso de que
+la tarea no exista en la lista también se mostrará un mensaje. */
 function completarTarea(&$listas, $nombreDeLista, $nombreDeTarea){
     if(array_key_exists($nombreDeLista, $listas)){
         foreach($listas[$nombreDeLista] as $clave => $tarea){
             if($tarea == $nombreDeTarea . " - (Terminada)"){
-                echo "La tarea ya está marcada como completa.";
+                echo "La tarea ya está marcada como completa.\n";
             }else if($tarea == $nombreDeTarea . " - (Sin terminar)"){
                 $listas[$nombreDeLista][$clave] = $nombreDeTarea . " - (Terminada)";
+            }else{
+                echo "No existe la tarea " . $nombreDeTarea . " en la lista.\n";
             }
         }
     }else{
@@ -151,11 +169,17 @@ function completarTarea(&$listas, $nombreDeLista, $nombreDeTarea){
     }
 }
 
+/*Esta función permite eliminar una tarea de una lista. Se comprueba que exista la lista y 
+se recorre la lista en busca de un elemento cuyo valor coincida con el nombre de la tarea
+introducida por el usuario. En caso de que la encuentre se eliminará el elemento con unset(), 
+en caso contrario se mostrará un mensaje indicando que no existe la tarea en la lista. */
 function eliminarTarea(&$listas, $nombreDeLista, $nombreDeTarea){
     if(array_key_exists($nombreDeLista, $listas)){
         foreach($listas[$nombreDeLista] as $clave => $tarea){
             if($tarea == $nombreDeTarea . " - (Terminada)" || $tarea == $nombreDeTarea . " - (Sin terminar)"){
                 unset($listas[$nombreDeLista][$clave]); //Eliminar posición
+            }else{
+                echo "No existe la tarea " . $nombreDeTarea . " en la lista.\n";
             }
         }
     }else{
@@ -163,14 +187,20 @@ function eliminarTarea(&$listas, $nombreDeLista, $nombreDeTarea){
     }
 }
 
+/*Esta función permite eliminar una lista. Se comprueba que la lista exista y se elimina 
+mediante el método unset(), en caso contrario se mostrará un mensaje al usuario. */
 function eliminarLista(&$listas, $nombreDeLista){
     if(array_key_exists($nombreDeLista, $listas)){
         unset($listas[$nombreDeLista]);
     }else{
-        echo "No existe ninguna lista con ese nombre...\n";
+        echo "No existe ninguna lista llamada " . $nombreDeLista . "...\n";
     }
 }
 
+/*Esta función permite mostrar las tareas pendientes de una lista. Se comprueba que exista la 
+lista y se muestra un título, luego, con un foreach se recorren las posiciones de la lista y 
+mediante un método de manejo de cadenas se separa la cadena del valor en dos. Se usa la 
+posición 1 que contendrá el estado de la tarea, si es igual a (Sin terminar) se mostrará la tarea. */
 function mostrarTareasPendientes(&$listas ,$nombreDeLista){
     if(array_key_exists($nombreDeLista, $listas)){
 
@@ -181,7 +211,7 @@ function mostrarTareasPendientes(&$listas ,$nombreDeLista){
             $estado = $informacionDeTarea[1];
 
             if($estado == "(Sin terminar)"){
-                echo $tarea . "\n";
+                echo "  - " . $tarea . "\n";
             }
         }
     }else{
@@ -189,6 +219,12 @@ function mostrarTareasPendientes(&$listas ,$nombreDeLista){
     }
 }
 
+/*Esta función permite mediante los métodos fopen(), fwrite() y fclose() crear un archivo 
+con el contenido que el usuario necesite. Se crea un fichero en el directorio 'Notas' con 
+la extensión .txt y mediante un readline() se recoge el contenido escrito por el usuario.
+
+Luego, si la lista existe crea un elemento en su interior con la clave 'Nota' cuyo valor
+será la ruta relativa a la nota en el directorio Notas. */
 function crearNota(&$listas, $nombreDeLista, $nombreArchivo){
     $fichero = fopen("./Notas/" . $nombreArchivo . ".txt", "w");
 
@@ -205,6 +241,13 @@ function crearNota(&$listas, $nombreDeLista, $nombreArchivo){
     }
 }
 
+/*Esta función permite visualizar el contenido de una nota en una lista de tareas mediante
+el método file_get_contents() indicándole la ruta al fichero. En primer lugar se comprueba
+que la lista existe, luego comprueba que exista el elemento con clave 'Nota' en el array.
+
+Si es así se almacena el valor/ruta en la variable $ruta y se comprueba que exista el fichero
+en el directorio, de ser así se almacena el contenido en la variable $contenido con el método
+file_get_contents() y se muestra un título y su valor mediante un echo. */
 function mostrarNota($listas, $nombreDeLista){
     if(array_key_exists($nombreDeLista, $listas)){
         if(array_key_exists("Nota", $listas[$nombreDeLista])){

@@ -7,6 +7,7 @@
     </head>
     <body>
         <?php
+            
             include_once "./Funciones.inc.php";
 
             desplegarProvincias();
