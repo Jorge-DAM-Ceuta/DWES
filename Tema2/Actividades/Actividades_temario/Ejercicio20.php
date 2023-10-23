@@ -2,10 +2,10 @@
 
 $current = ["1", "3", "5", "7"]
 
-while($variable = $current($a)){
+/*while($variable = $current($a)){
     echo $variable;
     next($a);
-}
+}*/
 
 /* No, la manera correcta es usar la función current($array). Como en el
 ejercicio anterior, no haría falta usar una variable externa. Simplemente
