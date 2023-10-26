@@ -24,7 +24,7 @@
         </form>
 
         <?php
-            if (isset($_POST['enviar'])) {
+            if (isset($_POST["enviar"])) {
                 $filas = $_POST["filas"];
                 $columnas = $_POST["columnas"];
         
@@ -32,15 +32,17 @@
                     echo "<table border='1'>";
 
                     for ($i = 1; $i <= $filas; $i++) {
-                        echo '<tr>';
+                        echo "<tr>";
                         
                         for ($j = 1; $j <= $columnas; $j++) {
                             $numero = $i + $j;
-                            $estilo = "color: black;";
-
+                            
                             if ($numero % 3 == 0){
                                 $estilo = "color: red;";
-                            } 
+                            
+                            }else{
+                                $estilo = "color: black;";    
+                            }
 
                             echo "<td style='". $estilo . "'>" . $numero . "</td>";
                         }
