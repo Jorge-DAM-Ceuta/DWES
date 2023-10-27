@@ -3,7 +3,6 @@
     /*Ejercicio 1*/
     function comprobarDNI($dni){
         $letrasDNI = array("T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E");
-        $splitDNI;
 
         /*Si en la posición anterior a la letra se encuentra un '-' se divide la cadena 
         con explode. Luego se compara que la posición 1 del array que contiene la letra

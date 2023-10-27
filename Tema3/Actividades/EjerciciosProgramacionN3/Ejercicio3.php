@@ -25,42 +25,50 @@
         </form>
 
         <?php
-            $precio = 0.0;
-            $descuentoAplicado = 0;
-            $descuento = 0; 
-            $calculoIVA = 0;
-            $precioFinal = 0;
-
             if(isset($_POST["calcular"])){
                 $precio = $_POST["precio"];
                 $tipoCliente = $_POST["cliente"];
 
                 $descuento = 0;
 
+                /*Después de recoger los datos obtenidos del formulario se empiezan a hacer
+                las operaciones requeridas sobre el valor del precio. 
+                
+                Se comprueba el tipo de cliente, si es empresario se le hace un 15% de descuento
+                multiplicando el valor del precio por 0.15, en otro caso se aplicará un 20%*/
+
                 if($tipoCliente == "empresario"){
                     $descuentoAplicado = $precio * 0.15;
                 }else{
-                    $descuentoAplicado = $precio * (0.15 + 0.05);
+                    $descuentoAplicado = $precio * 0.20;
                 }
 
+                /*Si el valor del descuento es mayor que el límite se quedará el valor máximo,
+                en este caso 25, en otro caso el valor será el mismo obtenido. */
                 if($descuentoAplicado > 25){
                     $descuento = 25;
                 }else{
                     $descuento = $descuentoAplicado;
                 }
 
+                /*Se calcula el IVA del producto con el descuento aplicado*/
                 $calculoIVA = ($precio - $descuento) * 0.21;
 
+                /*Se calcula el precio final obtenido del producto con el descuento aplicado 
+                sumado al IVA del producto también con el descuento aplicado */
                 $precioFinal = ($precio - $descuento) + $calculoIVA;
+
+                /*Se pinta una tabla HTML con los valores siguintes: */
+                echo "<table border='1'>";
+
+                echo "<tr><td>Precio del producto</td><td>" . $precio . "</td></tr>";
+                echo "<tr><td>Descuento aplicado</td><td>" . $descuentoAplicado . "</td></tr>";
+                echo "<tr><td>Descuento final</td><td>" . $descuento . "</td></tr>";
+                echo "<tr><td>Cálculo del IVA</td><td>" . $calculoIVA . "</td></tr>";
+                echo "<tr><td>Precio final</td><td>" . $precioFinal . "</td></tr>";
             }
 
-            echo "<table border='1'>";
-
-            echo "<tr><td>Precio del producto</td><td>" . $precio . "</td></tr>";
-            echo "<tr><td>Descuento aplicado</td><td>" . $descuentoAplicado . "</td></tr>";
-            echo "<tr><td>Descuento final</td><td>" . $descuento . "</td></tr>";
-            echo "<tr><td>Cálculo del IVA</td><td>" . $calculoIVA . "</td></tr>";
-            echo "<tr><td>Precio final</td><td>" . $precioFinal . "</td></tr>";
+            
         ?>
 
     </body>

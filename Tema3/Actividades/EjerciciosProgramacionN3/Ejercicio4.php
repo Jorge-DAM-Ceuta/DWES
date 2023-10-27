@@ -27,7 +27,15 @@
             if (isset($_POST["enviar"])) {
                 $filas = $_POST["filas"];
                 $columnas = $_POST["columnas"];
-        
+                
+                /*Mediante un número de filas y columnas obtenidas del formulario se crea una 
+                tabla con valores obtenidos de sumar la fila con la columna en cada celda.
+                
+                El primer bucle recorre las filas y crea una fila HTML, seguido en el segundo
+                bucle for se crea un número por cada columna de la fila y lo pinta de rojo si
+                es múltiplo de 3, en caso contrario aparecerán en color negro, esto se aplica
+                mediante el atributo style color dentro de la celda en concreto. */
+                
                 if ($filas > 0 && $columnas > 0) {
                     echo "<table border='1'>";
 
@@ -38,13 +46,12 @@
                             $numero = $i + $j;
                             
                             if ($numero % 3 == 0){
-                                $estilo = "color: red;";
-                            
+                                echo "<td style='color: red;'>" . $numero . "</td>";
                             }else{
-                                $estilo = "color: black;";    
+                                echo "<td style='color: black;'>" . $numero . "</td>";
                             }
 
-                            echo "<td style='". $estilo . "'>" . $numero . "</td>";
+                            
                         }
 
                         echo "</tr>";
