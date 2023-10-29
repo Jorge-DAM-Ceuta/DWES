@@ -44,7 +44,7 @@
                         echo "<tr>";
 
                         for($j = $i; $contador < 4; $j++){
-                            if($j == count($imagenes)){
+                            if($j == count($imagenes) - 1){
                                 echo "<td><img src='./imagenes/" . $imagenes[$j] . "' width='100%' height='100%'></td>";
                                 break;    
                             }else{
