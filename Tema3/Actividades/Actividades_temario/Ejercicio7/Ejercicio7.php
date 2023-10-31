@@ -18,14 +18,13 @@
     <body>
         
         <?php
+            $rutaJSON = "./usuarios.json";
+            $jsonString = file_get_contents($rutaJSON);
+            $arrayUsuarios = json_decode($jsonString, true);
+
             /* Se recogen los datos y se almacenan en un array, luego saluda al usuario por pantalla. */
             if(isset($_POST['enviar'])) {
-                $nombre = $_POST['nombre'];
-                $email = $_POST['email'];
-                $password = $_POST['password'];
-
-                $usuario = array("Nombre" => $nombre, "Email" => $email, "Password" => $password);
-                print("Bienvenido " . $usuario["Nombre"] . "!!");
+                
 
             }else { 
             
