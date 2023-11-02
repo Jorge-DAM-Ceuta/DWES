@@ -1,16 +1,17 @@
-{
-    "usuarios": [
-        {   "username": "Jorge", 
-            "email": "jorge@gmail.com",
-            "password": "123"
-        },
-        {   "username": "Marcos", 
-            "email": "marcos@gmail.com",
-            "password": "123"
-        },
-        {   "username": "Javier", 
-            "email": "javier@gmail.com",
-            "password": "123"
-        } 
-    ]
-}
+[
+    {
+        "username": "Jorge",
+        "email": "jorge@gmail.com",
+        "password": "123"
+    },
+    {
+        "username": "Marcos",
+        "email": "marcos@gmail.com",
+        "password": "123"
+    },
+    {
+        "username": "Javier",
+        "email": "javier@gmail.com",
+        "password": "123"
+    }
+]
