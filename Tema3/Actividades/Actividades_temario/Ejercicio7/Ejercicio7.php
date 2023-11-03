@@ -44,15 +44,13 @@
             if(isset($_POST['enviar'])) {
                 foreach($arrayUsuarios as $key => &$usuario) {
 
-                    if($usuario['username'] == $_POST['nombre'] && $usuario['password'] == $_POST['password']){
+                    if($usuario['username'] == $_POST['nombre'] && $usuario['email'] == $_POST['email'] && $usuario['password'] == $_POST['password']){
                         echo "<p>Hola " . $_POST['nombre'] . "!!</p>";
 
                         echo "<p>Contraseña original: " . $usuario['password'];
                         $usuario['password'] = password_hash($usuario['password'], PASSWORD_ARGON2I);
                         
                         echo "<p>Tu contraseña ahora está cifrada de manera segura: " . $usuario['password'];
-                    }else{
-                        echo "<p>El usuario no existe o la contraseña no coincide.</p>";
                     }
                 }
 
