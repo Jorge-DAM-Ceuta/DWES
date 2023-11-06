@@ -28,13 +28,18 @@
         Mediante un bucle for recorre los valores recogidos de los checkbox, para en caso de ser 
         más de uno que se muestren todos. Mediante un print se muestran los valores introducidos.-->
         <?php
-            if(isset($_POST['enviar'])) {
-                $nombre = $_POST['nombre'];
+            include_once("./Ejercicio11.inc.php");
+
+            if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar'])) {
+                $nombre = validarDatos($_POST['nombre']);
                 $modulos = $_POST['modulos'];
+
                 print "Nombre: " . $nombre . "<br/>";
-                    foreach ($modulos as $modulo) {
-                        print 'Modulo: ' . $modulo . "<br/>";
-                    }
+                
+                foreach ($modulos as $modulo) {
+                    print 'Modulo: ' . $modulo . "<br/>";
+                }
+
             }else { 
             
         ?>
@@ -59,7 +64,7 @@
 
                     <p>
                         <input type="checkbox" name="modulos[]" value="DWEC" />
-                        Desarrollo web en entorno cliente<br />    
+                        Desarrollo web en entorno cliente   
                     </p>
 
                     <input type="submit" value="Enviar" name="enviar"/>

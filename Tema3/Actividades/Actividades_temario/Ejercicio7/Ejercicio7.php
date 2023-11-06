@@ -37,14 +37,16 @@
         </form>
 
         <?php
+            include_once('../Ejercicio11.inc.php');
+
             $rutaJSON = "./usuarios.json";
             $jsonString = file_get_contents($rutaJSON);
             $arrayUsuarios = json_decode($jsonString, true);
 
-            if(isset($_POST['enviar'])) {
+            if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar'])) {
                 foreach($arrayUsuarios as $key => &$usuario) {
 
-                    if($usuario['username'] == $_POST['nombre'] && $usuario['email'] == $_POST['email'] && $usuario['password'] == $_POST['password']){
+                    if($usuario['username'] == validarDatos($_POST['nombre']) && $usuario['email'] == validarDatos($_POST['email']) && $usuario['password'] == validarDatos($_POST['password'])){
                         echo "<p>Hola " . $_POST['nombre'] . "!!</p>";
 
                         echo "<p>Contraseña original: " . $usuario['password'];

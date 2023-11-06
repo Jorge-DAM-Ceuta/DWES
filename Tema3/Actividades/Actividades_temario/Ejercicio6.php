@@ -17,6 +17,8 @@
                 <label>Asignatura preferida:</label>
                 <input type="radio" name="radio" value="DWES">DWES
                 <input type="radio" name="radio" value="DWEC">DWEC
+                <input type="radio" name="radio" value="DIW">DIW
+                <input type="radio" name="radio" value="DAW">DAW
             </p>
             <p>
                 <label>Selecciona tu instituto:</label>
@@ -52,7 +54,9 @@
         </form>
 
         <?php
-            if (isset($_POST['enviar'])){
+            include_once('./Ejercicio11.inc.php');
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar'])){
                 $ciclos = "";
 
                 foreach ($_POST['check'] as $valor){
@@ -64,7 +68,7 @@
                 echo '<br>Tu instituto es ' . $_POST['instituto'];
                 echo '<br>Tu color favorito es el ' . $_POST['favColor'];
                 echo '<br>Las clases comienzan el día ' . $_POST['fechaInicio'];
-                echo '<br>Quiero asistir ' . $_POST['diasClase'] . ' días a clase';
+                echo '<br>Quiero asistir ' . validarDatos($_POST['diasClase']) . ' días a clase';
                 echo '<br>Mis ganas de empezar son ' . $_POST['motivacion'] . ' sobre 100';
                 echo $_POST['oculto'];
             }

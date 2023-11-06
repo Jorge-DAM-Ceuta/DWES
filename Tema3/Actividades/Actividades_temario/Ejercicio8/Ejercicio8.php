@@ -29,16 +29,17 @@
         </form>
 
         <?php
+            include_once('../Ejercicio11.inc.php');
 
-            if (isset($_POST['generar'])){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['generar'])){
                 if(file_exists('./notas.xml')){
                     $notas = simplexml_load_file('./notas.xml');
                     //Se añade un nuevo nodo.
                     $nota = $notas->addChild('nota');
 
-                    $nota->addChild('titulo', $_POST['titulo']);
-                    $nota->addChild('fechaLimite', $_POST['fecha']);
-                    $nota->addChild('contenido', $_POST['contenido']);
+                    $nota->addChild('titulo', validarDatos($_POST['titulo']));
+                    $nota->addChild('fechaLimite', validarDatos($_POST['fecha']));
+                    $nota->addChild('contenido', validarDatos($_POST['contenido']));
 
                     file_put_contents('notas.xml', $notas->asXML());
 
@@ -54,9 +55,9 @@
                     //Se añade un nuevo nodo.
                     $nota = $notas->addChild('nota');
 
-                    $nota->addChild('titulo', $_POST['titulo']);
-                    $nota->addChild('fechaLimite', $_POST['fecha']);
-                    $nota->addChild('contenido', $_POST['contenido']);
+                    $nota->addChild('titulo', validarDatos($_POST['titulo']));
+                    $nota->addChild('fechaLimite', validarDatos($_POST['fecha']));
+                    $nota->addChild('contenido', validarDatos($_POST['contenido']));
 
                     file_put_contents('notas.xml', $notas->asXML());
 

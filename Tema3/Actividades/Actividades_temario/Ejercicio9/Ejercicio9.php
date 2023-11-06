@@ -29,12 +29,13 @@
         </form>
 
         <?php
+            include_once('../Ejercicio11.inc.php');
 
-            if (isset($_POST['generar'])){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['generar'])){
 
                 if(file_exists('./contenido.txt')){
                     $archivo = fopen("./contenido.txt", "w") or die("No se puede abrir el fichero.");
-                    fwrite($archivo, $_POST["contenido"]);
+                    fwrite($archivo, validarDatos($_POST["contenido"]));
                     fclose($archivo);
                     
                     $archivo = fopen("./contenido.txt", "r") or die("No se puede abrir el fichero.");
@@ -46,8 +47,8 @@
                         //Se añade un nuevo nodo.
                         $nota = $notas->addChild('nota');
     
-                        $nota->addChild('titulo', $_POST['titulo']);
-                        $nota->addChild('fechaLimite', $_POST['fecha']);
+                        $nota->addChild('titulo', validarDatos($_POST['titulo']));
+                        $nota->addChild('fechaLimite', validarDatos($_POST['fecha']));
                         $nota->addChild('contenido', $contenido);
     
                         file_put_contents('notas.xml', $notas->asXML());
@@ -57,7 +58,7 @@
 
                 }else{
                     $archivo = fopen("./contenido.txt", "w") or die("No se puede abrir el fichero.");
-                    fwrite($archivo, $_POST["contenido"]);
+                    fwrite($archivo, validarDatos($_POST["contenido"]));
                     fclose($archivo);
                     
                     $archivo = fopen("./contenido.txt", "r") or die("No se puede abrir el fichero.");
@@ -74,8 +75,8 @@
                     //Se añade un nuevo nodo.
                     $nota = $notas->addChild('nota');
 
-                    $nota->addChild('titulo', $_POST['titulo']);
-                    $nota->addChild('fechaLimite', $_POST['fecha']);
+                    $nota->addChild('titulo', validarDatos($_POST['titulo']));
+                    $nota->addChild('fechaLimite', validarDatos($_POST['fecha']));
                     $nota->addChild('contenido', $contenido);
 
                     file_put_contents('notas.xml', $notas->asXML());

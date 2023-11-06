@@ -18,13 +18,16 @@
     <body>
         
         <?php
+            include_once("./Ejercicio11.inc.php");
+
             /* Se recogen los datos y se almacenan en un array, luego saluda al usuario por pantalla. */
-            if(isset($_POST['enviar'])) {
-                $nombre = $_POST['nombre'];
-                $email = $_POST['email'];
-                $password = $_POST['password'];
+            if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar'])) {
+                $nombre = validarDatos($_POST['nombre']);
+                $email = validarDatos($_POST['email']);
+                $password = validarDatos($_POST['password']);
 
                 $usuario = array("Nombre" => $nombre, "Email" => $email, "Password" => $password);
+                
                 print("Bienvenido " . $usuario["Nombre"] . "!!");
 
             }else { 
