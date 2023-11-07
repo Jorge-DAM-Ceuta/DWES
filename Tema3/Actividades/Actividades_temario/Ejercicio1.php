@@ -32,14 +32,16 @@
 
             if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar'])) {
                 $nombre = validarDatos($_POST['nombre']);
-                $modulos = $_POST['modulos'];
-
-                print "Nombre: " . $nombre . "<br/>";
                 
-                foreach ($modulos as $modulo) {
-                    print 'Modulo: ' . $modulo . "<br/>";
-                }
+                if(preg_match("/[A-Za-z\-]{3,}/", $nombre)){
+                    $modulos = $_POST['modulos'];
 
+                    print "<p>Nombre del alumno: " . $nombre . "</p>";
+                    
+                    foreach ($modulos as $modulo) {
+                        print "<p>Modulo: " . $modulo . "</p>";
+                    }
+                }
             }else { 
             
         ?>
@@ -50,24 +52,25 @@
                 <form name="input" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
                     <p>
                         <label>Nombre del alumno:</label>
-                        <input type="text" name="nombre" />
+                        <input type="text" name="nombre" required/>
                     </p> 
 
                     <p>
-                        <label>Módulos que cursa:</label>
+                        <label>Módulos que cursa:
+                            <input type="checkbox" name="modulos[]" value="DWEC">
+                            Desarrollo web en entorno cliente 
+                            <input type="checkbox" name="modulos[]" value="DWES">
+                            Desarrollo web en entorno servidor
+                            <input type="checkbox" name="modulos[]" value="DIW">
+                            Diseño de interfaces web
+                            <input type="checkbox" name="modulos[]" value="DAW">
+                            Despliegue de aplicaciones web
+                        </label>
                     </p>
-                    
+            
                     <p>
-                        <input type="checkbox" name="modulos[]" value="DWES" />
-                        Desarrollo web en entorno servidor
-                    </p>
-
-                    <p>
-                        <input type="checkbox" name="modulos[]" value="DWEC" />
-                        Desarrollo web en entorno cliente   
-                    </p>
-
-                    <input type="submit" value="Enviar" name="enviar"/>
+                        <input type="submit" value="Enviar" name="enviar"/>      
+                    </p>                
                 </form>
             
             <!-- Este bloque PHP se usa para cerrar la llave del bloque else. -->

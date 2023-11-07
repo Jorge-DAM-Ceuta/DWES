@@ -23,13 +23,17 @@
             /* Se recogen los datos y se almacenan en un array, luego saluda al usuario por pantalla. */
             if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar'])) {
                 $nombre = validarDatos($_POST['nombre']);
-                $email = validarDatos($_POST['email']);
-                $password = validarDatos($_POST['password']);
-
-                $usuario = array("Nombre" => $nombre, "Email" => $email, "Password" => $password);
                 
-                print("Bienvenido " . $usuario["Nombre"] . "!!");
+                if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 
+                    $email = validarDatos($_POST['email']);
+                
+                    $password = validarDatos($_POST['password']);
+
+                    $usuario = array("Nombre" => $nombre, "Email" => $email, "Password" => $password);
+                    
+                    print("Bienvenido " . $usuario["Nombre"] . "!!");
+                }
             }else { 
             
         ?>
@@ -37,17 +41,17 @@
                 <form name="input" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
                     <p>
                         <label>Nombre de usuario: </label>
-                        <input type="text" name="nombre" pattern=".+"/>
+                        <input type="text" name="nombre" pattern=".+" required/>
                     </p> 
 
                     <p>
                         <label>E-mail: </label>
-                        <input type="email" name="email" pattern=".+"/>
+                        <input type="email" name="email" pattern=".+" required/>
                     </p>
                     
                     <p>
                         <label>Contraseña: </label>    
-                        <input type="password" name="password" pattern=".+"/>
+                        <input type="password" name="password" pattern=".+" required/>
                     </p>
 
                     <input type="submit" value="Enviar" name="enviar"/>
