@@ -12,17 +12,32 @@
             
             <p>
                 <label>Título: </label>
-                <input type="text" name="titulo" pattern=".+">
+                <input type="text" name="titulo" pattern=".+" required>
+                <?php 
+                    if(isset($_POST['enviar']) && empty($_POST['titulo'])){
+                        echo "<span style='color:red'>--&lt; Debes introducir un título!!</span>";
+                    }
+                ?>
             </p>
             
             <p>
                 <label>Fecha límite: </label>
-                <input type="date" name="fecha" pattern=".+">
+                <input type="date" name="fecha" pattern=".+" required>
+                <?php 
+                    if(isset($_POST['enviar']) && empty($_POST['fecha'])){
+                        echo "<span style='color:red'>--&lt; Debes introducir una fecha!!</span>";
+                    }
+                ?>
             </p>
 
             <p>
                 <label>Contenido: </label>
-                <input type="text" name="contenido" pattern=".+">
+                <input type="text" name="contenido" pattern=".+" required>
+                <?php 
+                    if(isset($_POST['enviar']) && empty($_POST['contenido'])){
+                        echo "<span style='color:red'>--&lt; Debes introducir contenido en la nota!!</span>";
+                    }
+                ?>
             </p>
 
             <input name="generar" value="Generar" type="submit">

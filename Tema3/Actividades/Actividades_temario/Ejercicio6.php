@@ -12,6 +12,11 @@
                 <input type="checkbox" name="check[]" value="DAM">DAM
                 <input type="checkbox" name="check[]" value="DAW">DAW
                 <input type="checkbox" name="check[]" value="ASIR">ASIR
+                <?php 
+                    if(isset($_POST['enviar']) && empty($_POST['check'])){
+                        echo "<span style='color:red'>--&lt; Debe seleccionar al menos un ciclo!!</span>";
+                    }
+                ?>
             </p>
             <p>
                 <label>Asignatura preferida:</label>
@@ -19,30 +24,60 @@
                 <input type="radio" name="radio" value="DWEC">DWEC
                 <input type="radio" name="radio" value="DIW">DIW
                 <input type="radio" name="radio" value="DAW">DAW
+                <?php 
+                    if(isset($_POST['enviar']) && empty($_POST['radio'])){
+                        echo "<span style='color:red'>--&lt; Debe seleccionar una asignatura!!</span>";
+                    }
+                ?>
             </p>
             <p>
                 <label>Selecciona tu instituto:</label>
-                <select name="instituto">
+                <select name="instituto" required>
                     <option value="" selected>Selecciona un instituto</option>
                     <option value="CIFP Nº1 Ceuta">CIFP Nº1 Ceuta</option>
                     <option value="I.E.S. Siete Colinas">I.E.S. Siete Colinas</option>
                 </select>
+                <?php 
+                    if(isset($_POST['enviar']) && empty($_POST['instituto'])){
+                        echo "<span style='color:red'>--&lt; Debes seleccionar tu instituto!!</span>";
+                    }
+                ?>
             </p>
             <p>
                 <label>Selecciona tu color favorito</label>
-                <input type="color" id="favColor" name="favColor">
+                <input type="color" id="favColor" name="favColor" required>
+                <?php 
+                    if(isset($_POST['enviar']) && empty($_POST['favColor'])){
+                        echo "<span style='color:red'>--&lt; Selecciona tu color favorito!!</span>";
+                    }
+                ?>
             </p>            
             <p>
                 <label>Fecha de inicio de clases</label>
-                <input type="date" id="fechaInicio" name="fechaInicio">
+                <input type="date" id="fechaInicio" name="fechaInicio" required>
+                <?php 
+                    if(isset($_POST['enviar']) && empty($_POST['fechaInicio'])){
+                        echo "<span style='color:red'>--&lt; Introduce tu fecha de inicio!!</span>";
+                    }
+                ?>
             </p>
             <p>
                 <label>Elige cuántos días quieres asistir a clases 0-365</label>
-                <input type="number" name="diasClase" min="0" max="365">
+                <input type="number" name="diasClase" min="0" max="365" required>
+                <?php 
+                    if(isset($_POST['enviar']) && empty($_POST['diasClase'])){
+                        echo "<span style='color:red'>--&lt; Debe decir cuantos días quiere ir a clase!!</span>";
+                    }
+                ?>
             </p>
             <p>
                 <label>Ganas de empezar</label>
-                <input type="range" name="motivacion" min="0" max="100">
+                <input type="range" name="motivacion" min="0" max="100" required>
+                <?php 
+                    if(isset($_POST['enviar']) && empty($_POST['motivacion'])){
+                        echo "<span style='color:red'>--&lt; Indica tus ganas de empezar!!</span>";
+                    }
+                ?>
             </p>
             <p>
                 <label>Campo oculto</label>

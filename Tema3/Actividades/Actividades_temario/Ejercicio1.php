@@ -33,7 +33,7 @@
             if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar'])) {
                 $nombre = validarDatos($_POST['nombre']);
                 
-                if(preg_match("/[A-Za-z\-]{3,}/", $nombre)){
+                if(preg_match("/[A-Za-z\s]{3,}/", $nombre)){
                     $modulos = $_POST['modulos'];
 
                     print "<p>Nombre del alumno: " . $nombre . "</p>";
@@ -53,6 +53,11 @@
                     <p>
                         <label>Nombre del alumno:</label>
                         <input type="text" name="nombre" required/>
+                        <?php 
+                            if(isset($_POST['enviar']) && empty($_POST['nombre'])){
+                                echo "<span style='color:red'>--&lt; Debe introducir un nombre!!</span>";
+                            }
+                        ?>
                     </p> 
 
                     <p>
@@ -66,6 +71,11 @@
                             <input type="checkbox" name="modulos[]" value="DAW">
                             Despliegue de aplicaciones web
                         </label>
+                        <?php 
+                            if(isset($_POST['enviar']) && empty($_POST['modulos'])){
+                                echo "<span style='color:red'>--&lt; Debe seleccionar al menos un módulo!!</span>";
+                            }
+                        ?>
                     </p>
             
                     <p>

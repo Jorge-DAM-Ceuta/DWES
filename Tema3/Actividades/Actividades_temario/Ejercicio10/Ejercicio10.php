@@ -9,7 +9,7 @@
         <form enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <p>
                 <label>Sube cualquier tipo de archivo</label>
-                <input name="archivo" type="file">
+                <input name="archivo" type="file" required>
             </p>
 
             <input name="enviar" value="Subir" type="submit">
