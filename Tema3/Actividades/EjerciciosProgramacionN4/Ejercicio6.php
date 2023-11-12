@@ -18,13 +18,19 @@
         </form>
 
         <?php
+            /*En este código se usa un texto para convertir sus caracteres a caracteres
+            hacker. Tenemos una función con un array asociativo del que se obtienen los
+            valores de cada letra correspondiente. En un for se convierte el caracter a 
+            minúsculas y se le aplica la función para sustituir su valor y añadirlo al 
+            resultado.*/
+
             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['convertir'])) {
                     $texto = $_POST['texto'];
                     $resultado = '';
                     
                     for ($i = 0; $i < strlen($texto); $i++) {
                         $caracter = strtolower($texto[$i]);
-                        $nuevoCaracter = obtenerReemplazo(strtolower($caracter));
+                        $nuevoCaracter = obtenerReemplazo($caracter);
         
                         $resultado .= $nuevoCaracter;
                         
@@ -36,6 +42,9 @@
             
             function obtenerReemplazo($caracter){
                 $reemplazos = [
+                    ' ' => ' ',
+                    '.' => '.',
+                    ',' => ',',
                     'a' => '4',
                     'á' => '4',
                     'b' => 'I3',
@@ -70,7 +79,7 @@
                     'z' => '2'
                 ];
             
-                return isset($reemplazos[$caracter]) ? $reemplazos[$caracter] : $caracter;
+                return $reemplazos[$caracter];
             }
         ?>
     </body>

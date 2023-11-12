@@ -15,8 +15,8 @@
 
                 for ($i = 0; $i < count($meses); $i++) {
                     echo "<p>
-                            <label>{$meses[$i]}:</label>
-                            <input type='number' name='temperaturas[]'>
+                            <label>$meses[$i]:</label>
+                            <input type='number' name='temperaturas[]' required>
                         </p>";
                 }
             ?>
@@ -25,21 +25,23 @@
         </form>
 
         <?php
+            /*En este código se introducen las temperaturas medias de cada mes en sus 
+            respectivos input, sus valores se recogen como un array y se muestran junto 
+            al mes debajo de cada imagen de la barra horizontal que obtiene el ancho 
+            mediante el valor de la temperatura media*/
+
             if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST['enviar'])) {
                 $temperaturas = $_POST["temperaturas"];
 
-                if (count($temperaturas) == 12) {  
-                    echo "<h2>Diagrama de Barras:</h2>";
+                echo "<h2>Diagrama de Barras:</h2>";
 
-                    for ($i = 0; $i < count($meses); $i++) {
-                        echo "<figure>
-                                <img src='./Imagenes/barra.png' width='$temperaturas[$i]'>
-                                <figcaption>$meses[$i] $temperaturas[$i]°C</figcaption>
-                            </figure>";
-                    }
-                } else {
-                    echo "<p>Escribe una temperatura por cada mes</p>";
+                for ($i = 0; $i < count($meses); $i++) {
+                    echo "<figure>
+                            <img src='./Imagenes/barra.png' width='$temperaturas[$i]'>
+                            <figcaption>$meses[$i] $temperaturas[$i]°C</figcaption>
+                        </figure>";
                 }
+               
             }
         ?>
     </body>

@@ -9,6 +9,11 @@
         <h1>Numeros:</h1>
 
         <?php
+            /*En este código los números aleatorios se generan y se almacenan en un
+            fichero de texto para evitar que al pulsar el submit se generen de nuevo.*/        
+
+            /*Con esta funcion se generan los números aleatorios 
+            y se almacenan en un fichero de texto*/
             function generarNumeros() {
                 $numeros = array();
                 for ($i = 0; $i < 100; $i++) {
@@ -18,12 +23,15 @@
                 file_put_contents('./numeros.txt', implode(' ', $numeros));
             }
             
+            /*Esta función obtiene los números del fichero y los devuelve*/
             function obtenerNumeros() {
                 $contenido = file_get_contents('./numeros.txt');
 
                 return explode(' ', $contenido);
             }
             
+            /*Se ejecuta antes de que se pulse el submit y muestra los números en 
+            un párrafo separados por espacios en blanco.*/
             if(!isset($_POST['enviar'])){
                 generarNumeros();
             }
@@ -47,7 +55,12 @@
         </form>
 
         <?php
+            /*Mediante los input se le indica el valor que se va a sustituir y por el
+            número que se sustituirá. Se usa un foreach para obtener cada número. 
+            En caso de que el número sea igual al valor que se va a sustituir se intercambia
+            por el número sustituto y se le aplica un color rojo mediante una etiqueta span.
             
+            Por último se muestran los números separado por espacios de nuevo.*/
             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['enviar'])) {
                 
                 $primerValor = $_POST["primerValor"];

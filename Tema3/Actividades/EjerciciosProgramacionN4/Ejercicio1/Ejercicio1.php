@@ -29,6 +29,14 @@
         </form>
 
         <?php
+            /*En este ejercicio se usa un input hidden para almacenar el valor del intento, 
+            y se escribe el número disponible de intentos en un fichero de texto externo.
+            
+            Cada vez que se realiza un intento, este se sobreescribe el fichero con un 
+            número menor hasta que llega a 0 y restablecer el número de intentos a 4. 
+
+            También se restablece el número de intentos si se acierta la combinación.*/
+
             $combinacionCorrecta = 2345;
 
             $intentos = file_get_contents("./intentos.txt");

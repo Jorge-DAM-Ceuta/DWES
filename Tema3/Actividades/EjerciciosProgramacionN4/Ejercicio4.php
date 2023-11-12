@@ -40,6 +40,11 @@
         </form>
 
         <?php
+            /*En este código se obtiene el valor introducido en el input y las unidades de
+            conversión que se usarán en la operación. Tenemos un array con las unidades y sus
+            valores. En la operación para obtener el resultado se divide el valor de la primera
+            unidad con el de la segunda y se multiplica por el valor intoducido para mostrarlo.*/
+
             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['convertir'])) {
                 $valor = $_POST["valor"];
                 $primeraUnidad = $_POST["primeraUnidad"];
@@ -54,6 +59,7 @@
                 ];
 
                 $resultado = $valor * ($unidad[$primeraUnidad] / $unidad[$segundaUnidad]);
+
                 echo "<h2>$valor $primeraUnidad son: $resultado $segundaUnidad</h2>";
             }
         ?>
