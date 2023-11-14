@@ -9,22 +9,65 @@
 
         <?php
             
-
             if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['calcular'])) {
               
+                $sumaNotas = 0;
+                $nombreAlumnos = array();
+                $mediasAlumnos = array();
+
                 $rutaJSON = "./Notas.json";
                 $jsonString = file_get_contents($rutaJSON);
                 $alumnos = json_decode($jsonString, true);
 
+                foreach($alumnos as $objeto => $informacion){
+                    foreach($informacion as $asignatura => $notas){
+                        //Se guarda el nombre del alumno.
+                        if($asignatura == "nombre"){
+                            array_push($nombreAlumnos, $notas);
+                        }else{
+                            foreach($notas as $valores){
+                                echo "<h3>NOTAS:$notas, VALORES: $valores</h3>";
+                            }
+                        } 
+                    }
+                }
+
+                foreach($nombreAlumnos as $nombres){
+                    echo "<h2>NOMBRES: $nombres</h2>";
+                }
+
+                /*
                 foreach($alumnos as $nombre => $notas){
                     echo "<p>Notas de $nombre: $notas</p>";
 
-                    $sumaNotas += explode(", ", $notas);
-                    $media = $sumaNotas / 5;
+                    //Guardamos los nombres de los alumnos en un array para mostrar sus datos luego.
+                    array_push($nombreAlumnos, $nombre);
 
-                    echo "<p>Media de notas de $nombre: $media</p>";
+                    //Quitamos los espacios y comas al string de las notas del alumno.
+                    $explodeNotas = explode(", ", $notas); 
+
+                    //Recorremos cada posicion del string de las notas del alumno para sumarlas a otra variable.
+                    for($i = 0; $i < count($explodeNotas); $i++){
+                        $sumaNotas += (int)$explodeNotas[$i];
+                    }
                     
+                    //Hacemos la media y la guardamos en otro array para mostrarlo luego.
+                    $media = $sumaNotas / 5;
+                    array_push($mediasAlumnos, $media);
+
+                    //Reiniciamos el valor de la variable para realizar la suma del siguiente alumno.
+                    $sumaNotas = 0;
                 }
+                
+                //Mostramos las medias de las notas de cada alumno.
+                for($i = 0; $i < count($nombreAlumnos); $i++){
+                    echo "<h3>Media de notas de $nombreAlumnos[$i]: $mediasAlumnos[$i]</h3>";
+                }
+
+                "Mohamed": "5, 8, 3, 6, 8",
+                "Ra\u00fal": "7, 3, 3, 4, 1"
+
+                */
 
             /*
                 $jsonString = json_encode($notas, JSON_PRETTY_PRINT);
