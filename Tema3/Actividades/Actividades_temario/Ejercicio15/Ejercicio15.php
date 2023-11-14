@@ -25,8 +25,8 @@
                         if($asignatura == "nombre"){
                             array_push($nombreAlumnos, $notas);
                         }else{
-                            foreach($notas as $valores){
-                                echo "<h3>NOTAS:$notas, VALORES: $valores</h3>";
+                            foreach($notas as $nota){
+                                echo "<h3>NOTAS TOTALES, Nota: $nota</h3>";
                             }
                         } 
                     }
