@@ -1,0 +1,12 @@
+{
+    "Notas":[
+        {
+            "titulo":"Nota1",
+            "contenido":"contenidoNota1"
+        },
+        {
+            "titulo":"Nota2",
+            "contenido":"contenidoNota2"
+        }
+    ]
+}
