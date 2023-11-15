@@ -1,0 +1,39 @@
+{
+  "inventario": [
+    {
+      "codigo": 1028,
+      "titulo": "Call of Duty: Modern Warfare",
+      "plataforma": "PlayStation 5",
+      "precio": 59.99,
+      "stock": 25
+    },
+    {
+      "codigo": 4563,
+      "titulo": "The Legend of Zelda: Breath of the Wild",
+      "plataforma": "Nintendo Switch",
+      "precio": 49.99,
+      "stock": 40
+    },
+    {
+      "codigo": 8742,
+      "titulo": "FIFA 22",
+      "plataforma": "Xbox Series X",
+      "precio": 54.99,
+      "stock": 30
+    },
+    {
+      "codigo": 4322,
+      "titulo": "Cyberpunk 2077",
+      "plataforma": "PC",
+      "precio": 39.99,
+      "stock": 20
+    },
+    {
+      "codigo": 6586,
+      "titulo": "Super Mario Odyssey",
+      "plataforma": "Nintendo Switch",
+      "precio": 44.99,
+      "stock": 35
+    }
+  ]
+}
