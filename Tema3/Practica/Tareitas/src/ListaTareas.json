@@ -6,7 +6,7 @@
                 "Descripcion": "Tarea1Lista1",
                 "Prioridad": "Baja",
                 "FechaLimite": "17\/11\/2014",
-                "Estado": "Completada"
+                "Estado": "Pendiente"
             }
         ],
         "Cosas de clase": [
@@ -15,7 +15,7 @@
                 "Descripcion": "A ver si funciona esta vaina",
                 "Prioridad": "Alta",
                 "FechaLimite": "16\/11\/2023",
-                "Estado": "Pendiente"
+                "Estado": "Completada"
             }
         ]
     }

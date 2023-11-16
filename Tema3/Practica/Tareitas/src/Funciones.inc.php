@@ -19,7 +19,7 @@
                     echo "<td align='center'>" . $tarea['Descripcion'] . "</td>";
                     echo "<td align='center'>" . $tarea['Prioridad'] . "</td>";
                     echo "<td align='center'>" . $tarea['FechaLimite'] . "</td>";
-                    echo "<td align='center'><input type='submit' name='editar' value='Editar'><a href='./src/MarcarCompletada.php?id=$id&lista=$lista'>Completar</a><a href='./src/EliminarTarea.php?id=$id&lista=$lista'>Eliminar</a></td>";
+                    echo "<td align='center'><input type='submit' name='editar' value='Editar'> &nbsp; <a href='./src/MarcarCompletada.php?id=$id&lista=$lista'>Completar</a> &nbsp; <a href='./src/EliminarTarea.php?id=$id&lista=$lista'>Eliminar</a></td>";
                     echo "</tr>";
                 }
             }
@@ -36,7 +36,7 @@
                     echo "<td align='center'>" . $tarea['Descripcion'] . "</td>";
                     echo "<td align='center'>" . $tarea['Prioridad'] . "</td>";
                     echo "<td align='center'>" . $tarea['FechaLimite'] . "</td>";
-                    echo "<td align='center'><input type='submit' name='reiniciar' value='Reiniciar'><a href='./src/EliminarTarea.php ? id=$id & lista=$lista' name='eliminar'>Eliminar</a></td>";
+                    echo "<td align='center'><a href='./src/MarcarPendiente.php ? id=$id & lista=$lista'>Reiniciar</a> &nbsp; <a href='./src/EliminarTarea.php ? id=$id & lista=$lista'>Eliminar</a></td>";
                     echo "</tr>";
                 }
             }
@@ -114,6 +114,65 @@
                 $tarea['Estado'] = 'Completada';
             }
         }
+
+        $ruta = "ListaTareas.json";
+        $jsonString = json_encode($listaTareas, JSON_PRETTY_PRINT);
+        $fichero = fopen($ruta, 'w');
+        fwrite($fichero, $jsonString);
+        fclose($fichero);
+
+        header("Location: ../Index.php");
+    }
+
+    function marcarTareaPendiente(&$listaTareas, $id, $lista){
+        $tareas = &$listaTareas['ListaTareas'][$lista];
+
+        foreach($tareas as &$tarea) {
+            if($tarea['id'] == $id && $tarea['Estado'] == 'Completada') {
+                $tarea['Estado'] = 'Pendiente';
+            }
+        }
+
+        $ruta = "ListaTareas.json";
+        $jsonString = json_encode($listaTareas, JSON_PRETTY_PRINT);
+        $fichero = fopen($ruta, 'w');
+        fwrite($fichero, $jsonString);
+        fclose($fichero);
+
+        header("Location: ../Index.php");
+    }
+
+    function editarTarea(&$listaTareas, $id, $lista){
+        $tareas = &$listaTareas['ListaTareas'][$lista];
+
+        foreach($tareas as &$tarea) {
+            if($tarea['id'] == $id) {
+                $descripcion = $tarea['Descripcion'];
+                $prioridad = $tarea['Prioridad'];
+                $fechaLimite = $tarea['FechaLimite'];
+                $estado = $tarea['Estado'];
+            }
+        }
+
+        echo "<p>
+                <label>Descripción: </label>
+                <input type='text' name='descripcion' value='$descripcion'>
+            </p>
+            
+            <p>
+                <label>Descripción: </label>
+                <input type='text' name='prioridad' value='$prioridad'>
+            </p>
+            
+            <p>
+                <label>Descripción: </label>
+                <input type='date' name='fechaLimite' value='$fechaLimite'>
+            </p>
+            
+            <p>
+                <label>Descripción: </label>
+                <input type='text' name='estado' value='$estado'>
+            </p>";
 
         $ruta = "ListaTareas.json";
         $jsonString = json_encode($listaTareas, JSON_PRETTY_PRINT);
