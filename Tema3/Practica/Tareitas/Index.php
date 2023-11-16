@@ -1,7 +1,7 @@
 <?php
     include_once("./src/Funciones.inc.php");
 
-    $listas = decodificarListas();
+    $listas = decodificarListas("src/ListaTareas.json");
 ?>
 
 <!DOCTYPE html>
@@ -109,7 +109,7 @@
                 $listaPerteneciente = $_POST['listas'];
 
                 agregarTareaALista($descripcion, $prioridad, $fechaLimite, $listaPerteneciente, $listas);
-                $listas = decodificarListas();
+                $listas = decodificarListas("src/ListaTareas.json");
             }
         ?>
     </body>
