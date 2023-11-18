@@ -19,7 +19,7 @@
                     echo "<td align='center'>" . $tarea['Descripcion'] . "</td>";
                     echo "<td align='center'>" . $tarea['Prioridad'] . "</td>";
                     echo "<td align='center'>" . $tarea['FechaLimite'] . "</td>";
-                    echo "<td align='center'><input type='submit' name='editar' value='Editar'> &nbsp; <a href='./src/MarcarCompletada.php?id=$id&lista=$lista'>Completar</a> &nbsp; <a href='./src/EliminarTarea.php?id=$id&lista=$lista'>Eliminar</a></td>";
+                    echo "<td align='center'><a href='./src/EditarTarea.php?id=$id&lista=$lista'>Editar</a> &nbsp; <a href='./src/MarcarCompletada.php?id=$id&lista=$lista'>Completar</a> &nbsp; <a href='./src/EliminarTarea.php?id=$id&lista=$lista'>Eliminar</a></td>";
                     echo "</tr>";
                 }
             }
@@ -36,7 +36,7 @@
                     echo "<td align='center'>" . $tarea['Descripcion'] . "</td>";
                     echo "<td align='center'>" . $tarea['Prioridad'] . "</td>";
                     echo "<td align='center'>" . $tarea['FechaLimite'] . "</td>";
-                    echo "<td align='center'><a href='./src/MarcarPendiente.php ? id=$id & lista=$lista'>Reiniciar</a> &nbsp; <a href='./src/EliminarTarea.php ? id=$id & lista=$lista'>Eliminar</a></td>";
+                    echo "<td align='center'><a href='./src/MarcarPendiente.php?id=$id&lista=$lista'>Reiniciar</a> &nbsp; <a href='./src/EliminarTarea.php?id=$id&lista=$lista'>Eliminar</a></td>";
                     echo "</tr>";
                 }
             }
@@ -49,7 +49,7 @@
         }
     }
 
-    function agregarTareaALista($descripcion, $prioridad, $fechaLimite, $nombreLista, array &$listasTareas) {
+    function agregarTareaALista($descripcion, $prioridad, $fechaLimite, $nombreLista, array &$listasTareas, $estado="Pendiente") {
         
         //Obtener el último id.
         $maxID = 0;
@@ -71,7 +71,7 @@
             "Descripcion"=> $descripcion,
             "Prioridad"=> $prioridad,
             "FechaLimite"=> $fechaLimite,
-            "Estado"=> "Pendiente"
+            "Estado"=> $estado
         );
         
         if (array_key_exists($nombreLista, $listasTareas['ListaTareas'])) {
@@ -142,45 +142,44 @@
         header("Location: ../Index.php");
     }
 
-    function editarTarea(&$listaTareas, $id, $lista){
+    function cargarTarea(&$listaTareas, $id, $lista){
         $tareas = &$listaTareas['ListaTareas'][$lista];
 
         foreach($tareas as &$tarea) {
             if($tarea['id'] == $id) {
                 $descripcion = $tarea['Descripcion'];
-                $prioridad = $tarea['Prioridad'];
-                $fechaLimite = $tarea['FechaLimite'];
-                $estado = $tarea['Estado'];
+                //$prioridad = $tarea['Prioridad'];
+                $fechaLimite = date("Y/m/d", strtotime($tarea['FechaLimite']));
+                //$estado = $tarea['Estado'];
             }
         }
 
         echo "<p>
                 <label>Descripción: </label>
-                <input type='text' name='descripcion' value='$descripcion'>
+                <input type='text' name='descripcion' size='40' value='$descripcion'>
             </p>
             
             <p>
-                <label>Descripción: </label>
-                <input type='text' name='prioridad' value='$prioridad'>
+                <label>Prioridad: </label>
+                <select name='prioridad'>
+                    <option value='Alta'>Alta</option>
+                    <option value='Media'>Media</option>
+                    <option value='Baja'>Baja</option>
+                </select>
             </p>
             
             <p>
-                <label>Descripción: </label>
-                <input type='date' name='fechaLimite' value='$fechaLimite'>
+                <label>Fecha límite: </label>
+                <input type='date' name='fechaLimite' required>
             </p>
             
             <p>
-                <label>Descripción: </label>
-                <input type='text' name='estado' value='$estado'>
+                <label>Estado: </label>
+                <select name='estado'>
+                    <option value='Completada'>Completada</option>
+                    <option value='Pendiente'>Pendiente</option>
+                </select>
             </p>";
-
-        $ruta = "ListaTareas.json";
-        $jsonString = json_encode($listaTareas, JSON_PRETTY_PRINT);
-        $fichero = fopen($ruta, 'w');
-        fwrite($fichero, $jsonString);
-        fclose($fichero);
-
-        header("Location: ../Index.php");
     }
 
     function decodificarNotas():mixed{

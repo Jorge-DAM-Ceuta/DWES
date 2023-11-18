@@ -6,6 +6,20 @@
                 "Descripcion": "Tarea1Lista1",
                 "Prioridad": "Baja",
                 "FechaLimite": "17\/11\/2014",
+                "Estado": "Completada"
+            },
+            {
+                "id": 2,
+                "Descripcion": "A\u00f1adir un huevo a la ensalada de pi\u00f1a",
+                "Prioridad": "Alta",
+                "FechaLimite": "18\/11\/2023",
+                "Estado": "Pendiente"
+            },
+            {
+                "id": 3,
+                "Descripcion": "SEBOLLA",
+                "Prioridad": "Alta",
+                "FechaLimite": "30\/11\/2023",
                 "Estado": "Pendiente"
             }
         ],
