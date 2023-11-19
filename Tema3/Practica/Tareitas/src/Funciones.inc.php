@@ -1,5 +1,6 @@
 <?php
 
+    //LISTAS
     function decodificarListas($rutaJSON):mixed{
 
         $ruta = $rutaJSON;
@@ -9,6 +10,63 @@
         return $listas;
     }
 
+    function mostrarListasEnSelect($listasTareas) {
+        foreach ($listasTareas['ListaTareas'] as $nombreLista => $tareas) {
+            echo "<option value='$nombreLista'>$nombreLista</option>";
+        }
+    }
+
+    function agregarLista(&$listas, $nombreLista) {
+        if (!isset($listas['ListaTareas'][$nombreLista])) {
+            $listas['ListaTareas'][$nombreLista] = [];
+        } else {
+            echo "La lista $nombreLista ya existe.";
+        }
+
+        $ruta = "src/ListaTareas.json";
+        $jsonString = json_encode($listas, JSON_PRETTY_PRINT);
+        $fichero = fopen($ruta, 'w');
+        fwrite($fichero, $jsonString);
+        fclose($fichero);
+
+        header("Location: Listas.php");
+    }
+
+    function mostrarListas($listas){
+        foreach($listas['ListaTareas'] as $nombreLista => $tareas) {
+            echo "<tr><td align='center'><strong>$nombreLista</strong></td><td><a href='./src/EditarLista.php?lista=$nombreLista'>Editar</a> &nbsp; <a href='./src/EliminarLista.php?lista=$nombreLista'>Eliminar</a></td></tr>";
+        }
+    }
+
+    function eliminarLista(&$listas, $lista){
+        unset($listas['ListaTareas'][$lista]);
+        
+        $ruta = "ListaTareas.json";
+        $jsonString = json_encode($listas, JSON_PRETTY_PRINT);
+        $fichero = fopen($ruta, 'w');
+        fwrite($fichero, $jsonString);
+        fclose($fichero);
+
+        header("Location: ../Listas.php");
+    }
+
+    function editarLista(&$listas, $lista, $nuevoNombre){
+        $tareas = $listas['ListaTareas'][$lista];
+
+        $listas['ListaTareas'][$nuevoNombre] = $tareas;
+
+        unset($listas['ListaTareas'][$lista]);
+
+        $ruta = "ListaTareas.json";
+        $jsonString = json_encode($listas, JSON_PRETTY_PRINT);
+        $fichero = fopen($ruta, 'w');
+        fwrite($fichero, $jsonString);
+        fclose($fichero);
+
+        header("Location: ../Listas.php");
+    }
+
+    //TAREAS
     function mostrarTablaPendientes($listaTareas) {
         foreach ($listaTareas['ListaTareas'] as $lista => $tareas) {
             foreach ($tareas as $tarea) {
@@ -40,12 +98,6 @@
                     echo "</tr>";
                 }
             }
-        }
-    }
-
-    function mostrarListasEnSelect($listasTareas) {
-        foreach ($listasTareas['ListaTareas'] as $nombreLista => $tareas) {
-            echo "<option value='$nombreLista'>$nombreLista</option>";
         }
     }
 

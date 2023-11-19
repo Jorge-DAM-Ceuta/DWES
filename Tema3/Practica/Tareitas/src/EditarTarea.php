@@ -16,22 +16,28 @@
                 $id = $_GET["id"];
                 $lista = $_GET["lista"];
 
+                echo "<h1>1NOMBRE LISTA: $lista</h1>";
+
                 cargarTarea($listas, $id, $lista);
 
                 //eliminarTarea($listas, $id, $lista);
+                echo "<h1>2NOMBRE LISTA: $lista</h1>";
             ?>
 
             <input type="submit" name="modificar" value="Editar tarea">
         </form>
 
         <?php
+
+            echo "<h1>3NOMBRE LISTA: $lista</h1>";
+
             if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['modificar'])){
                 $descripcion = $_POST['descripcion'];
                 $prioridad = $_POST['prioridad'];
                 $fechaLimite = date("d/m/Y", strtotime($_POST['fechaLimite']));
                 $estado = $_POST['estado'];
 
-                echo"<p>$descripcion, $prioridad, $fechaLimite, $estado</p>";
+                echo"<p>$descripcion, $prioridad, $fechaLimite, $lista, $estado</p>";
 
                 agregarTareaALista($descripcion, $prioridad, $fechaLimite, $lista, $listas, $estado);
 
