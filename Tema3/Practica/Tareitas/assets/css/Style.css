@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'Cambria';
+    src: url('../fonts/cambria.ttc') format('truetype');
+}
+
+@font-face {
+    font-family: 'Dopestyle';
+    src: url('../fonts/Dopestyle.ttf') format('truetype');
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    font-family: 'Dopestyle', sans-serif;
+    color: #207C85;
+    text-align: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-family: 'Dopestyle', sans-serif;
+    color: #2AA2AD;
+    font-size: 1.5em;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+p {
+    font-family: 'Cambria', sans-serif;
+    line-height: 1.6;
+}
+
+a {
+    font-family: 'Cambria', sans-serif;
+    color: #007bff;
+    text-decoration: none;
+    border-bottom: 1px dashed #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+th, td {
+    font-family: 'Cambria', sans-serif;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    font-family: 'Dopestyle', sans-serif;
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+label{
+    font-family: 'Cambria', sans-serif;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}

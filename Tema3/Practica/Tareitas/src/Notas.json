@@ -1,12 +1,19 @@
 {
-    "Notas":[
+    "Notas": [
         {
-            "titulo":"Nota1",
-            "contenido":"contenidoNota1"
+            "titulo": "Nota1",
+            "contenido": "contenidoNota1",
+            "color": "#FF0078"
         },
         {
-            "titulo":"Nota2",
-            "contenido":"contenidoNota2"
+            "titulo": "Nota2",
+            "contenido": "contenidoNota2",
+            "color": "#00FF00"
+        },
+        {
+            "titulo": "Nueva Nota",
+            "contenido": "CONFIDENCIAL",
+            "color": "#559fc3"
         }
     ]
 }

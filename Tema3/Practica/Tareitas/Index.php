@@ -10,13 +10,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Index</title>
+        <link rel="stylesheet" href="./assets/css/Style.css">
     </head>
     <body>
         <header>
                 <h1>Tareitas</h1>
 
                 <nav>
-                    <a href="#">Tareitas</a>
+                    <a href="./Index.php">Tareitas</a>
                     <a href="./Listas.php">Listas</a>
                     <a href="./Notas.php">Notas</a>
                 </nav>
@@ -109,6 +110,7 @@
                 $listaPerteneciente = $_POST['listas'];
 
                 agregarTareaALista($descripcion, $prioridad, $fechaLimite, $listaPerteneciente, $listas);
+                header("Location: Index.php");
                 $listas = decodificarListas("src/ListaTareas.json");
             }
         ?>

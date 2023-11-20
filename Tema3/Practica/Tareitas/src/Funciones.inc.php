@@ -34,8 +34,46 @@
 
     function mostrarListas($listas){
         foreach($listas['ListaTareas'] as $nombreLista => $tareas) {
-            echo "<tr><td align='center'><strong>$nombreLista</strong></td><td><a href='./src/EditarLista.php?lista=$nombreLista'>Editar</a> &nbsp; <a href='./src/EliminarLista.php?lista=$nombreLista'>Eliminar</a></td></tr>";
+            echo "<tr><td align='center'><strong>$nombreLista</strong></td><td><a href='./src/MostrarLista.php?lista=$nombreLista'>Mostrar</a> &nbsp; <a href='./src/MarcarTareas.php?lista=$nombreLista'>Completar todas las tareas</a> &nbsp; <a href='./src/EliminarTareas.php?lista=$nombreLista'>Eliminar todas las tareas</a> &nbsp; <a href='./src/EditarLista.php?lista=$nombreLista'>Editar</a> &nbsp; <a href='./src/EliminarLista.php?lista=$nombreLista'>Eliminar</a></td></tr>";
         }
+    }
+
+    //MOSTRAR LISTA EN CONCRETO
+    function mostrarLista($listas, $lista){
+        foreach($listas['ListaTareas'][$lista] as $tareas => $tarea) {
+            echo "<tr>";
+                    echo "<td align='center'><input type='checkbox' disabled></td>";
+                    echo "<td align='center'>" . $tarea['Descripcion'] . "</td>";
+                    echo "<td align='center'>" . $tarea['Prioridad'] . "</td>";
+                    echo "<td align='center'>" . $tarea['FechaLimite'] . "</td>";
+            echo "</tr>";
+        }
+    }
+
+    function marcarTodoCompletado(&$listas, $lista){
+        foreach ($listas['ListaTareas'][$lista] as &$tarea) {
+            $tarea['Estado'] = 'Completada';
+        }
+
+        $ruta = "ListaTareas.json";
+        $jsonString = json_encode($listas, JSON_PRETTY_PRINT);
+        $fichero = fopen($ruta, 'w');
+        fwrite($fichero, $jsonString);
+        fclose($fichero);
+
+        header("Location: ../Listas.php");
+    }
+
+    function vaciarLista(&$listas, $lista){
+        $listas['ListaTareas'][$lista] = [];
+
+        $ruta = "ListaTareas.json";
+        $jsonString = json_encode($listas, JSON_PRETTY_PRINT);
+        $fichero = fopen($ruta, 'w');
+        fwrite($fichero, $jsonString);
+        fclose($fichero);
+
+        header("Location: ../Listas.php");
     }
 
     function eliminarLista(&$listas, $lista){
@@ -53,7 +91,11 @@
     function editarLista(&$listas, $lista, $nuevoNombre){
         $tareas = $listas['ListaTareas'][$lista];
 
+        //echo "<p>TAREAS: $tareas</p>"; var_dump($tareas);
+
         $listas['ListaTareas'][$nuevoNombre] = $tareas;
+
+        //echo "<p>LISTAS: $listas</p>"; var_dump($listas);
 
         unset($listas['ListaTareas'][$lista]);
 
@@ -66,7 +108,7 @@
         header("Location: ../Listas.php");
     }
 
-    //TAREAS
+    //------TAREAS------
     function mostrarTablaPendientes($listaTareas) {
         foreach ($listaTareas['ListaTareas'] as $lista => $tareas) {
             foreach ($tareas as $tarea) {
@@ -136,8 +178,6 @@
             fwrite($fichero, $jsonString);
             fclose($fichero);
         }
-
-        header("Location: Index.php");
     }
 
     function eliminarTarea(&$listaTareas, $id, $lista){
@@ -234,13 +274,55 @@
             </p>";
     }
 
-    function decodificarNotas():mixed{
+    function decodificarNotas($ruta){
 
-        $ruta = "src/Notas.json";
         $contenido = file_get_contents($ruta);
         $notas = json_decode($contenido, true);
         
         return $notas;
+    }
+
+    function mostrarNotas($notas){
+        foreach ($notas['Notas'] as $nota) {
+            $titulo = $nota['titulo'];
+            $color = $nota['color'];
+
+            echo "<tr style='background-color: $color;'>";
+                echo "<td>" . $nota['titulo'] . "</td>";
+                echo "<td>" . $nota['contenido'] . "</td>";
+                echo "<td><a href='./src/EliminarNota.php?titulo=$titulo'>Eliminar</a></td>";
+            echo "</tr>";
+        }
+    }
+
+    function crearNota(&$notas, $titulo, $contenido, $color){
+        array_push($notas['Notas'], array("titulo" => $titulo, "contenido" => $contenido, "color" => $color));
+        
+        $ruta = "src/Notas.json";
+        $jsonString = json_encode($notas, JSON_PRETTY_PRINT);
+        $fichero = fopen($ruta, 'w');
+        fwrite($fichero, $jsonString);
+        fclose($fichero);
+
+        header("Location: Notas.php");
+    }
+
+    function eliminarNota(&$notas, $titulo){
+        var_dump($notas);
+
+        foreach($notas['Notas'] as $indice => $nota) {
+            if($nota['titulo'] == $titulo) {
+                unset($notas['Notas'][$indice]);
+            }
+        }
+
+        $ruta = "Notas.json";
+        $jsonString = json_encode($notas, JSON_PRETTY_PRINT);
+        $fichero = fopen($ruta, 'w');
+        fwrite($fichero, $jsonString);
+        fclose($fichero);
+
+        header('location: ../Notas.php');
     }
 
 ?>

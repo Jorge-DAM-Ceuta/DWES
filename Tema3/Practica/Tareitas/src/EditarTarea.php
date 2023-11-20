@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Editar tarea</title>
+        <link rel="stylesheet" href="../assets/css/Style.css">
     </head>
     <body>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
@@ -16,12 +17,12 @@
                 $id = $_GET["id"];
                 $lista = $_GET["lista"];
 
-                echo "<h1>1NOMBRE LISTA: $lista</h1>";
+                //echo "<h1>1NOMBRE LISTA: $lista</h1>";
 
                 cargarTarea($listas, $id, $lista);
 
                 //eliminarTarea($listas, $id, $lista);
-                echo "<h1>2NOMBRE LISTA: $lista</h1>";
+                //echo "<h1>2NOMBRE LISTA: $lista</h1>";
             ?>
 
             <input type="submit" name="modificar" value="Editar tarea">
