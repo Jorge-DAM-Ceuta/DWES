@@ -1,5 +1,4 @@
 <?php
-
     function validarDatos(&$variable){
         trim($variable);
         stripslashes($variable);
