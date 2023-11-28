@@ -1,5 +1,8 @@
 <?php
-    $_COOKIE = 
+    if(isset($_POST['aceptar']) && isset($_COOKIE['confirmada'])){
+        setcookie('confirmada', 'true', time() + 60);
+        
+    }else{
 ?>
 
 <!DOCTYPE html>
@@ -10,20 +13,18 @@
         <title>Ejercicio 4</title>
     </head>
     <body>
-    <!-- Delay de 10s -->
-        <?php if(!isset($_POST['aceptar'])){ ?>
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
+        
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <dialog open>
                 <p>ACEPTAR COOKIES</p>
                 <input type='submit' name='aceptar' value='Aceptar'>
                 <input type='submit' name='rechazar' value='Rechazar'>
             </dialog>
         </form>
-        
+
         <?php
-            }else{
-                $_COOKIE['self'] = "";
+                header('Location: ./Ejercicio4.php');
+                exit();
             }
         ?>
     </body>

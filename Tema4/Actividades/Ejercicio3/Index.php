@@ -1,5 +1,11 @@
 <?php
     include_once("../Funciones.inc.php");
+    session_start();
+
+    if(isset($_SESSION['usuario'])){
+        header("location: ./Inicio.php");
+        die();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -19,12 +25,14 @@
                 $usuario = validarDatos($_POST['usuario']);
                 $password = cifrarPassword($_POST['password']);
 
-                array_push($usuarios, array("nombre" => $usuario, "password" => $password));
+                if(empty( $usuario )!= "" && $password != ""){
+                    array_push($usuarios, array("nombre" => $usuario, "password" => $password));
 
-                $jsonString = json_encode($usuarios, JSON_PRETTY_PRINT);
-                file_put_contents($rutaJSON, $jsonString);  
+                    $jsonString = json_encode($usuarios, JSON_PRETTY_PRINT);
+                    file_put_contents($rutaJSON, $jsonString);  
 
-                echo "<h2>Te has registrado correctamente</h2>";
+                    echo "<h2>Te has registrado correctamente</h2>";
+                }
             }
 
             if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['iniciar'])){
@@ -44,9 +52,7 @@
                         header("location: ./Inicio.php");
                         die();
                     }
-                }
-
-                
+                } 
             }
         ?>
 
