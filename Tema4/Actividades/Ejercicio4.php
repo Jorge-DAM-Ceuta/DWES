@@ -1,8 +1,11 @@
 <?php
-    if(isset($_POST['aceptar']) && isset($_COOKIE['confirmada'])){
-        setcookie('confirmada', 'true', time() + 60);
+    if(isset($_POST['aceptar'])){
+        setcookie('confirmada', 'true', time() + 60*1);
+        header('Location: ./Ejercicio4.php');
+        exit();
+    }
         
-    }else{
+    if(!isset($_COOKIE['confirmada'])){
 ?>
 
 <!DOCTYPE html>
@@ -21,11 +24,9 @@
                 <input type='submit' name='rechazar' value='Rechazar'>
             </dialog>
         </form>
-
-        <?php
-                header('Location: ./Ejercicio4.php');
-                exit();
-            }
-        ?>
     </body>
 </html>
+
+<?php
+    }
+?>
