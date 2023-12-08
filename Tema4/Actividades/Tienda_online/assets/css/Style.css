@@ -1,0 +1,24 @@
+.producto {
+    display: inline-block;
+    width: 300px;
+    padding: 70px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    vertical-align: top;
+    font-size: 16px;
+}
+
+.boton {
+    display: inline-block;
+    padding: 5px 10px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 97, 97);
+    border: 1px solid #000000;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+

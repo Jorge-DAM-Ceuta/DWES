@@ -1,0 +1,38 @@
+[
+    {
+        "nombre": "Mario bros U deluxe",
+        "descripcion": "",
+        "precio": "24.99€",
+        "imagen": "../assets/images/producto1.jpg"
+    },
+    {
+        "nombre": "The Elder Scrolls V: Skyrim",
+        "descripcion": "",
+        "precio": "24.99€",
+        "imagen": "../assets/images/producto2.jpg"
+    },
+    {
+        "nombre": "Sports party",
+        "descripcion": "",
+        "precio": "24.99€",
+        "imagen": "../assets/images/producto3.jpg"
+    },
+    {
+        "nombre": "51 Games",
+        "descripcion": "",
+        "precio": "24.99€",
+        "imagen": "../assets/images/producto4.jpg"
+    },
+    {
+        "nombre": "Splatoon 3",
+        "descripcion": "",
+        "precio": "24.99€",
+        "imagen": "../assets/images/producto5.jpg"
+    },
+    {
+        "nombre": "Splatoon 2",
+        "descripcion": "",
+        "precio": "24.99€",
+        "imagen": "../assets/images/producto6.jpg"
+    }
+]
