@@ -1,5 +1,6 @@
 <?php
     include_once("./Funciones.inc.php");
+    $productos = decodificarJSON();
 ?>
 
 <!DOCTYPE html>
@@ -19,8 +20,6 @@
     </head>
     <body>
         <?php
-            $productos = decodificarJSON();
-
             if(isset($_GET['nombre'])) {
                 mostrarDetalles($productos);
             }

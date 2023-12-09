@@ -28,6 +28,37 @@
                 </div>";
         }
     }
+    function mostrarCarrito($productos){
+        if (isset($_COOKIE['carrito'])) {
+            $carrito = json_decode($_COOKIE['carrito'], true);
+    
+            if (!empty($carrito)) {
+                foreach ($carrito as $nombreProducto => $detalles) {
+                    $cantidad = $detalles['cantidad'];
+                    foreach ($productos as $producto) {
+                        if ($producto['nombre'] == $nombreProducto) {
+                            echo "<div class='producto-carrito'>
+                                    <img src='" . $producto['imagen'] . "' width='80' height='80'>
+                                    <br/>
+                                    <strong>" . $producto['nombre'] . "</strong>
+                                    <br/>
+                                    Precio: " . $producto['precio'] . "
+                                    <br/>
+                                    Cantidad: $cantidad
+                                </div>
+                                <div>
+                                    <a class='botonCarrito' href='Eliminar.php?nombre=" . urlencode($nombreProducto) . "'>Eliminar</a>
+                                </div>
+                                <br/>
+                            ";
+                        }
+                    }
+                }
+            } else {
+                echo "<p>El carrito está vacío.</p>";
+            }
+        }
+    }
 
     function mostrarDetalles($productos){
         foreach ($productos as $producto) {
@@ -78,26 +109,5 @@
         header("Location: ./Index.php");
         exit();    
     }*/
-
-    function mostrarCarrito(){
-        if (isset($_COOKIE['carrito'])) {
-            $carrito = json_decode($_COOKIE['carrito'], true);
-    
-            if (!empty($carrito)) {
-                echo "<ul>";
-
-                foreach ($carrito as $nombreProducto => $detalles) {
-                    $cantidad = $detalles['cantidad'];
-                    echo "<li>$nombreProducto - Cantidad: $cantidad
-                            <a class='boton' href='Eliminar.php?nombre=" . urlencode($nombreProducto) . "'>Eliminar</a>
-                        </li>";
-                }
-
-                echo "</ul>";
-            } else {
-                echo "<p>El carrito está vacío.</p>";
-            }
-        }
-    }
 
 ?>

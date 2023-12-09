@@ -1,5 +1,6 @@
 <?php
     include_once("./Funciones.inc.php");
+    $productos = decodificarJSON();
 ?>
 
 <!DOCTYPE html>
@@ -11,19 +12,13 @@
         <title>Tienda Online</title>
     </head>
     <body>
-        <h2>Carrito de Compra</h2>
+        <div class="carrito">
+            <h2>Carrito de Compra</h2>
+            <?php mostrarCarrito($productos); ?>
+        </div>
 
-        <?php
-            mostrarCarrito();
-        ?>
-
-        <h1>Videojuegos</h1>
-
-        <?php
-            $productos = decodificarJSON();
-
-            mostrarProductos($productos);
-        ?>
+        <h1 style="text-align: center; margin-left: -200px;">Videojuegos</h1>
+        <?php mostrarProductos($productos); ?>
     </body>
 </html>
 
