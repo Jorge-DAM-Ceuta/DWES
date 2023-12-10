@@ -12,11 +12,13 @@
         <title>Tienda Online</title>
     </head>
     <body>
+        <!-- Se muestra el carrito de la compra a la derecha con una clase CSS. -->
         <div class="carrito">
             <h2>Carrito de Compra</h2>
             <?php mostrarCarrito($productos); ?>
         </div>
 
+        <!-- Se muestran los productos -->
         <h1 style="text-align: center; margin-left: -200px;">Videojuegos</h1>
         <?php mostrarProductos($productos); ?>
     </body>
