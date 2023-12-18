@@ -135,4 +135,34 @@
         }
     }
 
+    function mostrarAutorHilo($titulo){
+        $rutaJSON = "./foro.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $foro = json_decode($jsonString, true);
+        
+        foreach($foro as $hilo){
+            if($hilo['titulo'] == $titulo){
+                echo "<h3>Autor: " . $hilo['autor'] . "</h3>";             
+            }
+        }
+    }
+
+    function escribirMensaje($titulo, $mensaje){
+        $rutaJSON = "./foro.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $foro = json_decode($jsonString, true);
+        
+        foreach($foro as $hilo){
+            if($hilo['titulo'] == $titulo){
+                //Añadir el mensaje
+                array_push($hilo['mensajes'], $mensaje);
+                
+                //Cargar la página de nuevo
+                header("Location: ./hilo.php");
+                cargarHilo($titulo);
+                die();
+            }
+        }
+    }
+
 ?>
