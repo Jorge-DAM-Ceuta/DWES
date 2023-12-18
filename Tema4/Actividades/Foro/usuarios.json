@@ -1,0 +1,27 @@
+[
+    {
+        "nombre": "fran",
+        "correo": "fran.sanchez@cifpceuta.es",
+        "password": "123456"
+    },
+    {
+        "nombre": "javi",
+        "correo": "javi@cifpceuta.es",
+        "password": "654321"
+    },
+    {
+        "nombre": "Jorge",
+        "correo": "jorge@gmail.com",
+        "password": "$argon2i$v=19$m=65536,t=4,p=1$LkNFUnQwajhYUS9pRUhtNQ$WeIWChz2j2CqDrbeKiooHUIm9xv30TyXO6fhi\/\/JDMA"
+    },
+    {
+        "nombre": "Jorgito",
+        "correo": "jorge@gmail.com",
+        "password": "$argon2i$v=19$m=65536,t=4,p=1$ZTgzanVrR2FmN1k1NERDaw$gBqi62BUXNB1LqYNF7C0igVt\/UGouzoiuzKHGn8\/byo"
+    },
+    {
+        "nombre": "Jorgiyo",
+        "correo": "jorge@gmail.com",
+        "password": "$argon2i$v=19$m=65536,t=4,p=1$RDYvMkhTTm1mMnFyQ2lLaw$oTfpkg7qYQy3Vvy4UH15C3NsoSO+lxl37VT369n7yh8"
+    }
+]

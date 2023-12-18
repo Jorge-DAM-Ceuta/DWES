@@ -1,0 +1,44 @@
+[
+    {
+        "titulo": "Introducci\u00f3n al Foro",
+        "autor": "fran",
+        "mensajes": [
+            {
+                "usuario": "fran",
+                "contenido": "\u00a1Bienvenidos al foro! \u00bfQu\u00e9 les gustar\u00eda discutir?"
+            },
+            {
+                "usuario": "javi",
+                "contenido": "Hola a todos, estoy emocionado de participar."
+            }
+        ]
+    },
+    {
+        "titulo": "Despedida del Foro",
+        "autor": "javi",
+        "mensajes": [
+            {
+                "usuario": "javi",
+                "contenido": "\u00a1Hasta luego foro! Se acabo el carb\u00f3n."
+            },
+            {
+                "usuario": "fran",
+                "contenido": "Hasta la proxima a todos y a guisar con le\u00f1a."
+            },
+            {
+                "usuario": "javi",
+                "contenido": "As\u00ed es fran, ya nos veremos."
+            }
+        ]
+    },
+    {
+        "titulo": "EXAMEN TEMA 4",
+        "autor": "Jorgiyo",
+        "mensajes": []
+    },
+    {
+        "titulo": "gdhdfh",
+        "autor": "Jorgito",
+        "mensajes": []
+    }
+]
