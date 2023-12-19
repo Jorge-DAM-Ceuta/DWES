@@ -147,20 +147,26 @@
         }
     }
 
+    //FALTA AÑADIR EL USUARIO AL MENSAJE.
     function escribirMensaje($titulo, $mensaje){
         $rutaJSON = "./foro.json";
         $jsonString = file_get_contents($rutaJSON);
         $foro = json_decode($jsonString, true);
         
-        foreach($foro as $hilo){
+        foreach($foro as $indice => $hilo){
             if($hilo['titulo'] == $titulo){
                 //Añadir el mensaje
-                array_push($hilo['mensajes'], $mensaje);
+                $contenido = array(
+                    "contenido" => $mensaje
+                );
+        
+                $foro[$indice]['mensajes'] = $contenido;
+            
+                var_dump($foro);
                 
-                //Cargar la página de nuevo
-                header("Location: ./hilo.php");
-                cargarHilo($titulo);
-                die();
+                //Guardar el json
+                $jsonString = json_encode($foro, JSON_PRETTY_PRINT);
+                file_put_contents($rutaJSON, $jsonString);
             }
         }
     }

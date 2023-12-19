@@ -11,11 +11,22 @@
         die();
     }
 
-    $titulo = $_GET['titulo'];
+    //Si se recibe el título se almacena en la variable.
+    if(isset($_GET['titulo'])){
+        $titulo = $_GET['titulo'];
+    }
+
+    //Si se pulsa el botón del formulario se añade un nuevo mensaje y se recarga el hilo.
+    if(isset($_POST['publicar'])){
+        escribirMensaje($_POST['titulo'], $_POST['mensaje']);
+    }
+
+    escribirMensaje($titulo, "ahehe");
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,7 +55,7 @@
         
         <br>
         
-        <form action="" method="GET">
+        <form method="POST">
             <input type="hidden" name="titulo" value="<?php echo $titulo; ?>">
             <textarea name="mensaje" id="mensaje" cols="50" rows="3" placeholder="Escribe un nuevo mensaje" required></textarea>
 
@@ -52,15 +63,6 @@
 
             <input type="submit" name="publicar" value="Publicar mensaje">
         </form>
-
-        <?php
-            echo "<h2>" . $_GET['titulo'] . ", " . $_GET['mensaje'] . "</h2>";
-            
-            if(isset($_GET['publicar'])){
-                escribirMensaje($_GET['titulo'], $_GET['mensaje']);
-                cargarHilo($_GET['titulo']);
-            }
-        ?>
 
         <br>
     </main>
