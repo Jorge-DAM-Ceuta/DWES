@@ -34,8 +34,11 @@
     {
         "titulo": "EXAMEN TEMA 4",
         "autor": "Jorgiyo",
-        "mensajes": {
-            "contenido": "ahehe"
-        }
+        "mensajes": [
+            {
+                "contenido": "dwwaqef",
+                "usuario": "Jorgito"
+            }
+        ]
     }
 ]

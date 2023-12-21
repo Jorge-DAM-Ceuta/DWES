@@ -1,6 +1,5 @@
 <?php
     include_once("./src/funciones.inc.php");
-    session_start();
 
     if(isset($_GET['accion']) && $_GET['accion'] == 'salir'){
         cerrarSesion();
@@ -21,7 +20,7 @@
         escribirMensaje($_POST['titulo'], $_POST['mensaje']);
     }
 
-    escribirMensaje($titulo, "ahehe");
+    //escribirMensaje($titulo, "ahehe");
 
 ?>
 

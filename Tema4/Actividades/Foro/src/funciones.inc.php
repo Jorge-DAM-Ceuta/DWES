@@ -155,12 +155,15 @@
         
         foreach($foro as $indice => $hilo){
             if($hilo['titulo'] == $titulo){
-                //Añadir el mensaje
-                $contenido = array(
-                    "contenido" => $mensaje
+                //Añadir el mensaje y usuario
+                session_start();
+
+                $nuevoMensaje = array(
+                    "contenido" => $mensaje,
+                    "usuario" => $_SESSION['usuario']
                 );
-        
-                $foro[$indice]['mensajes'] = $contenido;
+
+                array_push($foro[$indice]['mensajes'], $nuevoMensaje);
             
                 var_dump($foro);
                 
