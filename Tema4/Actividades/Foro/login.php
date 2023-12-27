@@ -1,6 +1,7 @@
 <?php
     include_once("./src/funciones.inc.php");
 
+    session_start();
     if(isset($_SESSION['usuario'])){
         header("Location: ./index.php");
         die();
@@ -8,11 +9,11 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./assets/css/estilos.css">
+        <link rel="stylesheet" href="./assets/css/login.css">
         <title>Foro | Login</title>
     </head>
     <body>
@@ -37,9 +38,11 @@
             <h1>¡Bienvenido al Foro!</h1>
             <h2>Accede a tu cuenta o crea una nueva.</h2>
         </header>
+
         <hr>
+
         <main>
-            <section>
+            <section class="login-form">
                 <h3>Inicia sesión:</h3>
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                     <label for="nombre">Nombre de usuario:</label>
@@ -49,8 +52,10 @@
                     <input type="submit" name="iniciar" value="Iniciar sesión">
                 </form>
             </section>
+
             <hr>
-            <section>
+
+            <section class="register-form">
                 <h3>Registrate ahora:</h3>
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                     <label for="nombreUsuario">Nombre de usuario:</label>
@@ -64,8 +69,11 @@
                     <input type="submit" name="registrar" value="Crear cuenta">
                 </form>
             </section>
+
         </main>
+
         <hr>
+        
         <footer>
             CIFP Nº1 - 2023 &copy; Todos los derechos reservados.
         </footer>

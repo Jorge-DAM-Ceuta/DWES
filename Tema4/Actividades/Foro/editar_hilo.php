@@ -17,8 +17,8 @@
     }
 
     //Si se pulsa el botón del formulario se añade un nuevo mensaje y se recarga el hilo.
-    if(isset($_POST['publicar'])){
-        escribirMensaje($_POST['titulo'], $_POST['mensaje']);
+    if(isset($_POST['actualizar'])){
+        editarHilo($_POST['titulo'], $_POST['tituloNuevo']);
     }
 ?>
 
@@ -27,39 +27,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/hilo.css">
+    <link rel="stylesheet" href="./assets/css/editar_hilo.css">
     <title>Inicio | Foro</title>
 </head>
 <body>
     <!-- Menú de navegación -->
     <nav>
-        <a href="index.php">Inicio</a> | 
+        <a href="index.php">Inicio</a> | &nbsp;
         <a href="hilo.php?accion=salir">Cerrar sesión</a>
     </nav>
-    
-    <!-- Información del hilo actual -->
-    <header>
-        <?php echo "<h2>" . $titulo . "</h2>" ?>
-        <?php mostrarAutorHilo($titulo); ?>
-    </header>
+
     
     <hr>
     
-    <!-- Mostrar mensajes -->
     <main>
         <section>
-            <h3>Mensajes:</h3>
-            <?php cargarHilo($titulo); ?>
-            
-            <br>
-            
             <form method="POST">
                 <input type="hidden" name="titulo" value="<?php echo $titulo; ?>">
-                <textarea name="mensaje" id="mensaje" cols="50" rows="3" placeholder="Escribe un nuevo mensaje" required></textarea>
-
+                <label for="tituloNuevo">Titulo</label>
+                <input type="text" name="tituloNuevo" value="<?php echo $titulo; ?>">
+                
                 <br>
 
-                <input type="submit" name="publicar" value="Publicar mensaje">
+                <input type="submit" name="actualizar" value="Actualizar Hilo">
             </form>
 
             <br>

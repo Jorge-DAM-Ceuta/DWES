@@ -36,7 +36,6 @@
         }
 
         if($comprobacion == true && $usuarioExistente == false){
-            session_start();
 
             array_push($usuarios, array("nombre" => $username, "correo" => $email, "password" => $password));
 
@@ -59,7 +58,6 @@
 
         foreach($usuarios as $elemento){
             if($elemento['nombre'] == $username && password_verify($password, $elemento['password']) == true){
-                session_start();
 
                 $_SESSION['usuario'] = $elemento['nombre'];
                 $_SESSION['correo'] = $elemento['correo'];
@@ -71,7 +69,6 @@
     }
 
     function cerrarSesion(){
-        session_start();
         session_unset();
         session_destroy();
         
@@ -88,18 +85,27 @@
         echo "<hr>";
 
         foreach($foro as $hilo){
+            echo "<div class='hilo-card'>";
             echo "<p>Autor: " . $hilo['autor'] . "</p>
-                <p>Título: <strong>" . $hilo['titulo'] . "</strong></p>
+                <p><strong>" . $hilo['titulo'] . "</strong></p>
                 <p>Mensajes:</p>
                 <ul>";
             
             foreach($hilo['mensajes'] as $mensaje){
-                echo "<li>Usuario: " . $mensaje['usuario'] . " - " . $mensaje['contenido'] . "</li>";
+                echo "<li>" . $mensaje['usuario'] . " - " . $mensaje['contenido'] . "</li>";
             }
-
-            echo "</ul>
-            <a href='./hilo.php?titulo=" . $hilo['titulo'] . "'>Escribir mensaje</a> | <a href='#'>Editar hilo</a>
-            <hr>";
+            
+            if ($_SESSION['usuario'] == comprobarAutor($hilo['titulo'])) {
+                echo "</ul>
+                <a href='./hilo.php?titulo=" . $hilo['titulo'] . "'>Escribir mensaje</a> | <a href='./editar_hilo.php?titulo=" . $hilo['titulo'] . "'>Editar hilo</a>
+                <hr>";
+             }else{
+                echo "</ul>
+                <a href='./hilo.php?titulo=" . $hilo['titulo'] . "'>Escribir mensaje</a>
+                <hr>";
+             }
+            
+            echo "</div>";
         } 
     }
 
@@ -107,8 +113,6 @@
         $rutaJSON = "./foro.json";
         $jsonString = file_get_contents($rutaJSON);
         $foro = json_decode($jsonString, true);
-        
-        session_start();
 
         $mensajes = array();
 
@@ -129,7 +133,7 @@
         foreach($foro as $hilo){
             if($hilo['titulo'] == $titulo){
                 foreach($hilo['mensajes'] as $mensaje){
-                    echo "<li>Usuario: " . $mensaje['usuario'] . " - " . $mensaje['contenido'] . "</li>";             
+                    echo "<li>" . $mensaje['usuario'] . " - " . $mensaje['contenido'] . "</li>";             
                 }
             }
         }
@@ -156,7 +160,6 @@
         foreach($foro as $indice => $hilo){
             if($hilo['titulo'] == $titulo){
                 //Añadir el mensaje y usuario
-                session_start();
 
                 $nuevoMensaje = array(
                     "contenido" => $mensaje,
@@ -165,7 +168,6 @@
 
                 array_push($foro[$indice]['mensajes'], $nuevoMensaje);
             
-                var_dump($foro);
                 
                 //Guardar el json
                 $jsonString = json_encode($foro, JSON_PRETTY_PRINT);
@@ -173,5 +175,65 @@
             }
         }
     }
+    function comprobarAutor($titulo) {
+        $rutaJSON = "./foro.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $foro = json_decode($jsonString, true);
+    
+        foreach ($foro as $hilo) {
+            if ($hilo['titulo'] == $titulo) {
+                return $hilo['autor'] === $_SESSION['usuario'];
+            }
+        }
+    
+        return false; // Si no se encuentra el hilo o el usuario no coincide con el autor
+    }
+
+    function editarHilo($titulo, $nuevoTitulo) {
+        try {
+            $rutaJSON = "./foro.json";
+            $jsonString = file_get_contents($rutaJSON);
+    
+            if ($jsonString === false) {
+                throw new Exception("No se pudo leer el archivo JSON.");
+            }
+    
+            $foro = json_decode($jsonString, true);
+    
+            if ($foro === null) {
+                throw new Exception("No se pudo decodificar el archivo JSON.");
+            }
+    
+            foreach ($foro as $indice => $hilo) {
+                if ($hilo['titulo'] == $titulo) {
+                    if ($_SESSION['usuario'] === $hilo['autor']) {
+                        $foro[$indice]['titulo'] = $nuevoTitulo;
+    
+                        $jsonString = json_encode($foro, JSON_PRETTY_PRINT);
+                        if ($jsonString === false) {
+                            throw new Exception("Error al codificar el JSON.");
+                        }
+    
+                        $result = file_put_contents($rutaJSON, $jsonString);
+                        if ($result === false) {
+                            throw new Exception("Error al escribir en el archivo JSON.");
+                        }
+    
+                        header("Location: ./index.php?titulo=" . urlencode($nuevoTitulo));
+                        exit();
+                    } else {
+                        echo "<p>No tienes permiso para editar este hilo.</p>";
+                        return;
+                    }
+                }
+            }
+    
+            echo "<p>Hilo no encontrado.</p>";
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    
+    
 
 ?>

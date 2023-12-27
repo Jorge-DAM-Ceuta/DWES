@@ -1,0 +1,85 @@
+/* Resetear estilos por defecto */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    width: 25%;
+    margin: 0 auto; /* Centra horizontalmente */
+    margin-bottom: 20px; /* Espacio inferior */
+    padding: 20px; /* Añade espacio interno */
+    display: flex;
+    flex-direction: column; /* Cambia la dirección a columna */
+    align-items: center; /* Centra horizontalmente */
+    text-align: center; /* Centra el texto dentro del section */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+}
+
+main {
+    padding: 20px;
+}
+
+textarea,
+input[type="submit"] {
+    width: calc(100% - 30px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    outline: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+input[type="submit"] {
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    position: fixed; /* Fija el footer */
+    bottom: 0; /* Lo sitúa en la parte inferior */
+    left: 0; /* Asegura que esté alineado a la izquierda */
+    right: 0; /* Asegura que esté alineado a la derecha */
+}

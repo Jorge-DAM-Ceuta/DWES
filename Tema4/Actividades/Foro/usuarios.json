@@ -23,5 +23,10 @@
         "nombre": "Jorgiyo",
         "correo": "jorge@gmail.com",
         "password": "$argon2i$v=19$m=65536,t=4,p=1$RDYvMkhTTm1mMnFyQ2lLaw$oTfpkg7qYQy3Vvy4UH15C3NsoSO+lxl37VT369n7yh8"
+    },
+    {
+        "nombre": "Mohamed",
+        "correo": "hamito2003@gmail.com",
+        "password": "$argon2i$v=19$m=65536,t=4,p=1$dW90Zm81OVhBamtmMWlXZw$LOOutVE4tSqQ4KEdjNzhjfGHTOvppRHYl056wQPQ6jg"
     }
 ]
