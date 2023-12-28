@@ -5,7 +5,8 @@
         exit();
     }
         
-    if(!isset($_COOKIE['confirmada'])){
+    try{
+        if(!isset($_COOKIE['confirmada'])){
 ?>
 
 <!DOCTYPE html>
@@ -28,5 +29,8 @@
 </html>
 
 <?php
+        }
+    }catch(Exception $error){
+        echo "No se ha aceptado la cookie.";
     }
 ?>

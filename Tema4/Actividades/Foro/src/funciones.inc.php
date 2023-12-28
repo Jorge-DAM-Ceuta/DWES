@@ -94,7 +94,7 @@
             foreach($hilo['mensajes'] as $mensaje){
                 echo "<li>" . $mensaje['usuario'] . " - " . $mensaje['contenido'] . "</li>";
             }
-            
+
             if ($_SESSION['usuario'] == comprobarAutor($hilo['titulo'])) {
                 echo "</ul>
                 <a href='./hilo.php?titulo=" . $hilo['titulo'] . "'>Escribir mensaje</a> | <a href='./editar_hilo.php?titulo=" . $hilo['titulo'] . "'>Editar hilo</a>
@@ -151,7 +151,6 @@
         }
     }
 
-    //FALTA AÑADIR EL USUARIO AL MENSAJE.
     function escribirMensaje($titulo, $mensaje){
         $rutaJSON = "./foro.json";
         $jsonString = file_get_contents($rutaJSON);

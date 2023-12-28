@@ -1,27 +1,32 @@
 <?php
-    if(isset($_POST['cambiar'])){
-        $lenguaje = $_POST['lenguaje'];
-        setcookie('lenguaje', $lenguaje, time() + 60 * 1);
-        header("Location: ./Ejercicio5.php");
-        exit();
+    try{
+        if(isset($_POST['cambiar'])){
+            $lenguaje = $_POST['lenguaje'];
+            setcookie('lenguaje', $lenguaje, time() + 60 * 1);
+            header("Location: ./Ejercicio5.php");
+            exit();
+        }
+
+        $lenguajes = array(
+            'ES' => ['Bienvenido', './Banderas/es.png', 'yellow'],
+            'EN' => ['Welcome', './Banderas/en.png', 'red'],
+            'IT' => ['Benvenuto', './Banderas/it.png', 'green'],
+            'FR' => ['Bienvenue', './Banderas/fr.png', 'aqua']
+        );
+
+        $lenguajeActual = isset($_COOKIE['lenguaje']) ? $_COOKIE['lenguaje'] : 'ES';
+
+        $texto = $lenguajes[$lenguajeActual][0];
+        $bandera = $lenguajes[$lenguajeActual][1];
+        $color = $lenguajes[$lenguajeActual][2];
+    
+    }catch(Exception $error){
+        echo "No se ha podido cambiar el idioma.";
     }
-
-    $lenguajes = array(
-        'ES' => ['Bienvenido', './Banderas/es.png', 'yellow'],
-        'EN' => ['Welcome', './Banderas/en.png', 'red'],
-        'IT' => ['Benvenuto', './Banderas/it.png', 'green'],
-        'FR' => ['Bienvenue', './Banderas/fr.png', 'aqua']
-    );
-
-    $lenguajeActual = isset($_COOKIE['lenguaje']) ? $_COOKIE['lenguaje'] : 'ES';
-
-    $texto = $lenguajes[$lenguajeActual][0];
-    $bandera = $lenguajes[$lenguajeActual][1];
-    $color = $lenguajes[$lenguajeActual][2];
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

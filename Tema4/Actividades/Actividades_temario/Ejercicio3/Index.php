@@ -25,13 +25,17 @@
                 $usuario = validarDatos($_POST['usuario']);
                 $password = cifrarPassword($_POST['password']);
 
-                if(empty( $usuario )!= "" && $password != ""){
-                    array_push($usuarios, array("nombre" => $usuario, "password" => $password));
+                try{
+                    if(empty($usuario) != "" && $password != ""){
+                        array_push($usuarios, array("nombre" => $usuario, "password" => $password));
 
-                    $jsonString = json_encode($usuarios, JSON_PRETTY_PRINT);
-                    file_put_contents($rutaJSON, $jsonString);  
+                        $jsonString = json_encode($usuarios, JSON_PRETTY_PRINT);
+                        file_put_contents($rutaJSON, $jsonString);  
 
-                    echo "<h2>Te has registrado correctamente</h2>";
+                        echo "<h2>Te has registrado correctamente</h2>";
+                    }
+                }catch(Exception $error){
+                    echo "¡Los campos no pueden estar vacíos!";
                 }
             }
 
