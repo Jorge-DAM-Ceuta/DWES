@@ -10,12 +10,26 @@
             $this->activa = $activa;
         }
 
-        public function actualizarDatos($nombre=$this->nombre, $apellidos=$this->apellidos, $dni=$this->dni, $saldo=$this->saldo, $activa=$this->activa){
-            $this->nombre = $nombre;
-            $this->apellidos = $apellidos;
-            $this->dni = $dni;
-            $this->saldo = $saldo;
-            $this->activa = $activa;
+        public function actualizarDatos($nombre, $apellidos, $dni, $saldo, $activa){
+            if($nombre != "" && $nombre != null){
+                $this->nombre = $nombre;
+            }
+
+            if($apellidos != "" && $apellidos != null){
+                $this->apellidos = $apellidos;
+            }
+
+            if($dni != "" && $dni != null){
+                $this->dni = $dni;
+            }
+
+            if($saldo != "" && $saldo != null){
+                $this->saldo = $saldo;
+            }
+
+            if($activa != "" && $activa != null){
+                $this->activa = $activa;
+            }
         }
 
         public function ingresarDinero($cantidad){
@@ -39,7 +53,19 @@
         }
 
         public function mostrarInformacion(){
-            echo "<br/><br/>";
+            $cuentaActiva = "";
+
+            switch($this->activa){
+                case true:
+                    $cuentaActiva = "Si";
+                break;
+
+                case false:
+                    $cuentaActiva = "No";
+                break;
+            }
+
+            echo "<h2>Información de la cuenta</h2>-Titular: $this->apellidos, $this->nombre <br/>-DNI: $this->dni <br/>-Saldo: $this->saldo <br/>-Cuenta activa: $cuentaActiva<br/>";
         }
     }
 ?>
@@ -54,8 +80,9 @@
     <body>
         <?php
             $cuenta = new Cuenta("Jorge", "Muñoz García", "45124434K", activa:true);
-            $cuenta->actualizarDatos();
-
+            $cuenta->mostrarInformacion();
+            $cuenta->actualizarDatos(apellidos:"Vargas Rodríguez", dni:"45231246I", saldo:3600, activa:true);
+            $cuenta->mostrarInformacion();
 
         ?>
     </body>
