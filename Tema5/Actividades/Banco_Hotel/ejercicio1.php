@@ -1,6 +1,8 @@
 <?php
     class Cuenta{
-        private $nombre, $apellidos, $dni, $saldo, $activa;
+        private string $nombre, $apellidos, $dni;
+        private float $saldo;
+        private bool $activa;
 
         public function __construct($nombre="", $apellidos="", $dni="", $saldo=0, $activa=true){
             $this->nombre = $nombre;
@@ -11,25 +13,11 @@
         }
 
         public function actualizarDatos($nombre, $apellidos, $dni, $saldo, $activa){
-            if($nombre != "" && $nombre != null){
                 $this->nombre = $nombre;
-            }
-
-            if($apellidos != "" && $apellidos != null){
                 $this->apellidos = $apellidos;
-            }
-
-            if($dni != "" && $dni != null){
                 $this->dni = $dni;
-            }
-
-            if($saldo != "" && $saldo != null){
                 $this->saldo = $saldo;
-            }
-
-            if($activa != "" && $activa != null){
                 $this->activa = $activa;
-            }
         }
 
         public function ingresarDinero($cantidad){
