@@ -1,13 +1,14 @@
 <?php
     class Coche{
-        private $marca, $modelo, $color, $peso, $anioFabricacion, $kilometraje;
+        private $color, $peso, $kilometraje;
+        private const MARCA = "Mercedes Benz"; 
+        private const MODELO = "Maybach"; 
+        private const ANIO = "2016"; 
 
-        public function __construct($marca="", $modelo="", $color="", $peso="", $anioFabricacion="", $kilometraje=0){
-            $this->marca = $marca;
-            $this->modelo = $modelo;
+
+        public function __construct($color="", $peso="", $kilometraje=0){
             $this->color = $color;
             $this->peso = $peso;
-            $this->anioFabricacion = $anioFabricacion;
             $this->kilometraje = $kilometraje;   
         }
 
@@ -17,7 +18,7 @@
         }
         
         public function retroceder(){
-            $this->kilometraje--;   
+            $this->kilometraje++;   
             echo "<br/>El coche ha retrocedido 1 kilometro.<br/>";
         }
         
@@ -40,7 +41,11 @@
         }
         
         public function obtenerInformacion(){
-            echo "<h2>Información del vehículo</h2>-Marca: $this->marca <br/>-Modelo: $this->modelo <br/>-Color: $this->color <br/>-Peso: $this->peso <br/>-Año de fabricación: $this->anioFabricacion <br/>-Kilometraje: $this->kilometraje<br/>";
+            echo "<h2>Información del vehículo</h2>-Marca: " . Self::MARCA . " <br/>-Modelo: " . Self::MODELO . " <br/>-Color: $this->color <br/>-Peso: $this->peso <br/>-Año de fabricación: " . Self::ANIO . " <br/>-Kilometraje: $this->kilometraje<br/>";
+        }
+
+        public function __toString(){
+            return "<h2>Información del vehículo</h2>-Marca: " . Self::MARCA . " <br/>-Modelo: " . Self::MODELO . " <br/>-Color: $this->color <br/>-Peso: $this->peso <br/>-Año de fabricación: " . Self::ANIO . " <br/>-Kilometraje: $this->kilometraje<br/>";
         }
     }
 ?>
@@ -54,8 +59,9 @@
     </head>
     <body>
         <?php
-            $coche = new Coche("Mercedes Benz", "Maybach", "Rojo", "693Kg", 2016, 0);
-            $coche->obtenerInformacion();
+            $coche = new Coche("Rojo", "693Kg", 0);
+            //$coche->obtenerInformacion();
+            echo $coche;
             $coche->avanzar();
             $coche->maniobrar("derecha");
             $coche->retroceder();     
