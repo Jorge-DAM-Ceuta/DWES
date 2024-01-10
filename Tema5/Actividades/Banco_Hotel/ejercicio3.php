@@ -66,6 +66,11 @@
         <title>Ejercicio 1</title>
     </head>
     <body>
+
+        <form action="<?php $_SERVER["PHP_SELF"]?>" method="POST">
+            
+        </form>
+        
         <?php
             $cuenta = new Cuenta("Jorge", "Muñoz García", "45124434K", activa:false);
             $cuenta->desbloquear();
@@ -76,7 +81,6 @@
             $cuenta->retirarDinero(57);
             $cuenta->bloquear();
             $cuenta->mostrarInformacion();
-            
         ?>
     </body>
 </html>
