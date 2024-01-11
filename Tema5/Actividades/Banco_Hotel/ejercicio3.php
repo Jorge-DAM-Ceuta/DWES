@@ -66,21 +66,30 @@
         <title>Ejercicio 1</title>
     </head>
     <body>
+        <h1>Mi banco</h1>
 
         <form action="<?php $_SERVER["PHP_SELF"]?>" method="POST">
-            
+            <p>
+                <label>Ingresar: <input type="text" name="cantidad1" placeholder="Cantidad a ingresar"></label>
+                <input type="submit" name="ingresar" value="Ingresar">
+            </p>
+
+            <p>
+                <label>Retirar: <input type="text" name="cantidad2" placeholder="Cantidad a retirar"></label>
+                <input type="submit" name="retirar" value="Retirar">
+            </p>
         </form>
         
         <?php
-            $cuenta = new Cuenta("Jorge", "Muñoz García", "45124434K", activa:false);
-            $cuenta->desbloquear();
-            $cuenta->mostrarInformacion();
-            $cuenta->actualizarDatos("Manuel", "Vargas Rodríguez", "45231246I", 3600, true);
-            $cuenta->mostrarInformacion();
-            $cuenta->ingresarDinero(107);
-            $cuenta->retirarDinero(57);
-            $cuenta->bloquear();
-            $cuenta->mostrarInformacion();
+            $cuenta = new Cuenta("Jorge", "Muñoz García", "45124434K", 4000, activa:true);
+            
+            if(isset($_POST['ingresar']) && $_SERVER['REQUEST_METHOD'] == "POST"){
+                $cantidadIngreso = $_POST['cantidad1'];
+            }
+
+            if(isset($_POST['ingresar']) && $_SERVER['REQUEST_METHOD'] == "POST"){
+                $cantidadRetiro = $_POST['cantidad2'];
+            }
         ?>
     </body>
 </html>
