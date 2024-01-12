@@ -1,0 +1,49 @@
+[
+    {
+        "saldoActual": 1073,
+        "movimientos": [
+            {
+                "tipo": "Ingreso",
+                "cantidad": 300,
+                "concepto": "Reserva M\u00e1ster",
+                "fecha": "17\/11\/2023"
+            },
+            {
+                "tipo": "Retiro",
+                "cantidad": 100,
+                "concepto": "Retiro cumplea\u00f1os",
+                "fecha": "17\/11\/2023"
+            },
+            {
+                "tipo": "Ingreso",
+                "cantidad": 10,
+                "concepto": "Arreglo",
+                "fecha": "12\/1\/2024"
+            },
+            {
+                "tipo": "Retiro",
+                "cantidad": 12,
+                "concepto": "saedas",
+                "fecha": "12\/1\/2024"
+            },
+            {
+                "tipo": "Ingreso",
+                "cantidad": 10,
+                "concepto": "Para mi ",
+                "fecha": "12\/1\/2024"
+            },
+            {
+                "tipo": "Ingreso",
+                "cantidad": 9,
+                "concepto": "fewtfg",
+                "fecha": "12\/1\/2024"
+            },
+            {
+                "tipo": "Ingreso",
+                "cantidad": 56,
+                "concepto": "bfrhterh",
+                "fecha": "12\/1\/2024"
+            }
+        ]
+    }
+]
