@@ -1,10 +1,10 @@
 <?php
-    class Vehiculo{
+    abstract class Vehiculo{
         private string $marca, $modelo, $color;
-        private int $anioFabricacion;
-        private float $kilometraje, $peso;
+        private float $peso, $kilometraje, $longitud, $cantidadGasolina;
+        private int $anioFabricacion, $numeroCadenasNieve;
         private array $personas;
-
+        
         public function __construct(string $color="Negro", float $peso=1000){
             $this->marca = "Mercedes Benz";
             $this->modelo = "Maybach";
@@ -12,6 +12,9 @@
             $this->peso = $peso;
             $this->anioFabricacion = 2016;
             $this->kilometraje = 0;   
+            $this->longitud = 2;
+            $this->cantidadGasolina = 60;
+            $this->numeroCadenasNieve = 0;
             $this->personas = array();
         }
 
@@ -61,6 +64,30 @@
 
         public function getKilometraje():float{
             return $this->kilometraje;
+        }
+
+        public function setLongitud(float $longitud){
+            $this->longitud = $longitud;
+        }
+
+        public function getLongitud():float{
+            return $this->longitud;
+        }
+
+        public function setCantidadGasolina(float $cantidadGasolina){
+            $this->cantidadGasolina = $cantidadGasolina;
+        }
+
+        public function getCantidadGasolina():float{
+            return $this->cantidadGasolina;
+        }
+
+        public function setnumeroCadenasNieve(int $numeroCadenasNieve){
+            $this->numeroCadenasNieve = $numeroCadenasNieve;
+        }
+
+        public function getnumeroCadenasNieve():int{
+            return $this->numeroCadenasNieve;
         }
 
         public function setPersonas(int $personas){
@@ -122,32 +149,52 @@
             }
         }
 
-        public function obtenerInformacion(){
-            echo "<h2>Información del vehículo</h2>-Marca: $this->marca <br/>-Modelo: $this->modelo <br/>-Color: $this->color <br/>-Peso: $this->peso <br/>-Año de fabricación: $this->anioFabricacion <br/>-Kilometraje: $this->kilometraje <br/>-Número de ocupantes: " . count($this->personas) . "<br/>";
+        public function repintar(string $color){
+            echo "<br/>Se ha repintado el coche de color $this->color a color $color<br/>";
+            $this->color = $color;
         }
-        
+
+        public function ponerGasolina(float $litros){
+            if($this->cantidadGasolina <= 60){
+                $this->peso += $litros;
+            }else{
+                echo "<br/>El tanque de gasolina está lleno.<br/>";
+            }
+        }
+
+        public function aniadirCadenasNive(){
+            if($this->numeroCadenasNieve <= 4){
+                $this->numeroCadenasNieve ++;
+                echo "<br/>Se ha añadido una cadena de nieve al coche<br/>";
+            }else{
+                echo "<br/>Ya hay una cadena de nieve en cada rueda<br/>";
+            }
+        }
+
+        public function quitarCadenasNive(){
+            if($this->numeroCadenasNieve > 0){
+                $this->numeroCadenasNieve --;
+                echo "<br/>Se ha quitado una cadena de nieve al coche<br/>";
+            }else{
+                echo "<br/>Ya no quedan cadenas de nieve puestas<br/>";
+            }
+        }
+
+        public function aniadirRemolque(float $longitudRemolque){
+            if($this->longitud <= 2){
+                $this->longitud += $longitudRemolque;
+                echo "<br/>Se ha añadido una remolque al coche<br/>";
+            }else{
+                echo "<br/>Ya hay dos remolques en el coche<br/>";
+            }
+        }
+
+        public function obtenerInformacion(){
+            echo "<h2>Estado del vehículo</h2>-Marca: $this->marca <br/>-Modelo: $this->modelo <br/>-Color: $this->color <br/>-Peso: $this->peso <br/>-Año de fabricación: $this->anioFabricacion <br/>-Kilometraje: $this->kilometraje <br/>-Longitud: $this->longitud metros<br/>-Litros de combustible: $this->cantidadGasolina<br/>-Número de cadenas de nieve: $this->numeroCadenasNieve<br/>-Número de ocupantes: " . count($this->personas) . "<br/>";
+        }
+
         public function __toString(){
-            return "<h2>Información del vehículo</h2>-Marca: $this->marca <br/>-Modelo: $this->modelo <br/>-Color: $this->color <br/>-Peso: $this->peso <br/>-Año de fabricación: $this->anioFabricacion <br/>-Kilometraje: $this->kilometraje <br/>-Número de ocupantes: " . count($this->personas) . "<br/>";
+            return "<h2>Estado del vehículo</h2>-Marca: $this->marca <br/>-Modelo: $this->modelo <br/>-Color: $this->color <br/>-Peso: $this->peso <br/>-Año de fabricación: $this->anioFabricacion <br/>-Kilometraje: $this->kilometraje <br/>-Longitud: $this->longitud metros<br/>-Litros de combustible: $this->cantidadGasolina<br/>-Número de cadenas de nieve: $this->numeroCadenasNieve<br/>-Número de ocupantes: " . count($this->personas) . "<br/>";
         }
     }
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Ejercicio 4</title>
-    </head>
-    <body>
-        <?php
-            $coche = new Vehiculo("Negro", 1500);
-            //$coche->obtenerInformacion();
-            echo $coche;
-            $coche->circula();
-            echo "<br/>Peso del vehículo: " . $coche->getPeso() . " Kg<br/>";
-            $coche->aniadirPersona(70);  
-            echo "<br/>Peso del vehículo: " . $coche->getPeso() . " Kg<br/>";   
-        ?>
-    </body>
-</html>

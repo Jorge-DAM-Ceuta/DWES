@@ -18,6 +18,7 @@
                 $this->dni = $dni;
                 $this->saldo = $saldo;
                 $this->activa = $activa;
+                /*isset*/
         }
 
         public function ingresarDinero(float $cantidad){
