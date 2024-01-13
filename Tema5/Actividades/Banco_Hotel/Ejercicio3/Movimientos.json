@@ -1,6 +1,6 @@
 [
     {
-        "saldoActual": 1073,
+        "saldoActual": 100,
         "movimientos": [
             {
                 "tipo": "Ingreso",
@@ -43,6 +43,24 @@
                 "cantidad": 56,
                 "concepto": "bfrhterh",
                 "fecha": "12\/1\/2024"
+            },
+            {
+                "tipo": "Ingreso",
+                "cantidad": 17,
+                "concepto": "hola",
+                "fecha": "12\/1\/2024"
+            },
+            {
+                "tipo": "Retiro",
+                "cantidad": 1000,
+                "concepto": "saedas",
+                "fecha": "12\/1\/2024"
+            },
+            {
+                "tipo": "Ingreso",
+                "cantidad": 10,
+                "concepto": "tataa",
+                "fecha": "13\/1\/2024"
             }
         ]
     }
