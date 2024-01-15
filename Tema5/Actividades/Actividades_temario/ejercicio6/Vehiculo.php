@@ -2,7 +2,7 @@
     abstract class Vehiculo{
         private string $marca, $modelo, $color;
         private float $peso, $kilometraje, $longitud, $cantidadGasolina;
-        private int $anioFabricacion, $numeroCadenasNieve;
+        private int $anioFabricacion;
         private array $personas;
         
         public function __construct(string $color="Negro", float $peso=1000){
@@ -14,7 +14,6 @@
             $this->kilometraje = 0;   
             $this->longitud = 2;
             $this->cantidadGasolina = 60;
-            $this->numeroCadenasNieve = 0;
             $this->personas = array();
         }
 
@@ -80,14 +79,6 @@
 
         public function getCantidadGasolina():float{
             return $this->cantidadGasolina;
-        }
-
-        public function setnumeroCadenasNieve(int $numeroCadenasNieve){
-            $this->numeroCadenasNieve = $numeroCadenasNieve;
-        }
-
-        public function getnumeroCadenasNieve():int{
-            return $this->numeroCadenasNieve;
         }
 
         public function setPersonas(int $personas){
@@ -159,24 +150,6 @@
                 $this->peso += $litros;
             }else{
                 echo "<br/>El tanque de gasolina está lleno.<br/>";
-            }
-        }
-
-        public function aniadirCadenasNive(){
-            if($this->numeroCadenasNieve <= 4){
-                $this->numeroCadenasNieve ++;
-                echo "<br/>Se ha añadido una cadena de nieve al coche<br/>";
-            }else{
-                echo "<br/>Ya hay una cadena de nieve en cada rueda<br/>";
-            }
-        }
-
-        public function quitarCadenasNive(){
-            if($this->numeroCadenasNieve > 0){
-                $this->numeroCadenasNieve --;
-                echo "<br/>Se ha quitado una cadena de nieve al coche<br/>";
-            }else{
-                echo "<br/>Ya no quedan cadenas de nieve puestas<br/>";
             }
         }
 
