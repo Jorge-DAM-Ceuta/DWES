@@ -4,7 +4,7 @@
         private int $cilindrada;
         
         public function __construct(string $color="Negro", float $peso=1000, int $cilindrada=45){
-            Vehiculo::__construct($color, $peso);
+            Vehiculo::__construct($color, $peso, $categoriaEmisiones = CategoriaEmisiones::ECO);
             $this->cilindrada = $cilindrada;
         }
 

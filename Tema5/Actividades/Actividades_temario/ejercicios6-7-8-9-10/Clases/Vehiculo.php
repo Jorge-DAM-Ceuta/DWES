@@ -11,7 +11,7 @@
         protected array $personas;
         protected CategoriaEmisiones $categoriaEmisiones;
         
-        public function __construct(string $color="Negro", float $peso=1000, $categoriaEmisiones=CategoriaB){
+        public function __construct(string $color="Negro", float $peso=1000, $categoriaEmisiones=CategoriaEmisiones::CategoriaB){
             $this->marca = "Mercedes Benz";
             $this->modelo = "Maybach";
             $this->color = $color;
@@ -135,11 +135,9 @@
 
         abstract public function aniadirPersona(float $pesoPersona);
 
-        /*????????????????????????????????????????????????*/
         public static function verAtributo($objeto){
-            return $objeto::__toString();
+            return "<h2>Estado del vehículo</h2>-Marca: $objeto->marca <br/>-Modelo: $objeto->modelo <br/>-Color: $objeto->color <br/>-Peso: $objeto->peso <br/>-Año de fabricación: $objeto->anioFabricacion <br/>-Kilometraje: $objeto->kilometraje <br/>-Litros de combustible: $objeto->cantidadGasolina<br/>-Número de ocupantes: " . count($objeto->personas) . "<br/>";
         }
-        /*????????????????????????????????????????????????*/
 
         public function obtenerInformacion(){
             echo "<h2>Estado del vehículo</h2>-Marca: $this->marca <br/>-Modelo: $this->modelo <br/>-Color: $this->color <br/>-Peso: $this->peso <br/>-Año de fabricación: $this->anioFabricacion <br/>-Kilometraje: $this->kilometraje <br/>-Litros de combustible: $this->cantidadGasolina<br/>-Número de ocupantes: " . count($this->personas) . "<br/>";

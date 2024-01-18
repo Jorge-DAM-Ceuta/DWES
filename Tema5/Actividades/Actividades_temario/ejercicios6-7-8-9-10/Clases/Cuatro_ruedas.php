@@ -3,7 +3,7 @@
         private int $numeroPuertas;
         
         public function __construct(string $color="Negro", float $peso=1000, int $numeroPuertas=4){
-            Vehiculo::__construct($color, $peso);
+            Vehiculo::__construct($color, $peso, $categoriaEmisiones = CategoriaEmisiones::CeroEmisiones);
             $this->numeroPuertas = $numeroPuertas;
         }
 

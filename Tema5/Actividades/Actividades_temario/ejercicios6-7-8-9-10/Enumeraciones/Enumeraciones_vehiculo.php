@@ -1,6 +1,6 @@
 <?php
 
-    enum CategoriaEmisiones{
+    enum CategoriaEmisiones:string{
         case CategoriaB = "El vehículo es de categoría B";
         case CategoriaC = "El vehículo es de categoría C";
         case ECO = "El vehículo es de categoría ECO";
