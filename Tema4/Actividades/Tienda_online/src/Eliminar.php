@@ -14,9 +14,18 @@
                 llamado carrito, en caso contrario lo inicializa como un nuevo array.*/
                 $carrito = isset($_COOKIE['carrito']) ? json_decode($_COOKIE['carrito'], true) : array();
             
-                //Si el producto existe en el array se elimina con unset.
+                
+                //Se comprueba que el producto esté en el carrito.
                 if(isset($carrito[$nombreProducto])) {
-                    unset($carrito[$nombreProducto]);
+                    //Si su cantidad es mayor a 0 se quita uno a la cantidad.
+                    if($carrito[$nombreProducto]['cantidad'] > 0){
+                        $carrito[$nombreProducto]['cantidad'] -= 1;
+                    }
+                
+                    //Si la cantidad llega a cero se elimina el producto del carrito.
+                    if($carrito[$nombreProducto]['cantidad'] == 0){
+                        unset($carrito[$nombreProducto]);
+                    }
                 }
             
                 //Se codifica el array a formato json y se setea la cookie con los valores.

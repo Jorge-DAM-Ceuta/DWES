@@ -12,6 +12,9 @@
         <title>Producto</title>
         <style>
             body {
+                background-image: url("background.jpg");
+                background-size: 100% 200%;
+                background-repeat: no-repeat;
                 text-align: center;
                 margin: 0 auto;
                 padding-top: 250px;

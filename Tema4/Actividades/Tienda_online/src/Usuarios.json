@@ -1,0 +1,12 @@
+[
+    {
+        "username": "Jorge",
+        "password": "$argon2i$v=19$m=65536,t=4,p=1$M1hjSVptTWx2dnVRWHBTWQ$Iv9ICOTnIe8N2VX4T6uxRUO49pID1bRPxFhnuJMS8t0",
+        "role": "Admin"
+    },
+    {
+        "username": "jorgemungar",
+        "password": "$argon2i$v=19$m=65536,t=4,p=1$M1hjSVptTWx2dnVRWHBTWQ$Iv9ICOTnIe8N2VX4T6uxRUO49pID1bRPxFhnuJMS8t0",
+        "role": "Client"
+    }
+]
