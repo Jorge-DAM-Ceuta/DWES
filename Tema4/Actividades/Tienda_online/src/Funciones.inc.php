@@ -121,7 +121,7 @@ function iniciarSesion($username, $password){
         foreach ($productos as $producto) {
             $nombreProducto = $producto['nombre'];
 
-            if ($nombreProducto == $_GET['nombre']) {
+            if($nombreProducto == $_GET['nombre']){
                 echo "<div>
                         <img src='" . $producto['imagen'] . "' width='200' height='200'>
                         <h1>" . $producto['nombre'] . "</h1>
@@ -132,6 +132,7 @@ function iniciarSesion($username, $password){
                         <a class='boton' style='text-decoration-line: none; margin-right: 20px; color: white;' href='Index.php'>Volver</a>
                         <a class='boton' style='text-decoration-line: none; color: white;' href='Comprar.php?nombre=" . urlencode($nombreProducto) . "'>Comprar</a>
                     </div>";
+                return $producto;
             }
         }
     }
