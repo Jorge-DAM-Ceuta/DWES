@@ -1,0 +1,20 @@
+[
+    {
+        "id": "1",
+        "titulo": "With that",
+        "artista": "Young thug",
+        "colaboracion": ["Duke"],
+        "duracion": 4.10,
+        "favorita": "true",
+        "imagen": "../assets/imagenes/Young_Thug_Punk.png"
+    },
+    {
+        "id": "2",
+        "titulo": "I already know",
+        "artista": "Young thug",
+        "colaboracion": [],
+        "duracion": 4,
+        "favorita": "true",
+        "imagen": ""
+    }
+]

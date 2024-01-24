@@ -1,0 +1,46 @@
+.contenedorCanciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    & .cancion {
+        background-color: #f4f4f4;
+        border-radius: 10px;
+        padding: 15px;
+        width: 300px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    
+        & img{
+            width: 100%;
+        }
+
+        & p {
+            margin: 5px 0;
+        }
+        
+        & .botones-accion {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+    
+            & .boton {
+                padding: 8px 15px;
+                background-color: #3498db;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+
+            & .boton:hover {
+                background-color: #2980b9;
+            }
+        }
+    }
+    
+    & .cancion:hover {
+        transform: scale(1.05);
+    }
+}
+  

@@ -1,0 +1,18 @@
+[
+    {
+        "id": "1",
+        "titulo": "With that",
+        "artista": "Young thug",
+        "colaboracion": [],
+        "duracion": 4,
+        "favorita": "true"
+    },
+    {
+        "id": "2",
+        "titulo": "I already know",
+        "artista": "Young thug",
+        "colaboracion": [],
+        "duracion": 4,
+        "favorita": "true"
+    }
+]
