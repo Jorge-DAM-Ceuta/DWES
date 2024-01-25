@@ -1,8 +1,43 @@
 <?php
     include_once("./Funciones.inc.php");
-    
-    $nombreProducto = isset($_GET['nombre']) ? $_GET['nombre']: "";
-    $productos = decodificarJSON();
+
+    /*Al mostrar las canciones no aparecen favoritas,
+    al marcar una en favoritas no se modificara su valor
+    en el objeto que se muestra ni en el json canciones.
+    En caso de marcar favorita se cambia el icono y en el
+    json usuarios se añade una lista de reproduccion llamada
+    favoritos, se coge el objeto de la canción, y se clona,
+    luego se hace un setFavoritos true y se añade el objeto a
+    la lista de reproduccion. 
+    */
+
+    if(isset($_GET['id'])) {
+        $idCancion = urldecode($_GET['id']);
+
+        $rutaJSON = "./json/Canciones.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $canciones = json_decode($jsonString, true);
+
+        foreach($canciones as $key => $cancion) {
+            if($cancion['id'] == $idCancion) {
+                $nuevoTitulo = isset($_POST["titulo"]) ? $_POST["titulo"] : $cancion->getTitulo();
+                $nuevoArtista = isset($_POST["artista"]) ? $_POST["artista"] : $cancion->getArtista();
+                $nuevoColaboracion = isset($_POST["colaboracion"]) ? explode(", ", $_POST["colaboracion"]) : $cancion->getColaboracion();
+                $nuevoDuracion = isset($_POST["duracion"]) ? $_POST["duracion"] : $cancion->getDuracion();
+                $nuevoTitulo = isset($_POST["titulo"]) ? $_POST["titulo"] : $cancion->getTitulo();
+                $nuevoTitulo = isset($_POST["titulo"]) ? $_POST["titulo"] : $cancion->getTitulo();
+                $nuevoTitulo = isset($_POST["titulo"]) ? $_POST["titulo"] : $cancion->getTitulo();
+                
+
+
+                $jsonString = json_encode($canciones, JSON_PRETTY_PRINT);
+                file_put_contents($rutaJSON, $jsonString);
+                
+                header("Location: Index.php");
+                exit();
+            }
+        }
+    }
     
     if(isset($_GET['nombre'])){
         $producto = mostrarDetalles($productos);

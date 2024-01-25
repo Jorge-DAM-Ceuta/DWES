@@ -119,7 +119,7 @@ include_once("./clases/Cancion.php");
             $colaboradores = !empty($cancion->getColaboracion()) ? " ft. " . implode(', ', $cancion->getColaboracion()) : ""; 
 
             echo "<div class='cancion'>
-                    <img src='$imagen'>
+                    <img src='$imagen'/>
                     <p>" . $cancion->getTitulo() . $colaboradores . "</p> 
                     <p>" . $cancion->getArtista() . "</p> 
                     <p>Duración: " . $cancion->getDuracion() . " minutos</p> 
