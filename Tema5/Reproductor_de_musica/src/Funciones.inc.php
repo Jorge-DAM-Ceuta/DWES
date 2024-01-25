@@ -14,6 +14,9 @@ include_once("./clases/Cancion.php");
     ]
 
     FALTA[
+        //USUARIOS
+            Al registrar un usuario añadir: array listas de reproducción y el subarray favoritos
+
         //CANCION
             Al editar añadir un boton para restablecer la imagen por defecto
 
