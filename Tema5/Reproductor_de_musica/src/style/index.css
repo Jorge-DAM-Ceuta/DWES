@@ -1,13 +1,13 @@
 .contenedorCanciones {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 15px;
 
     & .cancion {
         background-color: #f4f4f4;
         border-radius: 10px;
         padding: 15px;
-        width: 300px;
+        width: 225px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, opacity 0.3s ease;
     
@@ -43,4 +43,21 @@
         transform: scale(1.05);
     }
 }
-  
+
+.enlace-volver {
+    background-color: #4caf50;
+    position: absolute;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    top: 50px;
+    left: 70px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.enlace-volver:hover {
+    background-color: #45a049;
+}

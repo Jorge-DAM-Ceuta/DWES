@@ -6,14 +6,25 @@ include_once("./clases/Cancion.php");
         REGISTRAR USUARIO
         INICIAR SESION
         CERRAR SESION
+
         CARGAR CANCIONES
         ELIMINAR CANCIONES
+        EDITAR CANCION
     ]
 
     FALTA[
         //CANCION
-            EDITAR INFO CANCION
+            AÑADIR CANCIÓN
+
             DESMARCAR / MARCAR FAVORITA
+                Al mostrar las canciones no aparecen favoritas,
+                al marcar una en favoritas no se modificara su valor
+                en el objeto que se muestra ni en el json canciones.
+                En caso de marcar favorita se cambia el icono y en el
+                json usuarios se añade una lista de reproduccion llamada
+                favoritos, se coge el objeto de la canción, y se clona,
+                luego se hace un setFavoritos true y se añade el objeto a
+                la lista de reproduccion. 
             
         //LISTAS DE REPRODUCCION
             CREAR LISTA
@@ -24,6 +35,12 @@ include_once("./clases/Cancion.php");
         //DISCOS
             CREAR UN DISCO
             EDITAR UN DISCO
+                EDITAR TITULO
+                EDITAR CANCIONES
+                EDITAR CARATULA
+                CAMBIAR AUTOR
+                CAMBIAR DISCOGRAFIA
+            BORRAR UN DISCO
     ]
 */
 
@@ -116,7 +133,7 @@ include_once("./clases/Cancion.php");
         
         foreach($canciones as $cancion){
             $imagen = $cancion->getRutaImagen() != "" ? $cancion->getRutaImagen() : "../assets/imagenes/imagen_defecto.jpg"; 
-            $colaboradores = !empty($cancion->getColaboracion()) ? " ft. " . implode(', ', $cancion->getColaboracion()) : ""; 
+            $colaboradores = obtenerColaboracion($cancion) != "" ? " ft. " . obtenerColaboracion($cancion) : "";
 
             echo "<div class='cancion'>
                     <img src='$imagen'/>
@@ -133,6 +150,76 @@ include_once("./clases/Cancion.php");
         } 
 
         echo "</div>"; 
+    }
+
+    //MOSTRAR CANCIÓN POR ID
+    function obtenerCancion($arrayCanciones, $idCancion){
+        foreach($arrayCanciones as $cancion){
+            if($cancion->getID() == $idCancion){
+                $imagen = $cancion->getRutaImagen() != "" ? $cancion->getRutaImagen() : "../assets/imagenes/imagen_defecto.jpg"; 
+                $colaboradores = obtenerColaboracion($cancion) != "" ? " ft. " . obtenerColaboracion($cancion) : "";
+
+                echo "<div class='cancion'>
+                        <img src='$imagen'/>
+                        <p>" . $cancion->getTitulo() . $colaboradores . "</p> 
+                        <p>" . $cancion->getArtista() . "</p> 
+                        <p>Duración: " . $cancion->getDuracion() . " minutos</p> 
+                        <p>Favorita: " . ($cancion->getFavorita() ? 'Sí' : 'No') . "</p> 
+                    </div>"; 
+                
+                return $cancion;
+            }
+        } 
+    }
+
+    //OBTENER LA COLABORACIÓN DE UNA CANCIÓN
+    function obtenerColaboracion($cancion){
+        $colaboracion = "";
+
+        if(!empty($cancion->getColaboracion())){
+            if(count($cancion->getColaboracion()) == 1){
+                $colaboracion = $cancion->getColaboracion()[0];
+            }else{
+                $colaboracion = implode(', ', $cancion->getColaboracion());
+            }
+        }else{
+            $colaboracion = "";
+        }
+
+        return $colaboracion;
+    }
+
+    //OBTIENE EL NUMERO DE COLABORACIONES DEL FORMULARIO PARA SUSTITUIRLA EN LA CANCIÓN
+    function obtenerNumeroColaboraciones($colaboracion){
+        if(str_contains($colaboracion, ",")){
+            return "Varios";
+        }else{
+            return "Uno";
+        }
+    }
+
+    function editarCancion($cancion){
+        $cancionesJSON = decodificarCanciones();
+
+        foreach ($cancionesJSON as &$cancionJson) {
+            // Verificar si el ID coincide
+            if ($cancionJson["id"] == $cancion->getID()) {
+
+                $cancionJson["titulo"] = $cancion->getTitulo();
+                $cancionJson["artista"] = $cancion->getArtista();
+                $cancionJson["colaboracion"] = $cancion->getColaboracion();
+                $cancionJson["duracion"] = $cancion->getDuracion();
+                $cancionJson["favorita"] = $cancion->getFavorita();
+                $cancionJson["imagen"] = $cancion->getRutaImagen();
+            }
+        }
+
+        $jsonString = json_encode($cancionesJSON, JSON_PRETTY_PRINT);
+        file_put_contents("./json/Canciones.json", $jsonString);
+        
+        header("Location: Index.php");
+        exit();
+
     }
 
     /*MOSTRAR LAS LISTAS CORRESPONDIENTES OBTENIDAS DE LAS COOKIES*/

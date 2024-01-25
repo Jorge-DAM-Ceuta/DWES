@@ -3,18 +3,89 @@
         "id": "1",
         "titulo": "With that",
         "artista": "Young thug",
-        "colaboracion": ["Duke"],
-        "duracion": 4.10,
-        "favorita": "true",
-        "imagen": "../assets/imagenes/Young_Thug_Punk.png"
+        "colaboracion": [
+            "Duke"
+        ],
+        "duracion": 4.2,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Young_Thug_Punk.png"
     },
     {
         "id": "2",
         "titulo": "I already know",
         "artista": "Young thug",
-        "colaboracion": [],
+        "colaboracion": [
+            "Duke",
+            "Future",
+            "Drake"
+        ],
         "duracion": 4,
-        "favorita": "true",
+        "favorita": false,
+        "imagen": ""
+    },
+    {
+        "id": "2",
+        "titulo": "I already know",
+        "artista": "Young thug",
+        "colaboracion": [
+            "Duke",
+            "Future",
+            "Drake"
+        ],
+        "duracion": 4,
+        "favorita": false,
+        "imagen": ""
+    },
+    {
+        "id": "2",
+        "titulo": "I already know",
+        "artista": "Young thug",
+        "colaboracion": [
+            "Duke",
+            "Future",
+            "Drake"
+        ],
+        "duracion": 4,
+        "favorita": false,
+        "imagen": ""
+    },
+    {
+        "id": "2",
+        "titulo": "I already know",
+        "artista": "Young thug",
+        "colaboracion": [
+            "Duke",
+            "Future",
+            "Drake"
+        ],
+        "duracion": 4,
+        "favorita": false,
+        "imagen": ""
+    },
+    {
+        "id": "2",
+        "titulo": "I already know",
+        "artista": "Young thug",
+        "colaboracion": [
+            "Duke",
+            "Future",
+            "Drake"
+        ],
+        "duracion": 4,
+        "favorita": false,
+        "imagen": ""
+    },
+    {
+        "id": "2",
+        "titulo": "I already know",
+        "artista": "Young thug",
+        "colaboracion": [
+            "Duke",
+            "Future",
+            "Drake"
+        ],
+        "duracion": 4,
+        "favorita": false,
         "imagen": ""
     }
 ]
