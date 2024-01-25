@@ -1,31 +1,41 @@
 <?php
     include_once("./Funciones.inc.php");
-    $productos = decodificarJSON();
+
+    //Obtenemos el array de canciones del JSON.
+    $arrayJSON = decodificarCanciones();
+    $nuevoID = obtenerUltimoID($arrayJSON)+1;
+
+    //Obtenemos un array de objetos tipo Canción.
+    $arrayCanciones = instanciarCanciones(decodificarCanciones());
+
 
     if(isset($_POST["aniadir"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
-        $nuevoProducto = array(
-            "nombre" => $_POST['nombre'],
-            "descripcion" => $_POST['descripcion'],
-            "precio" => $_POST['precio'],
-            "imagen" => ""
-        );
-    
+        $nuevoTitulo = $_POST["titulo"];
+        $nuevoArtista = $_POST["artista"];
+        $nuevaDuracion = $_POST["duracion"];
+
+        $nuevaColaboracion = ""; 
+        if(isset($_POST["colaboracion"])){
+            if(obtenerNumeroColaboraciones($_POST["colaboracion"]) == "Varios"){
+                $nuevaColaboracion = explode(", ", $_POST["colaboracion"]); 
+            }else{
+                $nuevaColaboracion = array();
+                array_push($nuevaColaboracion, $_POST["colaboracion"]);
+            }
+        } 
+
+        $nuevaCancion = new Cancion($nuevoID, $nuevoTitulo, $nuevoArtista, $nuevaColaboracion, $nuevaDuracion, false);
+
         if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] == UPLOAD_ERR_OK) {
             $nombreArchivo = $_FILES['imagen']['name'];
-            $rutaDestino = "../assets/images/" . $nombreArchivo;
-    
-            move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino);
-    
-            $nuevoProducto['imagen'] = $rutaDestino;
-        }
-    
-        $productos[] = $nuevoProducto;
-    
-        $jsonString = json_encode($productos, JSON_PRETTY_PRINT);
-        file_put_contents("Productos.json", $jsonString);
+            $rutaDestino = "../assets/imagenes/" . $nombreArchivo;
 
-        header("Location: Index.php");
-        die();
+            if (move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) {
+                $nuevaCancion->setRutaImagen($rutaDestino);
+            }
+        }
+
+        aniadir_cancion($arrayJSON, $nuevaCancion);
     }
 ?>
 
@@ -34,31 +44,25 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../assets/css/Style.css">
-        <title>Añadir producto</title>
+        <link rel="stylesheet" href="./style/aniadir_cancion.css">
+        <title>Añadir canción</title>
         
     </head>
     <body>
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method='POST' enctype='multipart/form-data'>
-            <a href='Index.php'>Volver</a>
-            
-            <label>Nombre: <input type='text' name='nombre' required></label>
-            
-            <br/>
-            
-            <label>Descripción: <input type='text' name='descripcion'></label>
-            
-            <br/>
-            
-            <label>Precio: <input type='text' name='precio'></label>
-            
-            <br/>
+        <a href="Index.php" class="enlace-volver">Cancelar y volver</a>
 
-            <label>Imagen: <input type='file' name='imagen'></label>
-            
+        <form action="" method='POST' enctype='multipart/form-data'>
+            <label>Titulo: <input type='text' name='titulo' required></label>
             <br/>
-
-            <input type='submit' name='aniadir' value='Añadir producto'>
+            <label>Artista: <input type='text' name='artista'></label>
+            <br/>
+            <label>Colaboración: <input type='text' name='colaboracion'></label>
+            <br/>
+            <label>Duración: <input type='number' step='0.01' name='duracion'></label>
+            <br/>
+            <input type='file' name='imagen'>
+            <br/>
+            <input type='submit' name='aniadir' value='Añadir canción'>
         </form>
     </body>
 </html>

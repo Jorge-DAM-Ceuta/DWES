@@ -24,6 +24,7 @@
             <!-- Se muestran las canciones -->
             <h1>Canciones</h1>
             <a class="enlace-volver" href="Cerrar_sesion.php">Cerrar sesión</a>
+            <a class="enlace-volver" href="Aniadir_cancion.php">Añadir canción</a>
             <?php mostrarCanciones($arrayCanciones); ?>
     </body>
 </html>

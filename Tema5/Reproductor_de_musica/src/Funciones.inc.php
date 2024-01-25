@@ -198,6 +198,28 @@ include_once("./clases/Cancion.php");
         }
     }
 
+    //AÑADIR CANCIÓN
+    function aniadir_cancion($arrayJSON, $nuevaCancion){
+        $nuevaCancionJSON = array(
+            "id" => $nuevaCancion->getID(),
+            "titulo" => $nuevaCancion->getTitulo(),
+            "artista" => $nuevaCancion->getArtista(),
+            "colaboracion" => $nuevaCancion->getColaboracion(),
+            "duracion" => $nuevaCancion->getDuracion(),
+            "favorita" => $nuevaCancion->getFavorita(),
+            "imagen" => $nuevaCancion->getRutaImagen()
+        );
+
+        $arrayJSON[] = $nuevaCancionJSON;
+
+        $jsonString = json_encode($arrayJSON, JSON_PRETTY_PRINT);
+        file_put_contents("./json/Canciones.json", $jsonString);
+
+        header("Location: Index.php");
+        die();
+    }
+
+    //EDITA LA INFORMACIÓN DE LA CANCIÓN
     function editarCancion($cancion){
         $cancionesJSON = decodificarCanciones();
 
@@ -220,6 +242,10 @@ include_once("./clases/Cancion.php");
         header("Location: Index.php");
         exit();
 
+    }
+
+    function obtenerUltimoID($arrayJSON):int{
+        return end($arrayJSON)["id"];
     }
 
     /*MOSTRAR LAS LISTAS CORRESPONDIENTES OBTENIDAS DE LAS COOKIES*/

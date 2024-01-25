@@ -4,7 +4,7 @@
     if(isset($_GET['id'])) {
         $idCancion = urldecode($_GET['id']);
 
-        //Obtenemos un array de objetos tipo Canción,
+        //Obtenemos un array de objetos tipo Canción.
         $arrayCanciones = instanciarCanciones(decodificarCanciones());
 
         //Obtenemos los valores de la canción actual para mostrar sus valores en el formulario.
@@ -20,6 +20,7 @@
             if ($idCancion == $cancion->getID()) {
                 $nuevoTitulo = isset($_POST["titulo"]) ? $_POST["titulo"] : $cancion->getTitulo();
                 $nuevoArtista = isset($_POST["artista"]) ? $_POST["artista"] : $cancion->getArtista();
+                $nuevaDuracion = isset($_POST["duracion"]) ? $_POST["duracion"] : $cancion->getDuracion();
 
                 $nuevaColaboracion = ""; 
                 if(isset($_POST["colaboracion"])){
@@ -30,9 +31,6 @@
                         array_push($nuevaColaboracion, $_POST["colaboracion"]);
                     }
                 } 
-                
-                $nuevaDuracion = isset($_POST["duracion"]) ? $_POST["duracion"] : $cancion->getDuracion();
-                $nuevaRutaImagen = isset($_POST["rutaImagen"]) ? $_POST["rutaImagen"] : $cancion->getRutaImagen();
 
                 $cancion->setTitulo($nuevoTitulo);
                 $cancion->setArtista($nuevoArtista);
@@ -62,7 +60,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./style/mostrar_cancion.css">
+        <link rel="stylesheet" href="./style/editar_cancion.css">
         <title>Editar producto</title>
     </head>
     <body>
