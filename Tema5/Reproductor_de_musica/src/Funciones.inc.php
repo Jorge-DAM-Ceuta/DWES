@@ -15,6 +15,7 @@ include_once("./clases/Cancion.php");
 
     FALTA[
         //USUARIOS
+            Añadir email.
             Al registrar un usuario añadir: array listas de reproducción y el subarray favoritos
 
         //CANCION
