@@ -8,13 +8,14 @@ include_once("./clases/Cancion.php");
         CERRAR SESION
 
         CARGAR CANCIONES
-        ELIMINAR CANCIONES
-        EDITAR CANCION
+        AÑADIR CANCIÓN
+        ELIMINAR CANCIóN
+        EDITAR CANCIÓN
     ]
 
     FALTA[
         //CANCION
-            AÑADIR CANCIÓN
+            Al editar añadir un boton para restablecer la imagen por defecto
 
             DESMARCAR / MARCAR FAVORITA
                 Al mostrar las canciones no aparecen favoritas,
@@ -101,7 +102,6 @@ include_once("./clases/Cancion.php");
 /*------------------------------------------------------------------------------------------*/
 
 //REPRODUCTOR
-
     function decodificarCanciones(){
         $ruta = "./json/Canciones.json";
         $canciones = json_decode(file_get_contents($ruta), true);
@@ -170,6 +170,11 @@ include_once("./clases/Cancion.php");
                 return $cancion;
             }
         } 
+    }
+
+    //OBTIENE EL ID DE LA ÚLTIMA CANCIÓN
+    function obtenerUltimoID($arrayJSON):int{
+        return end($arrayJSON)["id"];
     }
 
     //OBTENER LA COLABORACIÓN DE UNA CANCIÓN
@@ -244,10 +249,9 @@ include_once("./clases/Cancion.php");
 
     }
 
-    function obtenerUltimoID($arrayJSON):int{
-        return end($arrayJSON)["id"];
-    }
 
+/*------------------------------------------------------------------------------------------------------*/
+//LISTAS DE REPRODUCCIÓN
     /*MOSTRAR LAS LISTAS CORRESPONDIENTES OBTENIDAS DE LAS COOKIES*/
     function mostrarListasReproduccion($productos){
         if (isset($_COOKIE['carrito'])) {
