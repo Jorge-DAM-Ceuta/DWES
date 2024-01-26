@@ -1,5 +1,5 @@
-{
-    "0": {
+[
+    {
         "id": "1",
         "titulo": "With that",
         "artista": "Young thug",
@@ -11,7 +11,7 @@
         "imagen": "..\/assets\/imagenes\/Young_Thug_Punk.png",
         "audio": ""
     },
-    "1": {
+    {
         "id": "2",
         "titulo": "I already know",
         "artista": "Young thug",
@@ -23,7 +23,7 @@
         "imagen": "..\/assets\/imagenes\/imagen_defecto.jpg",
         "audio": ""
     },
-    "5": {
+    {
         "id": "3",
         "titulo": "Nueva Nota",
         "artista": "Artic monkeys",
@@ -36,8 +36,8 @@
         "imagen": "..\/assets\/imagenes\/imagen_defecto.jpg",
         "audio": ""
     },
-    "6": {
-        "id": "3",
+    {
+        "id": "4",
         "titulo": "Nueva Nota",
         "artista": "Artic monkeys",
         "colaboracion": [
@@ -49,4 +49,4 @@
         "imagen": "..\/assets\/imagenes\/imagen_defecto.jpg",
         "audio": ""
     }
-}
+]

@@ -164,6 +164,8 @@ include_once("./clases/Cancion.php");
         echo "<div class='contenedorCanciones'>"; 
         
         foreach($canciones as $cancion){
+            $esFavorita = esFavorita($cancion->getID());
+
             $imagen = $cancion->getRutaImagen() != "" ? $cancion->getRutaImagen() : "../assets/imagenes/imagen_defecto.jpg"; 
             $colaboradores = obtenerColaboracion($cancion) != "" ? " ft. " . obtenerColaboracion($cancion) : "";
 
@@ -171,15 +173,15 @@ include_once("./clases/Cancion.php");
                     <img src='$imagen'/>
                     <p>" . $cancion->getTitulo() . $colaboradores . "</p> 
                     <p>" . $cancion->getArtista() . "</p> 
-                    <p>Duración: " . $cancion->getDuracion() . " minutos</p> 
-                    <p>Favorita: " . ($cancion->getFavorita() ? 'Sí' : 'No') . "</p> 
-                    
-                    <audio controls>
+                    <p>Duración: " . $cancion->getDuracion() . " minutos</p>"
+                    . ($esFavorita == true ? "<a href='Eliminar_de_favoritos.php?id=" . urlencode($cancion->getID()). "'><i class='fas fa-star'></i></a>" : "<a href='Aniadir_a_favoritos.php?id=" . urlencode($cancion->getID()). "'><i class='far fa-star'></i></a>") .
+                    "<audio controls>
                         <source src='" . $cancion->getRutaAudio() . "' type='audio/mp3'>
                     </audio>
                 
                     <div class='botones-accion'> 
                         <a class='boton' href='Editar_cancion.php?id=" . urlencode($cancion->getID()) . "'>Editar</a> 
+                        <a class='boton' href='Aniadir_a_lista.php?id=" . urlencode($cancion->getID()) . "'>Añadir a lista</a> 
                         <a class='boton' href='Eliminar_cancion.php?id=" . urlencode($cancion->getID()) . "'>Eliminar</a> 
                     </div> 
                 </div>"; 
@@ -188,7 +190,7 @@ include_once("./clases/Cancion.php");
         echo "</div>"; 
     }
 
-    //MOSTRAR CANCIÓN POR ID
+    //MOSTRAR CANCIÓN POR ID DEL ARRAY CANCIONES
     function obtenerCancion($arrayCanciones, $idCancion){
         foreach($arrayCanciones as $cancion){
             if($cancion->getID() == $idCancion){
@@ -203,6 +205,15 @@ include_once("./clases/Cancion.php");
                         <p>Favorita: " . ($cancion->getFavorita() ? 'Sí' : 'No') . "</p> 
                     </div>"; 
                 
+                return $cancion;
+            }
+        } 
+    }
+
+    //OBTENER CANCIÓN POR ID DEL JSON
+    function obtenerCancionJSON($arrayJSON, $idCancion){
+        foreach($arrayJSON as $cancion){
+            if($cancion["id"] == $idCancion){
                 return $cancion;
             }
         } 
@@ -340,6 +351,18 @@ include_once("./clases/Cancion.php");
         }
     }
 
+    function selectListasReproduccion($listasReproduccion){
+        if (!empty($listasReproduccion)) {
+            echo "<select name='nombreListaSelect'>";
+            foreach ($listasReproduccion as $nombreLista => $canciones) {
+                echo "<option value='" . urlencode($nombreLista) . "'>$nombreLista</option>";
+            }
+            echo "</select>";
+        } else {
+            echo "<p>No hay listas de reproducción disponibles.</p>";
+        }
+    }
+
     function aniadirListaReproduccion($username, $nombreLista){
         $rutaJSON = "./json/Usuarios.json";
         $jsonString = file_get_contents($rutaJSON);
@@ -397,5 +420,63 @@ include_once("./clases/Cancion.php");
 
         header("Location: Listas_reproduccion.php");
         die();
+    }
+
+    function aniadirCancionALista($username, $nombreLista, $cancion){
+        $rutaJSON = "./json/Usuarios.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $usuarios = json_decode($jsonString, true);
+
+        foreach($usuarios as &$usuario){
+            if($usuario["username"] == $username){
+                $usuario["listas_reproduccion"][$nombreLista][] = $cancion;
+            }
+        }
+
+        $jsonString = json_encode($usuarios, JSON_PRETTY_PRINT);
+        file_put_contents($rutaJSON, $jsonString);
+
+        header("Location: Index.php");
+        die();
+    }
+
+    function aniadirCancionAFavoritos($username, $cancion){
+        $rutaJSON = "./json/Usuarios.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $usuarios = json_decode($jsonString, true);
+
+        foreach($usuarios as &$usuario){
+            if($usuario["username"] == $username){
+                $usuario["listas_reproduccion"]["Favoritos"][] = $cancion;
+            }
+        }
+
+        $jsonString = json_encode($usuarios, JSON_PRETTY_PRINT);
+        file_put_contents($rutaJSON, $jsonString);
+
+        header("Location: Index.php");
+        die();
+    }
+
+    function esFavorita($idCancion){
+        $username = $_SESSION['usuario']['username'];
+    
+        $rutaJSON = "./json/Usuarios.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $usuarios = json_decode($jsonString, true);
+    
+        foreach($usuarios as $usuario){
+            if($usuario["username"] == $username){
+                if(isset($usuario["listas_reproduccion"]["Favoritos"]) && is_array($usuario["listas_reproduccion"]["Favoritos"])){
+                    foreach($usuario["listas_reproduccion"]["Favoritos"] as $cancion){
+                        if(isset($cancion["id"]) && $cancion["id"] == $idCancion){
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+    
+        return false;
     }
 ?>

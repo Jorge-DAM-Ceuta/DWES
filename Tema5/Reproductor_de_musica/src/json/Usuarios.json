@@ -4,8 +4,59 @@
         "email": "jorgemugar12@hotmail.com",
         "password": "$argon2i$v=19$m=65536,t=4,p=1$bUZtZFR3R0Z3eEJqVk4weg$zGRYW1aeE5nHOfBUuQN+EIHVvNx6uAAIlIQQlYP0Ezw",
         "listas_reproduccion": {
-            "Favoritos": [],
-            "Coche": []
+            "Favoritos": [
+                {
+                    "id": "1",
+                    "titulo": "With that",
+                    "artista": "Young thug",
+                    "colaboracion": [
+                        "Duke"
+                    ],
+                    "duracion": 4.2,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Young_Thug_Punk.png",
+                    "audio": ""
+                },
+                {
+                    "id": "2",
+                    "titulo": "I already know",
+                    "artista": "Young thug",
+                    "colaboracion": [
+                        "Future"
+                    ],
+                    "duracion": 4,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/imagen_defecto.jpg",
+                    "audio": ""
+                }
+            ],
+            "Coche": [
+                {
+                    "id": "1",
+                    "titulo": "With that",
+                    "artista": "Young thug",
+                    "colaboracion": [
+                        "Duke"
+                    ],
+                    "duracion": 4.2,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Young_Thug_Punk.png",
+                    "audio": ""
+                },
+                {
+                    "id": "4",
+                    "titulo": "Nueva Nota",
+                    "artista": "Artic monkeys",
+                    "colaboracion": [
+                        "Future",
+                        "Drake"
+                    ],
+                    "duracion": 5,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/imagen_defecto.jpg",
+                    "audio": ""
+                }
+            ]
         }
     }
 ]

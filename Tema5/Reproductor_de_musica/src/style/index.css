@@ -81,7 +81,7 @@ h1{
             margin-top: 10px;
     
             & .boton {
-                padding: 8px 15px;
+                padding: 7px;
                 background-color: #4caf50;
                 color: #fff;
                 text-decoration: none;

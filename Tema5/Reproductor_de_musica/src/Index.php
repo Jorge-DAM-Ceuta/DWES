@@ -17,6 +17,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/001ac9542b.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="./style/index.css">
         <title>Tienda Online</title>
     </head>
