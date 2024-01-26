@@ -8,8 +8,9 @@
         private float $duracion;
         private bool $favorita;
         private string $rutaImagen;
+        private string $rutaAudio;
 
-        public function __construct($id, $titulo, $artista, $colaboracion, $duracion, $favorita, $rutaImagen = ""){
+        public function __construct($id, $titulo, $artista, $colaboracion, $duracion, $favorita, $rutaImagen = "", $rutaAudio=""){
             $this->id = $id;
             $this->titulo = $titulo;
             $this->artista = $artista;
@@ -17,6 +18,7 @@
             $this->duracion = $duracion;
             $this->favorita = $favorita;
             $this->rutaImagen = $rutaImagen;
+            $this->rutaAudio = $rutaAudio;
         }
         
         public function getID(){
@@ -66,6 +68,13 @@
         }
         public function setRutaImagen($rutaImagen){
             $this->rutaImagen = $rutaImagen;
+        }
+
+        public function getRutaAudio(){
+            return $this->rutaAudio;
+        }
+        public function setRutaAudio($rutaAudio){
+            $this->rutaAudio = $rutaAudio;
         }
     }
 

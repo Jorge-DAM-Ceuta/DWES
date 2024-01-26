@@ -1,5 +1,5 @@
-[
-    {
+{
+    "0": {
         "id": "1",
         "titulo": "With that",
         "artista": "Young thug",
@@ -8,31 +8,45 @@
         ],
         "duracion": 4.2,
         "favorita": false,
-        "imagen": "..\/assets\/imagenes\/Young_Thug_Punk.png"
+        "imagen": "..\/assets\/imagenes\/Young_Thug_Punk.png",
+        "audio": ""
     },
-    {
+    "1": {
         "id": "2",
         "titulo": "I already know",
         "artista": "Young thug",
         "colaboracion": [
-            "Duke",
-            "Future",
-            "Drake"
+            "Future"
         ],
         "duracion": 4,
         "favorita": false,
-        "imagen": ""
+        "imagen": "..\/assets\/imagenes\/imagen_defecto.jpg",
+        "audio": ""
     },
-    {
-        "id": "5",
-        "titulo": "I already know",
-        "artista": "Young thug",
+    "5": {
+        "id": "3",
+        "titulo": "Nueva Nota",
+        "artista": "Artic monkeys",
         "colaboracion": [
             "Future",
             "Drake"
         ],
-        "duracion": 4,
+        "duracion": 5,
         "favorita": false,
-        "imagen": ""
+        "imagen": "..\/assets\/imagenes\/imagen_defecto.jpg",
+        "audio": ""
+    },
+    "6": {
+        "id": "3",
+        "titulo": "Nueva Nota",
+        "artista": "Artic monkeys",
+        "colaboracion": [
+            "Future",
+            "Drake"
+        ],
+        "duracion": 5,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/imagen_defecto.jpg",
+        "audio": ""
     }
-]
+}

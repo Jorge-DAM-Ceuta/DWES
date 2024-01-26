@@ -11,16 +11,17 @@ include_once("./clases/Cancion.php");
         AÑADIR CANCIÓN
         ELIMINAR CANCIóN
         EDITAR CANCIÓN
+
+        CARGAR LISTAS
+        CREAR LISTA
+        EDITAR LISTA
+        ELIMINAR LISTA
     ]
 
     FALTA[
-        //USUARIOS
-            Añadir email.
-            Al registrar un usuario añadir: array listas de reproducción y el subarray favoritos
-
         //CANCION
-            Al editar añadir un boton para restablecer la imagen por defecto
-
+            AÑADIR CANCIONES A UNA LISTA
+            
             DESMARCAR / MARCAR FAVORITA
                 Al mostrar las canciones no aparecen favoritas,
                 al marcar una en favoritas no se modificara su valor
@@ -32,10 +33,7 @@ include_once("./clases/Cancion.php");
                 la lista de reproduccion. 
             
         //LISTAS DE REPRODUCCION
-            CREAR LISTA
-            EDITAR NOMBRE DE LISTA
             ACCEDER A UNA LISTA Y CARGAR CANCIONES
-            ELIMINAR UNA LISTA
 
         //DISCOS
             CREAR UN DISCO
@@ -50,8 +48,9 @@ include_once("./clases/Cancion.php");
 */
 
 //USUARIOS
-    function registrarUsuario($username, $password){
+    function registrarUsuario($username, $email, $password){
         $usuarioExistente = false;
+        $emailExistente = false;
 
         $rutaJSON = "./json/Usuarios.json";
         $jsonString = file_get_contents($rutaJSON);
@@ -64,13 +63,26 @@ include_once("./clases/Cancion.php");
             }
         }
 
-        if($usuarioExistente == false){
-            array_push($usuarios, array("username" => $username, "password" => password_hash($password, PASSWORD_ARGON2I)));
+        //Comprobar que no exista el email.
+        foreach($usuarios as $elemento){
+            if($email == $elemento['email']){
+                $emailExistente = true;
+            }
+        }
 
-            $jsonString = json_encode($usuarios, JSON_PRETTY_PRINT);
-            file_put_contents($rutaJSON, $jsonString);  
+        if($usuarioExistente == false && filter_var($email, FILTER_VALIDATE_EMAIL)){
+            if($emailExistente == false){
+                array_push($usuarios, array("username" => $username, "email" => $email, "password" => password_hash($password, PASSWORD_ARGON2I), "listas_reproduccion" => array("Favoritos" => array())));
 
-            echo "<h2>Te has registrado correctamente</h2>";
+                $jsonString = json_encode($usuarios, JSON_PRETTY_PRINT);
+                file_put_contents($rutaJSON, $jsonString);  
+
+                echo "<h2>Te has registrado correctamente</h2>";
+            }else{
+                echo "<h2>Ya existe una cuenta con ese email</h2>";        
+            }
+        }else{
+            echo "<h2>Ya existe una cuenta con ese nombre</h2>";
         }
     }
 
@@ -82,19 +94,35 @@ include_once("./clases/Cancion.php");
         $autenticacion = false;
 
         foreach($usuarios as $elemento){
-            if($elemento['username'] == $username && password_verify($password, $elemento['password']) == true){
-                $autenticacion = true;
-
-                session_start();
-
-                $_SESSION['usuario'] = [
-                    'username' => $elemento['username'],
-                ];
-
-                header("Location: Index.php");
-                die();
-            }else{
-                $autenticacion = false;
+            // Comprobar si el username es un email.
+            if(filter_var($username, FILTER_VALIDATE_EMAIL)) {
+                if ($elemento['email'] == $username && password_verify($password, $elemento['password'])) {
+                    $autenticacion = true;
+    
+                    session_start();
+    
+                    // Se guarda el username en la sesión.
+                    $_SESSION['usuario'] = [
+                        'username' => $elemento['username'],
+                    ];
+    
+                    header("Location: Index.php");
+                    die();
+                }
+            } else {
+                if ($elemento['username'] == $username && password_verify($password, $elemento['password'])) {
+                    $autenticacion = true;
+    
+                    session_start();
+    
+                    // Se guarda el username en la sesión.
+                    $_SESSION['usuario'] = [
+                        'username' => $elemento['username'],
+                    ];
+    
+                    header("Location: Index.php");
+                    die();
+                }
             }
         }
         
@@ -103,9 +131,9 @@ include_once("./clases/Cancion.php");
         }
     }
 
-/*------------------------------------------------------------------------------------------*/
-
-//REPRODUCTOR
+/*--------------------------------------------------------------------------------------REPRODUCTOR----------------------------------------------------------------------------------------*/
+    
+//OBTENER DATOS
     function decodificarCanciones(){
         $ruta = "./json/Canciones.json";
         $canciones = json_decode(file_get_contents($ruta), true);
@@ -117,7 +145,7 @@ include_once("./clases/Cancion.php");
         $arrayCanciones = array();
 
         foreach($cancionesJSON as $cancionJSON){
-            $cancion = new Cancion($cancionJSON["id"], $cancionJSON["titulo"], $cancionJSON["artista"], $cancionJSON["colaboracion"], $cancionJSON["duracion"], $cancionJSON["favorita"], $cancionJSON["imagen"]);
+            $cancion = new Cancion($cancionJSON["id"], $cancionJSON["titulo"], $cancionJSON["artista"], $cancionJSON["colaboracion"], $cancionJSON["duracion"], $cancionJSON["favorita"], $cancionJSON["imagen"], $cancionJSON["audio"]);
             array_push($arrayCanciones, $cancion);
         }
 
@@ -131,7 +159,7 @@ include_once("./clases/Cancion.php");
         return $discos;
     }
 
-    /*MOSTRAR DETALLES / REPORDUCIR CANCIÓN*/
+//CANCIONES
     function mostrarCanciones($canciones){ 
         echo "<div class='contenedorCanciones'>"; 
         
@@ -145,6 +173,10 @@ include_once("./clases/Cancion.php");
                     <p>" . $cancion->getArtista() . "</p> 
                     <p>Duración: " . $cancion->getDuracion() . " minutos</p> 
                     <p>Favorita: " . ($cancion->getFavorita() ? 'Sí' : 'No') . "</p> 
+                    
+                    <audio controls>
+                        <source src='" . $cancion->getRutaAudio() . "' type='audio/mp3'>
+                    </audio>
                 
                     <div class='botones-accion'> 
                         <a class='boton' href='Editar_cancion.php?id=" . urlencode($cancion->getID()) . "'>Editar</a> 
@@ -216,7 +248,8 @@ include_once("./clases/Cancion.php");
             "colaboracion" => $nuevaCancion->getColaboracion(),
             "duracion" => $nuevaCancion->getDuracion(),
             "favorita" => $nuevaCancion->getFavorita(),
-            "imagen" => $nuevaCancion->getRutaImagen()
+            "imagen" => $nuevaCancion->getRutaImagen(),
+            "audio" => $nuevaCancion->getRutaAudio()
         );
 
         $arrayJSON[] = $nuevaCancionJSON;
@@ -250,45 +283,119 @@ include_once("./clases/Cancion.php");
         
         header("Location: Index.php");
         exit();
-
     }
 
+    function eliminarCancion($idCancion){
+        $rutaJSON = "./json/Canciones.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $canciones = json_decode($jsonString, true);
 
-/*------------------------------------------------------------------------------------------------------*/
-//LISTAS DE REPRODUCCIÓN
-    /*MOSTRAR LAS LISTAS CORRESPONDIENTES OBTENIDAS DE LAS COOKIES*/
-    function mostrarListasReproduccion($productos){
-        if (isset($_COOKIE['carrito'])) {
-            $carrito = json_decode($_COOKIE['carrito'], true);
-    
-            if (!empty($carrito)) {
-                foreach ($carrito as $nombreProducto => $detalles) {
-                    $cantidad = $detalles['cantidad'];
-                    foreach ($productos as $producto) {
-                        if ($producto['nombre'] == $nombreProducto) {
-                            echo "<div class='producto-carrito' style='margin-left: 3vw; margin-top: 2vh;'>
-                                    <img src='" . $producto['imagen'] . "' width='80' height='80'>
-                                    <br/>
-                                    <strong>" . $producto['nombre'] . "</strong>
-                                    <br/>
-                                    Precio: " . $producto['precio'] . "
-                                    <br/>
-                                </div>
-                                <div>
-                                    <a class='botonCarrito' style='margin-left: 3vw; margin-bottom: 1.5vh; text-decoration-line: none; font-size: 1.25em;' href='Eliminar.php?nombre=" . urlencode($nombreProducto) . "'>-</a>
-                                    <span>&nbsp;</span>
-                                    $cantidad
-                                    <span>&nbsp;</span>
-                                    <a class='botonCarrito' style='margin-bottom: 1.5vh; text-decoration-line: none; font-size: 1.15em;' href='Comprar.php?nombre=" . urlencode($nombreProducto) . "'>+</a>
-                                </div>
-                                <br/>
-                            ";
-                        }
-                    }
-                }
-            } else {
-                echo "<p>El carrito está vacío.</p>";
+        foreach($canciones as $key => $cancion) {
+            if($cancion['id'] == $idCancion) {
+                unset($canciones[$key]);
+                
+                $jsonString = json_encode($canciones, JSON_PRETTY_PRINT);
+                file_put_contents($rutaJSON, $jsonString);
+                
+                header("Location: Index.php");
+                exit();
             }
         }
+    }
+
+//LISTAS DE REPRODUCCIÓN
+    /*MOSTRAR LAS LISTAS DEL USUARIO*/
+    function obtenerListasUsurio($username){
+        $rutaJSON = "./json/Usuarios.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $usuarios = json_decode($jsonString, true);
+
+        foreach($usuarios as $usuario){
+            if($usuario["username"] == $username){
+                $listas = $usuario["listas_reproduccion"];
+            }
+        }
+
+        return $listas;
+    }
+
+    function mostrarListasReproduccion($listasReproduccion){
+        if (!empty($listasReproduccion)) {
+            echo "<div class='contenedor-listas'>";
+            
+            foreach($listasReproduccion as $nombreLista => $canciones){
+                echo "<div class='lista-enlace'>
+                        <a href='Mostrar_lista.php?nombreLista=" . urlencode($nombreLista) . "' class='nombre'>$nombreLista</a>
+                        
+                        <div class='botones-accion'> 
+                            <a class='boton' href='Editar_lista.php?nombreLista=" . urlencode($nombreLista) . "'>Editar</a> 
+                            <a class='boton' href='Eliminar_lista.php?nombreLista=" . urlencode($nombreLista) . "'>Eliminar</a> 
+                        </div>
+                    </div>";
+            }
+
+            echo "</div>";
+        } else {
+            echo "<p>No hay listas de reproducción disponibles.</p>";
+        }
+    }
+
+    function aniadirListaReproduccion($username, $nombreLista){
+        $rutaJSON = "./json/Usuarios.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $usuarios = json_decode($jsonString, true);
+
+        foreach($usuarios as &$usuario){
+            if($usuario["username"] == $username){
+                $usuario["listas_reproduccion"][$nombreLista] = [];
+            }
+        }
+
+        $jsonString = json_encode($usuarios, JSON_PRETTY_PRINT);
+        file_put_contents($rutaJSON, $jsonString);
+
+        header("Location: Listas_reproduccion.php");
+        die();
+    }
+
+    function editarListaReproduccion($username, $nombreActual, $nuevoNombre){
+        $rutaJSON = "./json/Usuarios.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $usuarios = json_decode($jsonString, true);
+
+        foreach($usuarios as &$usuario){
+            if($usuario["username"] == $username){
+                
+                //Crear una nueva lista con el contenido de la lista actual
+                $usuario["listas_reproduccion"][$nuevoNombre] = $usuario["listas_reproduccion"][$nombreActual];
+                
+                //Eliminar la lista antigua
+                unset($usuario["listas_reproduccion"][$nombreActual]);
+            }
+        }
+
+        $jsonString = json_encode($usuarios, JSON_PRETTY_PRINT);
+        file_put_contents($rutaJSON, $jsonString);
+
+        header("Location: Listas_reproduccion.php");
+        die();
+    }
+
+    function eliminarListaReproduccion($username, $nombreLista){
+        $rutaJSON = "./json/Usuarios.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $usuarios = json_decode($jsonString, true);
+
+        foreach($usuarios as &$usuario){
+            if($usuario["username"] == $username){
+                unset($usuario["listas_reproduccion"][$nombreLista]);
+            }
+        }
+
+        $jsonString = json_encode($usuarios, JSON_PRETTY_PRINT);
+        file_put_contents($rutaJSON, $jsonString);
+
+        header("Location: Listas_reproduccion.php");
+        die();
     }
 ?>

@@ -37,7 +37,10 @@
                 $cancion->setColaboracion($nuevaColaboracion);
                 $cancion->setDuracion($nuevaDuracion);
 
-                if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] == UPLOAD_ERR_OK) {
+                if(isset($_POST["imagenDefecto"])){
+                    $cancion->setRutaImagen("../assets/imagenes/imagen_defecto.jpg");
+
+                }else if(isset($_FILES['imagen']) && $_FILES['imagen']['error'] == UPLOAD_ERR_OK) {
                     $nombreArchivo = $_FILES['imagen']['name'];
                     $rutaDestino = "../assets/imagenes/" . $nombreArchivo;
     
@@ -49,7 +52,6 @@
                 editarCancion($cancion);
             }
         }
-
     }
         
     
@@ -67,16 +69,34 @@
         <a href="Index.php" class="enlace-volver">Cancelar y volver</a>
 
         <form action="" method='POST' enctype='multipart/form-data'>
-            <label>Titulo: <input type='text' name='titulo' value='<?php echo $cancionActual->getTitulo(); ?>' required></label>
+            <label>Titulo:</label>
+            <input type='text' name='titulo' value='<?php echo $cancionActual->getTitulo(); ?>'>
+
             <br/>
-            <label>Artista: <input type='text' name='artista' value='<?php echo $cancionActual->getArtista(); ?>'></label>
+
+            <label>Artista:</label> 
+            <input type='text' name='artista' value='<?php echo $cancionActual->getArtista(); ?>'>
+
             <br/>
-            <label>Colaboración: <input type='text' name='colaboracion' value='<?php echo $colaboracion; ?>'></label>
+
+            <label>Colaboración:</label> 
+            <input type='text' name='colaboracion' value='<?php echo $colaboracion; ?>'>
+
             <br/>
-            <label>Duración: <input type='number' step='0.01' name='duracion' value='<?php echo $cancionActual->getDuracion(); ?>'></label>
+
+            <label>Duración:</label> 
+            <input type='number' step='0.01' name='duracion' value='<?php echo $cancionActual->getDuracion(); ?>'>
+
             <br/>
+
+            <label>Imagen:</label> 
             <input type='file' name='imagen'>
+
+            <label>¿Restablecer la imagen por defecto?</label> 
+            <input type='checkbox' name='imagenDefecto'>
+
             <br/>
+            
             <input type='submit' name='editar' value='Editar información'>
         </form>
     </body>

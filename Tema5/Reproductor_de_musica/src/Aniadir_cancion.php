@@ -26,6 +26,15 @@
 
         $nuevaCancion = new Cancion($nuevoID, $nuevoTitulo, $nuevoArtista, $nuevaColaboracion, $nuevaDuracion, false);
 
+        if (isset($_FILES['audio']) && $_FILES['audio']['error'] == UPLOAD_ERR_OK) {
+            $nombreArchivo = $_FILES['audio']['name'];
+            $rutaDestino = "../assets/canciones/" . $nombreArchivo;
+
+            if (move_uploaded_file($_FILES['audio']['tmp_name'], $rutaDestino)) {
+                $nuevaCancion->setRutaAudio($rutaDestino);
+            }
+        }
+
         if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] == UPLOAD_ERR_OK) {
             $nombreArchivo = $_FILES['imagen']['name'];
             $rutaDestino = "../assets/imagenes/" . $nombreArchivo;
@@ -60,7 +69,9 @@
             <br/>
             <label>Duración: <input type='number' step='0.01' name='duracion'></label>
             <br/>
-            <input type='file' name='imagen'>
+            <label>Imagen: <input type='file' name='imagen'></label>
+            <br/>
+            <label>Audio: <input type='file' name='audio'></label>
             <br/>
             <input type='submit' name='aniadir' value='Añadir canción'>
         </form>

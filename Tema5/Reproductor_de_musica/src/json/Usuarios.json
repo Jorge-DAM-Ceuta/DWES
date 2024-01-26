@@ -1,10 +1,11 @@
 [
     {
-        "username": "Admin",
-        "password": "$argon2i$v=19$m=65536,t=4,p=1$M1hjSVptTWx2dnVRWHBTWQ$Iv9ICOTnIe8N2VX4T6uxRUO49pID1bRPxFhnuJMS8t0"
-    },
-    {
-        "username": "Client",
-        "password": "$argon2i$v=19$m=65536,t=4,p=1$M1hjSVptTWx2dnVRWHBTWQ$Iv9ICOTnIe8N2VX4T6uxRUO49pID1bRPxFhnuJMS8t0"
+        "username": "Jorge",
+        "email": "jorgemugar12@hotmail.com",
+        "password": "$argon2i$v=19$m=65536,t=4,p=1$bUZtZFR3R0Z3eEJqVk4weg$zGRYW1aeE5nHOfBUuQN+EIHVvNx6uAAIlIQQlYP0Ezw",
+        "listas_reproduccion": {
+            "Favoritos": [],
+            "Coche": []
+        }
     }
 ]

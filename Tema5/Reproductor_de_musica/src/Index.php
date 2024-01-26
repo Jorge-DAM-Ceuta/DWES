@@ -21,10 +21,18 @@
         <title>Tienda Online</title>
     </head>
     <body>
-            <!-- Se muestran las canciones -->
+        <nav class="menu">
             <h1>Canciones</h1>
-            <a class="enlace-volver" href="Cerrar_sesion.php">Cerrar sesión</a>
-            <a class="enlace-volver" href="Aniadir_cancion.php">Añadir canción</a>
+
+            <ul>
+                <li><a href="Cerrar_sesion.php">Cerrar sesión</a></li>
+                <li><a href="Aniadir_cancion.php">Añadir canción</a></li>
+                <li><a href="Listas_reproduccion.php">Listas de reproducción</a></li>
+                <li><a href="Discos.php">Discos</a></li>
+            </ul>
+        </nav>
+
+        <!-- Se muestran las canciones -->
             <?php mostrarCanciones($arrayCanciones); ?>
     </body>
 </html>
