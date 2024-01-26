@@ -7,7 +7,6 @@
         $idCancion = urldecode($_GET['id']);
     }
 
-    $listasReproduccion = obtenerListasUsurio($_SESSION['usuario']['username']);
     $arrayJSON = decodificarCanciones();
     $cancionActual = obtenerCancionJSON($arrayJSON, $idCancion);
 

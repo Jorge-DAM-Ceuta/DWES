@@ -11,29 +11,19 @@ include_once("./clases/Cancion.php");
         AÑADIR CANCIÓN
         ELIMINAR CANCIóN
         EDITAR CANCIÓN
+        AÑADIR A LISTA
+        MARCAR FAVORITA
+        DESMARCAR DE FAVORITOS
 
         CARGAR LISTAS
         CREAR LISTA
         EDITAR LISTA
         ELIMINAR LISTA
+        ACCEDER A UNA LISTA Y CARGAR CANCIONES
+        ELIMINAR CANCIÓN DE LISTA
     ]
 
-    FALTA[
-        //CANCION
-            AÑADIR CANCIONES A UNA LISTA
-            
-            DESMARCAR / MARCAR FAVORITA
-                Al mostrar las canciones no aparecen favoritas,
-                al marcar una en favoritas no se modificara su valor
-                en el objeto que se muestra ni en el json canciones.
-                En caso de marcar favorita se cambia el icono y en el
-                json usuarios se añade una lista de reproduccion llamada
-                favoritos, se coge el objeto de la canción, y se clona,
-                luego se hace un setFavoritos true y se añade el objeto a
-                la lista de reproduccion. 
-            
-        //LISTAS DE REPRODUCCION
-            ACCEDER A UNA LISTA Y CARGAR CANCIONES
+    FALTA[   
 
         //DISCOS
             CREAR UN DISCO
@@ -250,6 +240,28 @@ include_once("./clases/Cancion.php");
         }
     }
 
+    function esFavorita($idCancion){
+        $username = $_SESSION['usuario']['username'];
+    
+        $rutaJSON = "./json/Usuarios.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $usuarios = json_decode($jsonString, true);
+    
+        foreach($usuarios as $usuario){
+            if($usuario["username"] == $username){
+                if(isset($usuario["listas_reproduccion"]["Favoritos"]) && is_array($usuario["listas_reproduccion"]["Favoritos"])){
+                    foreach($usuario["listas_reproduccion"]["Favoritos"] as $cancion){
+                        if(isset($cancion["id"]) && $cancion["id"] == $idCancion){
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+    
+        return false;
+    }
+
     //AÑADIR CANCIÓN
     function aniadir_cancion($arrayJSON, $nuevaCancion){
         $nuevaCancionJSON = array(
@@ -422,6 +434,62 @@ include_once("./clases/Cancion.php");
         die();
     }
 
+    function obtenerCancionesLista($username, $nombreLista){
+        $rutaJSON = "./json/Usuarios.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $usuarios = json_decode($jsonString, true);
+
+        foreach($usuarios as $usuario){
+            if($usuario["username"] == $username){
+                if(isset($usuario["listas_reproduccion"][$nombreLista])){
+                    return $usuario["listas_reproduccion"][$nombreLista];
+                }
+            }
+        }
+    
+        return array();
+    }
+
+    function mostrarCancionesLista($arrayCanciones, $nombreLista){
+        echo "<div class='contenedorCanciones'>"; 
+        
+        foreach($arrayCanciones as $cancionJSON){
+            $id = $cancionJSON["id"];
+            $titulo = $cancionJSON["titulo"];
+            $artista = $cancionJSON["artista"];
+            $colaboracion = $cancionJSON["colaboracion"];
+            $duracion = $cancionJSON["duracion"];
+            $imagen = $cancionJSON["imagen"];
+            $audio = $cancionJSON["audio"];
+
+            $cancion = new Cancion($id, $titulo, $artista, $colaboracion, $duracion, false, $imagen, $audio);
+
+            $esFavorita = esFavorita($cancion->getID());
+
+            $imagen = $cancion->getRutaImagen() != "" ? $cancion->getRutaImagen() : "../assets/imagenes/imagen_defecto.jpg"; 
+            $colaboradores = obtenerColaboracion($cancion) != "" ? " ft. " . obtenerColaboracion($cancion) : "";
+
+            echo "<div class='cancion'>
+                    <img src='$imagen'/>
+                    <p>" . $cancion->getTitulo() . $colaboradores . "</p> 
+                    <p>" . $cancion->getArtista() . "</p> 
+                    <p>Duración: " . $cancion->getDuracion() . " minutos</p>"
+                    . ($esFavorita == true ? "<a href='Eliminar_de_favoritos.php?id=" . urlencode($cancion->getID()). "'><i class='fas fa-star'></i></a>" : "<a href='Aniadir_a_favoritos.php?id=" . urlencode($cancion->getID()). "'><i class='far fa-star'></i></a>") .
+                    "<audio controls>
+                        <source src='" . $cancion->getRutaAudio() . "' type='audio/mp3'>
+                    </audio>
+                
+                    <div class='botones-accion'> 
+                        <a class='boton' href='Editar_cancion.php?id=" . urlencode($cancion->getID()) . "'>Editar</a> 
+                        <a class='boton' href='Aniadir_a_lista.php?id=" . urlencode($cancion->getID()) . "'>Añadir a lista</a> 
+                        <a class='boton' href='Eliminar_de_lista.php?id=" . urlencode($cancion->getID()) . "&nombreLista=$nombreLista'>Eliminar de lista</a> 
+                    </div> 
+                </div>"; 
+        } 
+
+        echo "</div>"; 
+    }
+
     function aniadirCancionALista($username, $nombreLista, $cancion){
         $rutaJSON = "./json/Usuarios.json";
         $jsonString = file_get_contents($rutaJSON);
@@ -458,25 +526,52 @@ include_once("./clases/Cancion.php");
         die();
     }
 
-    function esFavorita($idCancion){
-        $username = $_SESSION['usuario']['username'];
-    
+    function eliminarCancionDeFavoritos($username, $idCancion){
         $rutaJSON = "./json/Usuarios.json";
         $jsonString = file_get_contents($rutaJSON);
         $usuarios = json_decode($jsonString, true);
     
-        foreach($usuarios as $usuario){
+        foreach($usuarios as &$usuario){
             if($usuario["username"] == $username){
-                if(isset($usuario["listas_reproduccion"]["Favoritos"]) && is_array($usuario["listas_reproduccion"]["Favoritos"])){
-                    foreach($usuario["listas_reproduccion"]["Favoritos"] as $cancion){
+                if(isset($usuario["listas_reproduccion"]["Favoritos"])){
+                    foreach($usuario["listas_reproduccion"]["Favoritos"] as $key => $cancion){
                         if(isset($cancion["id"]) && $cancion["id"] == $idCancion){
-                            return true;
+                            unset($usuario["listas_reproduccion"]["Favoritos"][$key]);
                         }
                     }
                 }
             }
         }
     
-        return false;
+        $jsonString = json_encode($usuarios, JSON_PRETTY_PRINT);
+        file_put_contents($rutaJSON, $jsonString);
+    
+        header("Location: Index.php");
+        die();
     }
+
+    function eliminarCancionDeLista($username, $nombreLista, $idCancion){
+        $rutaJSON = "./json/Usuarios.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $usuarios = json_decode($jsonString, true);
+    
+        foreach($usuarios as &$usuario){
+            if($usuario["username"] == $username){
+                if(isset($usuario["listas_reproduccion"][$nombreLista])){
+                    foreach($usuario["listas_reproduccion"][$nombreLista] as $key => $cancion){
+                        if(isset($cancion["id"]) && $cancion["id"] == $idCancion){
+                            unset($usuario["listas_reproduccion"][$nombreLista][$key]);
+                        }
+                    }
+                }
+            }
+        }
+    
+        $jsonString = json_encode($usuarios, JSON_PRETTY_PRINT);
+        file_put_contents($rutaJSON, $jsonString);
+
+        header("Location: Mostrar_lista.php?nombreLista=$nombreLista");
+        die();
+    }
+    
 ?>

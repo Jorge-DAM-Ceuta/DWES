@@ -8,7 +8,6 @@
     //Obtenemos un array de objetos tipo Canción.
     $arrayCanciones = instanciarCanciones(decodificarCanciones());
 
-
     if(isset($_POST["aniadir"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
         $nuevoTitulo = $_POST["titulo"];
         $nuevoArtista = $_POST["artista"];
