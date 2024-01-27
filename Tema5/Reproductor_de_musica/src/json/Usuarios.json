@@ -126,9 +126,60 @@
                     "favorita": false,
                     "imagen": "..\/assets\/imagenes\/No ceilings 3.png",
                     "audio": "..\/assets\/canciones\/Out West feat. Young Thug - Lil Wayne.mp3"
+                },
+                {
+                    "id": "28",
+                    "titulo": "The Blanguage",
+                    "artista": "Young thug",
+                    "colaboracion": [
+                        "Metro Boomin"
+                    ],
+                    "duracion": 4.23,
+                    "favorita": false,
+                    "imagen": "",
+                    "audio": "..\/assets\/canciones\/The Blanguage.mp3"
                 }
             ],
-            "Coche": []
+            "Coche": [
+                {
+                    "id": "19",
+                    "titulo": "With Them",
+                    "artista": "Young thug",
+                    "colaboracion": [
+                        ""
+                    ],
+                    "duracion": 3.18,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
+                    "audio": "..\/assets\/canciones\/With Them.mp3"
+                },
+                {
+                    "id": "4",
+                    "titulo": "Sicko mode",
+                    "artista": "Travis Scott",
+                    "colaboracion": [
+                        "Drake",
+                        "Swae Lee",
+                        "Big Hawk"
+                    ],
+                    "duracion": 5.13,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+                    "audio": "..\/assets\/canciones\/SICKO MODE.mp3"
+                },
+                {
+                    "id": "12",
+                    "titulo": "Astrothunder",
+                    "artista": "Travis Scott",
+                    "colaboracion": [
+                        ""
+                    ],
+                    "duracion": 2.23,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+                    "audio": "..\/assets\/canciones\/ASTROTHUNDER.mp3"
+                }
+            ]
         }
     }
 ]
