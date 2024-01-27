@@ -181,5 +181,13 @@
                 }
             ]
         }
+    },
+    {
+        "username": "Admin",
+        "email": "10113@cifpceuta.es",
+        "password": "$argon2i$v=19$m=65536,t=4,p=1$YzE4Q0ZjU0F0Li9mLnVsSQ$SmkO0V7e3t1bNr31cCn4spT1Rz+1iacaDzlH2vR9FLo",
+        "listas_reproduccion": {
+            "Favoritos": []
+        }
     }
 ]
