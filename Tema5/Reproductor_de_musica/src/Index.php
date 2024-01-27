@@ -8,8 +8,6 @@
         header("Location: Iniciar_sesion.php");
         exit();
     }
-
-    $arrayCanciones = instanciarCanciones(decodificarCanciones());
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://kit.fontawesome.com/001ac9542b.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="./style/index.css">
-        <title>Tienda Online</title>
+        <title>Reproductor de música</title>
     </head>
     <body>
         <nav class="menu">
@@ -28,13 +26,18 @@
             <ul>
                 <li><a href="Cerrar_sesion.php">Cerrar sesión</a></li>
                 <li><a href="Aniadir_cancion.php">Añadir canción</a></li>
+                <li><a href="Index.php">Canciones</a></li>
                 <li><a href="Listas_reproduccion.php">Listas de reproducción</a></li>
                 <li><a href="Mostrar_discos.php">Discos</a></li>
             </ul>
         </nav>
 
         <!-- Se muestran las canciones -->
-            <?php mostrarCanciones($arrayCanciones); ?>
+            <?php 
+                asignarCaratulaDisco();
+                $arrayCanciones = instanciarCanciones(decodificarCanciones());
+                mostrarCanciones($arrayCanciones); 
+            ?>
     </body>
 </html>
 

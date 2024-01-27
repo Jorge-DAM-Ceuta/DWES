@@ -1,5 +1,12 @@
 <?php
     include_once("./Funciones.inc.php");
+
+    session_start();
+
+    if (!isset($_SESSION['usuario']) || !$_SESSION['usuario']) {
+        header("Location: Iniciar_sesion.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +26,7 @@
                 <li><a href="Aniadir_disco.php">Añadir disco</a></li>
                 <li><a href="Index.php">Canciones</a></li>
                 <li><a href="Listas_reproduccion.php">Listas de reproducción</a></li>
+                <li><a href="Mostrar_discos.php">Discos</a></li>
             </ul>
         </nav>
 

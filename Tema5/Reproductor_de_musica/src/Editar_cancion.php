@@ -63,10 +63,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./style/editar_cancion.css">
-        <title>Editar producto</title>
+        <title>Editar canción</title>
     </head>
     <body>
         <a href="Index.php" class="enlace-volver">Cancelar y volver</a>
+        
+        <h1>Editar canción</h1>
 
         <form action="" method='POST' enctype='multipart/form-data'>
             <label>Titulo:</label>
@@ -79,7 +81,7 @@
 
             <br/>
 
-            <label>Colaboración:</label> 
+            <label>Colaboración: *Si hay varias sepáralas con ", "*</label> 
             <input type='text' name='colaboracion' value='<?php echo $colaboracion; ?>'>
 
             <br/>

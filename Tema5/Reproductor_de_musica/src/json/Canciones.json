@@ -1,52 +1,335 @@
 [
     {
-        "id": "1",
-        "titulo": "With that",
-        "artista": "Young thug",
-        "colaboracion": [
-            "Duke"
-        ],
-        "duracion": 4.2,
-        "favorita": false,
-        "imagen": "..\/assets\/imagenes\/Young_Thug_Punk.png",
-        "audio": ""
-    },
-    {
         "id": "2",
-        "titulo": "I already know",
-        "artista": "Young thug",
+        "titulo": "Stargazing",
+        "artista": "Travis Scott",
         "colaboracion": [
-            "Future"
+            ""
         ],
-        "duracion": 4,
+        "duracion": 4.31,
         "favorita": false,
-        "imagen": "..\/assets\/imagenes\/imagen_defecto.jpg",
-        "audio": ""
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/STARGAZING.mp3"
     },
     {
         "id": "3",
-        "titulo": "Nueva Nota",
-        "artista": "Artic monkeys",
+        "titulo": "Carousel",
+        "artista": "Travis Scott",
         "colaboracion": [
-            "Future",
-            "Drake"
+            "Frank Ocean"
         ],
-        "duracion": 5,
+        "duracion": 3,
         "favorita": false,
-        "imagen": "..\/assets\/imagenes\/imagen_defecto.jpg",
-        "audio": ""
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/CAROUSEL.mp3"
     },
     {
         "id": "4",
-        "titulo": "Nueva Nota",
-        "artista": "Artic monkeys",
+        "titulo": "Sicko mode",
+        "artista": "Travis Scott",
         "colaboracion": [
-            "Future",
-            "Drake"
+            "Drake",
+            "Swae Lee",
+            "Big Hawk"
         ],
-        "duracion": 5,
+        "duracion": 5.13,
         "favorita": false,
-        "imagen": "..\/assets\/imagenes\/imagen_defecto.jpg",
-        "audio": ""
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/SICKO MODE.mp3"
+    },
+    {
+        "id": "5",
+        "titulo": "R.I.P. Screw",
+        "artista": "Travis Scott",
+        "colaboracion": [
+            ""
+        ],
+        "duracion": 3.06,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/R.I.P. SCREW.mp3"
+    },
+    {
+        "id": "6",
+        "titulo": "Stop trying to be god",
+        "artista": "Travis Scott",
+        "colaboracion": [
+            "James Blake",
+            "Kid Cudi",
+            "Stevie Wonder"
+        ],
+        "duracion": 5.39,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/STOP TRYING TO BE GOD.mp3"
+    },
+    {
+        "id": "7",
+        "titulo": "No Bystanders",
+        "artista": "Travis Scott",
+        "colaboracion": [
+            "Juice WRLD",
+            "Sheck Wes"
+        ],
+        "duracion": 3.38,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/NO BYSTANDERS.mp3"
+    },
+    {
+        "id": "8",
+        "titulo": "Skeletons",
+        "artista": "Travis Scott",
+        "colaboracion": [
+            "Pharrell Williams",
+            "Tame Impala",
+            "The Weeknd"
+        ],
+        "duracion": 2.26,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/SKELETONS.mp3"
+    },
+    {
+        "id": "9",
+        "titulo": "Wake up",
+        "artista": "Travis Scott",
+        "colaboracion": [
+            "The Weekend"
+        ],
+        "duracion": 3.52,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/WAKE UP.mp3"
+    },
+    {
+        "id": "10",
+        "titulo": "5% Tint",
+        "artista": "Travis Scott",
+        "colaboracion": [
+            ""
+        ],
+        "duracion": 3.16,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/TINT.mp3"
+    },
+    {
+        "id": "11",
+        "titulo": "NC-17",
+        "artista": "Travis Scott",
+        "colaboracion": [
+            "21 Savage"
+        ],
+        "duracion": 2.37,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/NC-17.mp3"
+    },
+    {
+        "id": "12",
+        "titulo": "Astrothunder",
+        "artista": "Travis Scott",
+        "colaboracion": [
+            ""
+        ],
+        "duracion": 2.23,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/ASTROTHUNDER.mp3"
+    },
+    {
+        "id": "13",
+        "titulo": "Yosemite",
+        "artista": "Travis Scott",
+        "colaboracion": [
+            "Gunna",
+            "NAV"
+        ],
+        "duracion": 2.3,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/YOSEMITE.mp3"
+    },
+    {
+        "id": "14",
+        "titulo": "Can't say",
+        "artista": "Travis Scott",
+        "colaboracion": [
+            ""
+        ],
+        "duracion": 3.19,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/CANT SAY.mp3"
+    },
+    {
+        "id": "15",
+        "titulo": "Who? What!",
+        "artista": "Travis Scott",
+        "colaboracion": [
+            "Quavo",
+            "Takeoff"
+        ],
+        "duracion": 2.57,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/WHO WHAT.mp3"
+    },
+    {
+        "id": "16",
+        "titulo": "Butterfly effect",
+        "artista": "Travis Scott",
+        "colaboracion": [
+            ""
+        ],
+        "duracion": 3.11,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/BUTTERFLY EFFECT.mp3"
+    },
+    {
+        "id": "17",
+        "titulo": "Houstonfornication",
+        "artista": "Young thug",
+        "colaboracion": [
+            ""
+        ],
+        "duracion": 3.38,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/HOUSTONFORNICATION.mp3"
+    },
+    {
+        "id": "18",
+        "titulo": "Cofee bean",
+        "artista": "Travis Scott",
+        "colaboracion": [
+            ""
+        ],
+        "duracion": 3.29,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/COFFEE BEAN.mp3"
+    },
+    {
+        "id": "19",
+        "titulo": "With Them",
+        "artista": "Young thug",
+        "colaboracion": [
+            ""
+        ],
+        "duracion": 3.18,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
+        "audio": "..\/assets\/canciones\/With Them.mp3"
+    },
+    {
+        "id": "20",
+        "titulo": "Memo",
+        "artista": "Young thug",
+        "colaboracion": [
+            ""
+        ],
+        "duracion": 3.27,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
+        "audio": "..\/assets\/canciones\/Memo.mp3"
+    },
+    {
+        "id": "21",
+        "titulo": "Drippin",
+        "artista": "Young thug",
+        "colaboracion": [
+            ""
+        ],
+        "duracion": 3.07,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
+        "audio": "..\/assets\/canciones\/Drippin.mp3"
+    },
+    {
+        "id": "22",
+        "titulo": "Slime Shit",
+        "artista": "Young thug",
+        "colaboracion": [
+            "Yak Gotti"
+        ],
+        "duracion": 4.39,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
+        "audio": "..\/assets\/canciones\/Slime Shit (Feat. Yak Gotti).mp3"
+    },
+    {
+        "id": "23",
+        "titulo": "Digits",
+        "artista": "Young thug",
+        "colaboracion": [
+            ""
+        ],
+        "duracion": 2.57,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
+        "audio": "..\/assets\/canciones\/Digits.mp3"
+    },
+    {
+        "id": "24",
+        "titulo": "Worth It",
+        "artista": "Young thug",
+        "colaboracion": [
+            ""
+        ],
+        "duracion": 3.29,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
+        "audio": "..\/assets\/canciones\/Worth It.mp3"
+    },
+    {
+        "id": "25",
+        "titulo": "Tattoos",
+        "artista": "Young thug",
+        "colaboracion": [
+            ""
+        ],
+        "duracion": 4.02,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
+        "audio": "..\/assets\/canciones\/Tattoos.mp3"
+    },
+    {
+        "id": "26",
+        "titulo": "Problem",
+        "artista": "Young thug",
+        "colaboracion": [
+            ""
+        ],
+        "duracion": 4.02,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
+        "audio": "..\/assets\/canciones\/Problem.mp3"
+    },
+    {
+        "id": "27",
+        "titulo": "Out West",
+        "artista": "Lil Wayne",
+        "colaboracion": [
+            "Young Thug"
+        ],
+        "duracion": 3.54,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/No ceilings 3.png",
+        "audio": "..\/assets\/canciones\/Out West feat. Young Thug - Lil Wayne.mp3"
+    },
+    {
+        "id": "28",
+        "titulo": "The Blanguage",
+        "artista": "Young thug",
+        "colaboracion": [
+            "Metro Boomin"
+        ],
+        "duracion": 4.23,
+        "favorita": false,
+        "imagen": "",
+        "audio": "..\/assets\/canciones\/The Blanguage.mp3"
     }
 ]

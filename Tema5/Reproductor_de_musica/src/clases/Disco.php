@@ -5,16 +5,16 @@
         private string $titulo;
         private string $artista;
         private int $anio;
-        private string $rutaImagen;
         private array $canciones;
+        private string $rutaImagen;
 
-        public function __construct($id, $titulo, $artista, $anio, $rutaImagen = "", $canciones){
+        public function __construct($id, $titulo, $artista, $anio, $canciones, $rutaImagen = ""){
             $this->id = $id;
             $this->titulo = $titulo;
             $this->artista = $artista;
             $this->anio = $anio;
-            $this->rutaImagen = $rutaImagen;
             $this->canciones = $canciones;
+            $this->rutaImagen = $rutaImagen;
         }
         
         public function getID(){

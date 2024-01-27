@@ -1,10 +1,45 @@
 [
     {
         "id": "1",
-        "titulo": "Punk",
+        "titulo": "Slime Season 3",
         "artista": "Young thug",
-        "anio": 4,
-        "canciones": ["Contagious", "Stressed", "Shoot at the cops"],
-        "imagen": ""
+        "anio": 2016,
+        "canciones": [
+            "With Them",
+            "Memo",
+            "Drippin",
+            "Slime Shit",
+            "Digits",
+            "Worth It",
+            "Tattoos",
+            "Problem"
+        ],
+        "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg"
+    },
+    {
+        "id": "3",
+        "titulo": "ASTRO WORLD",
+        "artista": "Travis Scott",
+        "anio": 2018,
+        "canciones": [
+            "Astrothunder",
+            "Butterfly effect",
+            "Can't say",
+            "Carousel",
+            "Cofee bean",
+            "Houstonfornication",
+            "NC-17",
+            "No Bystanders",
+            "R.I.P. Screw",
+            "Sicko mode",
+            "Skeletons",
+            "Stargazing",
+            "Stop trying to be god",
+            "5% Tint",
+            "Wake up",
+            "Who? What!",
+            "Yosemite"
+        ],
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg"
     }
 ]

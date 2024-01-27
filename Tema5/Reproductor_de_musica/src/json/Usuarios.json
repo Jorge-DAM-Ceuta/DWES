@@ -6,16 +6,126 @@
         "listas_reproduccion": {
             "Favoritos": [
                 {
-                    "id": "1",
-                    "titulo": "With that",
+                    "id": "4",
+                    "titulo": "Sicko mode",
+                    "artista": "Travis Scott",
+                    "colaboracion": [
+                        "Drake",
+                        "Swae Lee",
+                        "Big Hawk"
+                    ],
+                    "duracion": 5.13,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+                    "audio": "..\/assets\/canciones\/SICKO MODE.mp3"
+                },
+                {
+                    "id": "5",
+                    "titulo": "R.I.P. Screw",
+                    "artista": "Travis Scott",
+                    "colaboracion": [
+                        ""
+                    ],
+                    "duracion": 3.06,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+                    "audio": "..\/assets\/canciones\/R.I.P. SCREW.mp3"
+                },
+                {
+                    "id": "12",
+                    "titulo": "Astrothunder",
+                    "artista": "Travis Scott",
+                    "colaboracion": [
+                        ""
+                    ],
+                    "duracion": 2.23,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+                    "audio": "..\/assets\/canciones\/ASTROTHUNDER.mp3"
+                },
+                {
+                    "id": "17",
+                    "titulo": "Houstonfornication",
                     "artista": "Young thug",
                     "colaboracion": [
-                        "Duke"
+                        ""
                     ],
-                    "duracion": 4.2,
+                    "duracion": 3.38,
                     "favorita": false,
-                    "imagen": "..\/assets\/imagenes\/Young_Thug_Punk.png",
-                    "audio": ""
+                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+                    "audio": "..\/assets\/canciones\/HOUSTONFORNICATION.mp3"
+                },
+                {
+                    "id": "14",
+                    "titulo": "Can't say",
+                    "artista": "Travis Scott",
+                    "colaboracion": [
+                        ""
+                    ],
+                    "duracion": 3.19,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+                    "audio": "..\/assets\/canciones\/CANT SAY.mp3"
+                },
+                {
+                    "id": "19",
+                    "titulo": "With Them",
+                    "artista": "Young thug",
+                    "colaboracion": [
+                        ""
+                    ],
+                    "duracion": 3.18,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
+                    "audio": "..\/assets\/canciones\/With Them.mp3"
+                },
+                {
+                    "id": "20",
+                    "titulo": "Memo",
+                    "artista": "Young thug",
+                    "colaboracion": [
+                        ""
+                    ],
+                    "duracion": 3.27,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
+                    "audio": "..\/assets\/canciones\/Memo.mp3"
+                },
+                {
+                    "id": "23",
+                    "titulo": "Digits",
+                    "artista": "Young thug",
+                    "colaboracion": [
+                        ""
+                    ],
+                    "duracion": 2.57,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
+                    "audio": "..\/assets\/canciones\/Digits.mp3"
+                },
+                {
+                    "id": "26",
+                    "titulo": "Problem",
+                    "artista": "Young thug",
+                    "colaboracion": [
+                        ""
+                    ],
+                    "duracion": 4.02,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
+                    "audio": "..\/assets\/canciones\/Problem.mp3"
+                },
+                {
+                    "id": "27",
+                    "titulo": "Out West",
+                    "artista": "Lil Wayne",
+                    "colaboracion": [
+                        "Young Thug"
+                    ],
+                    "duracion": 3.54,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/No ceilings 3.png",
+                    "audio": "..\/assets\/canciones\/Out West feat. Young Thug - Lil Wayne.mp3"
                 }
             ],
             "Coche": []

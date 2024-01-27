@@ -59,18 +59,20 @@
     <body>
         <a href="Index.php" class="enlace-volver">Cancelar y volver</a>
 
+        <h1>Añadir canción</h1>
+
         <form action="" method='POST' enctype='multipart/form-data'>
             <label>Titulo: <input type='text' name='titulo' required></label>
             <br/>
-            <label>Artista: <input type='text' name='artista'></label>
+            <label>Artista: <input type='text' name='artista' required></label>
             <br/>
-            <label>Colaboración: <input type='text' name='colaboracion'></label>
+            <label>Colaboración: *Si hay varias sepáralas con ", "*<input type='text' name='colaboracion'></label>
             <br/>
-            <label>Duración: <input type='number' step='0.01' name='duracion'></label>
+            <label>Duración: <input type='number' step='0.01' name='duracion' required></label>
             <br/>
             <label>Imagen: <input type='file' name='imagen'></label>
             <br/>
-            <label>Audio: <input type='file' name='audio'></label>
+            <label>Audio: <input type='file' name='audio' accept=".mp3" required></label>
             <br/>
             <input type='submit' name='aniadir' value='Añadir canción'>
         </form>

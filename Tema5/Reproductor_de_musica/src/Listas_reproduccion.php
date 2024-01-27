@@ -2,6 +2,11 @@
     include_once("./Funciones.inc.php");
 
     session_start();
+
+    if (!isset($_SESSION['usuario']) || !$_SESSION['usuario']) {
+        header("Location: Iniciar_sesion.php");
+        exit();
+    }
     
     $listasReproduccion = obtenerListasUsurio($_SESSION['usuario']['username']);
 ?>
@@ -22,6 +27,7 @@
                 <li><a href="Cerrar_sesion.php">Cerrar sesión</a></li>
                 <li><a href="Aniadir_lista.php">Añadir lista de reproducción</a></li>
                 <li><a href="Index.php">Canciones</a></li>
+                <li><a href="Listas_reproduccion.php">Listas de reproducción</a></li>
                 <li><a href="Mostrar_discos.php">Discos</a></li>
             </ul>
         </nav>

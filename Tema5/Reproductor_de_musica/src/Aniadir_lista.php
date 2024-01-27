@@ -22,6 +22,8 @@
     <body>
         <a href="Listas_reproduccion.php" class="enlace-volver">Cancelar y volver</a>
 
+        <h1>Añadir lista</h1>
+        
         <form action="" method='POST' enctype='multipart/form-data'>
             <label>Nombre para lista de reproducción: <input type='text' name='nombre' required></label>
             

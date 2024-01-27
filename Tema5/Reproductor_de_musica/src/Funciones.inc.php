@@ -15,6 +15,8 @@
         AÑADIR A LISTA
         MARCAR FAVORITA
         DESMARCAR DE FAVORITOS
+        AUTOCARGAR CARATULA DE DISCO EN CANCION
+        ASIGNAR IMAGEN POR DEFECTO
 
         CARGAR LISTAS
         CREAR LISTA
@@ -23,20 +25,10 @@
         ACCEDER A UNA LISTA Y CARGAR CANCIONES
         ELIMINAR CANCIÓN DE LISTA
 
+        CARGAR DISCOS
+        CREAR UN DISCO
+        EDITAR UN DISCO
         ELIMINAR UN DISCO
-    ]
-
-    FALTA[   
-
-        //DISCOS
-            CREAR UN DISCO
-            EDITAR UN DISCO
-                EDITAR TITULO
-                EDITAR CANCIONES
-                EDITAR CARATULA
-                CAMBIAR AUTOR
-                CAMBIAR DISCOGRAFIA
-            
     ]
 */
 
@@ -137,9 +129,11 @@
     function instanciarCanciones($cancionesJSON){
         $arrayCanciones = array();
 
-        foreach($cancionesJSON as $cancionJSON){
-            $cancion = new Cancion($cancionJSON["id"], $cancionJSON["titulo"], $cancionJSON["artista"], $cancionJSON["colaboracion"], $cancionJSON["duracion"], $cancionJSON["favorita"], $cancionJSON["imagen"], $cancionJSON["audio"]);
-            array_push($arrayCanciones, $cancion);
+        if(isset($cancionesJSON) && count($cancionesJSON) > 0){
+            foreach($cancionesJSON as $cancionJSON){
+                $cancion = new Cancion($cancionJSON["id"], $cancionJSON["titulo"], $cancionJSON["artista"], $cancionJSON["colaboracion"], $cancionJSON["duracion"], $cancionJSON["favorita"], $cancionJSON["imagen"], $cancionJSON["audio"]);
+                array_push($arrayCanciones, $cancion);
+            }
         }
 
         return $arrayCanciones;
@@ -156,7 +150,7 @@
         $arrayDiscos = array();
 
         foreach($discosJSON as $discoJSON){
-            $disco = new Disco($discoJSON["id"], $discoJSON["titulo"], $discoJSON["artista"], $discoJSON["anio"], $discoJSON["imagen"], $discoJSON["canciones"]);
+            $disco = new Disco($discoJSON["id"], $discoJSON["titulo"], $discoJSON["artista"], $discoJSON["anio"], $discoJSON["canciones"], $discoJSON["imagen"]);
             array_push($arrayDiscos, $disco);
         }
 
@@ -175,10 +169,10 @@
 
             echo "<div class='cancion'>
                     <img src='$imagen'/>
-                    <p>" . $cancion->getTitulo() . $colaboradores . "</p> 
+                    <p><strong>" . $cancion->getTitulo() . "</strong>" . $colaboradores . "</p> 
                     <p>" . $cancion->getArtista() . "</p> 
                     <p>Duración: " . $cancion->getDuracion() . " minutos</p>"
-                    . ($esFavorita == true ? "<a href='Eliminar_de_favoritos.php?id=" . urlencode($cancion->getID()). "'><i class='fas fa-star'></i></a>" : "<a href='Aniadir_a_favoritos.php?id=" . urlencode($cancion->getID()). "'><i class='far fa-star'></i></a>") .
+                    . ($esFavorita == true ? "<a href='Eliminar_de_favoritos.php?id=" . urlencode($cancion->getID()). "&ubicacion=Index.php'><i class='fas fa-star'></i></a>" : "<a href='Aniadir_a_favoritos.php?id=" . urlencode($cancion->getID()). "&ubicacion=Index.php'><i class='far fa-star'></i></a>") .
                     "<audio controls>
                         <source src='" . $cancion->getRutaAudio() . "' type='audio/mp3'>
                     </audio>
@@ -186,12 +180,52 @@
                     <div class='botones-accion'> 
                         <a class='boton' href='Editar_cancion.php?id=" . urlencode($cancion->getID()) . "'>Editar</a> 
                         <a class='boton' href='Aniadir_a_lista.php?id=" . urlencode($cancion->getID()) . "'>Añadir a lista</a> 
-                        <a class='boton' href='Eliminar_cancion.php?id=" . urlencode($cancion->getID()) . "'>Eliminar</a> 
+                        <a class='boton' href='Eliminar_cancion.php?id=" . urlencode($cancion->getID()) . "'>Eliminar canción</a> 
                     </div> 
                 </div>"; 
         } 
 
         echo "</div>"; 
+    }
+
+    //ASIGNAR CARATULA DE DISCO A LA CANCIÓN
+    function asignarCaratulaDisco(){
+        $cancionesJSON = decodificarCanciones();
+        $canciones = instanciarCanciones(decodificarCanciones());
+        $discos = instanciarDiscos(decodificarDiscos());
+
+        foreach ($canciones as &$cancion) {
+            foreach ($discos as $disco) {
+                foreach ($disco->getCanciones() as $cancionDelDisco) {
+                    if ($cancionDelDisco == $cancion->getTitulo()) {
+
+                        $cancionActualizada = array(
+                            "id" => $cancion->getID(),
+                            "titulo" => $cancion->getTitulo(),
+                            "artista" => $cancion->getArtista(),
+                            "colaboracion" => $cancion->getColaboracion(),
+                            "duracion" => $cancion->getDuracion(),
+                            "favorita" => $cancion->getFavorita(),
+                            "imagen" => $disco->getRutaImagen(),
+                            "audio" => $cancion->getRutaAudio()
+                        );
+
+                        foreach ($cancionesJSON as $indice => $cancionJSON) {
+                            if ($cancionJSON['id'] == $cancion->getID() && $disco->getRutaImagen() != "") {
+                                $cancionesJSON[$indice] = $cancionActualizada;
+                                break;
+                            }
+                        }
+    
+                        break;
+                    }
+                }
+            }
+        }
+
+        $jsonCanciones = json_encode($cancionesJSON, JSON_PRETTY_PRINT);
+        file_put_contents("./json/Canciones.json", $jsonCanciones);
+        
     }
 
     //MOSTRAR CANCIÓN POR ID DEL ARRAY CANCIONES
@@ -206,7 +240,6 @@
                         <p>" . $cancion->getTitulo() . $colaboradores . "</p> 
                         <p>" . $cancion->getArtista() . "</p> 
                         <p>Duración: " . $cancion->getDuracion() . " minutos</p> 
-                        <p>Favorita: " . ($cancion->getFavorita() ? 'Sí' : 'No') . "</p> 
                     </div>"; 
                 
                 return $cancion;
@@ -220,12 +253,16 @@
             if($cancion["id"] == $idCancion){
                 return $cancion;
             }
-        } 
+        }
     }
 
     //OBTIENE EL ID DE LA ÚLTIMA CANCIÓN
-    function obtenerUltimoID($arrayJSON):int{
-        return end($arrayJSON)["id"];
+    function obtenerUltimoID($arrayJSON){
+        if(isset($arrayJSON) && count($arrayJSON) > 0){
+            return end($arrayJSON)["id"];
+        }else{
+            return "1";
+        }
     }
 
     //OBTENER LA COLABORACIÓN DE UNA CANCIÓN
@@ -327,6 +364,8 @@
         $jsonString = file_get_contents($rutaJSON);
         $canciones = json_decode($jsonString, true);
 
+        eliminarCancionDeListas($idCancion);
+
         foreach($canciones as $key => $cancion) {
             if($cancion['id'] == $idCancion) {
                 unset($canciones[$key]);
@@ -336,6 +375,27 @@
                 
                 header("Location: Index.php");
                 exit();
+            }
+        }
+    }
+
+    function eliminarCancionDeListas($idCancion) {
+        $rutaJSONUsuarios = "./json/Usuarios.json";
+        $jsonStringUsuarios = file_get_contents($rutaJSONUsuarios);
+        $usuarios = json_decode($jsonStringUsuarios, true);
+    
+        foreach ($usuarios as &$usuario) {
+            if (isset($usuario["listas_reproduccion"])) {
+                foreach ($usuario["listas_reproduccion"] as $nombreLista => &$canciones) {
+                    foreach ($canciones as $key => $cancion) {
+                        if ($cancion['id'] == $idCancion) {
+                            unset($usuario["listas_reproduccion"][$nombreLista][$key]);
+    
+                            $jsonStringUsuarios = json_encode($usuarios, JSON_PRETTY_PRINT);
+                            file_put_contents($rutaJSONUsuarios, $jsonStringUsuarios);
+                        }
+                    }
+                }
             }
         }
     }
@@ -362,13 +422,16 @@
             
             foreach($listasReproduccion as $nombreLista => $canciones){
                 echo "<div class='lista-enlace'>
-                        <a href='Mostrar_lista.php?nombreLista=" . urlencode($nombreLista) . "' class='nombre'>$nombreLista</a>
+                        <a href='Mostrar_lista.php?nombreLista=" . urlencode($nombreLista) . "' class='nombre'>$nombreLista</a>";
                         
-                        <div class='botones-accion'> 
+                if($nombreLista != "Favoritos"){
+                    echo "<div class='botones-accion'> 
                             <a class='boton' href='Editar_lista.php?nombreLista=" . urlencode($nombreLista) . "'>Editar</a> 
                             <a class='boton' href='Eliminar_lista.php?nombreLista=" . urlencode($nombreLista) . "'>Eliminar</a> 
-                        </div>
-                    </div>";
+                        </div>";
+                    }
+
+                echo "</div>";
             }
 
             echo "</div>";
@@ -485,10 +548,10 @@
 
             echo "<div class='cancion'>
                     <img src='$imagen'/>
-                    <p>" . $cancion->getTitulo() . $colaboradores . "</p> 
+                    <p><strong>" . $cancion->getTitulo() . "</strong>" . $colaboradores . "</p> 
                     <p>" . $cancion->getArtista() . "</p> 
                     <p>Duración: " . $cancion->getDuracion() . " minutos</p>"
-                    . ($esFavorita == true ? "<a href='Eliminar_de_favoritos.php?id=" . urlencode($cancion->getID()). "'><i class='fas fa-star'></i></a>" : "<a href='Aniadir_a_favoritos.php?id=" . urlencode($cancion->getID()). "'><i class='far fa-star'></i></a>") .
+                    . ($esFavorita == true ? "<a href='Eliminar_de_favoritos.php?id=" . urlencode($cancion->getID()). "&nombreLista=$nombreLista'><i class='fas fa-star'></i></a>" : "<a href='Aniadir_a_favoritos.php?id=" . urlencode($cancion->getID()). "&nombreLista=$nombreLista'><i class='far fa-star'></i></a>") .
                     "<audio controls>
                         <source src='" . $cancion->getRutaAudio() . "' type='audio/mp3'>
                     </audio>
@@ -535,9 +598,6 @@
 
         $jsonString = json_encode($usuarios, JSON_PRETTY_PRINT);
         file_put_contents($rutaJSON, $jsonString);
-
-        header("Location: Index.php");
-        die();
     }
 
     function eliminarCancionDeFavoritos($username, $idCancion){
@@ -559,9 +619,6 @@
     
         $jsonString = json_encode($usuarios, JSON_PRETTY_PRINT);
         file_put_contents($rutaJSON, $jsonString);
-    
-        header("Location: Index.php");
-        die();
     }
 
     function eliminarCancionDeLista($username, $nombreLista, $idCancion){
@@ -599,9 +656,9 @@
 
             echo "<div class='cancion'>
                     <img src='$imagen'/>
-                    <p>" . $disco->getTitulo() . "</p> 
+                    <p><strong>" . $disco->getTitulo() . "</strong></p> 
                     <p>" . $disco->getArtista() . "</p> 
-                    <p>Año: " . $disco->getAnio() . " minutos</p>
+                    <p>Año: " . $disco->getAnio() . "</p>
                     <details>
                         <summary>Canciones</summary>";
                     
@@ -626,12 +683,73 @@
         return end($arrayJSON)["id"];
     }
 
-    function aniadirDisco(){
+    function aniadirDisco($arrayJSON, $nuevoDisco){
+        $nuevoDiscoJSON = array(
+            "id" => $nuevoDisco->getID(),
+            "titulo" => $nuevoDisco->getTitulo(),
+            "artista" => $nuevoDisco->getArtista(),
+            "anio" => $nuevoDisco->getAnio(),
+            "canciones" => $nuevoDisco->getCanciones(),
+            "imagen" => $nuevoDisco->getRutaImagen()
+        );
 
+        $arrayJSON[] = $nuevoDiscoJSON;
+
+        $jsonString = json_encode($arrayJSON, JSON_PRETTY_PRINT);
+        file_put_contents("./json/Discos.json", $jsonString);
+
+        header("Location: Mostrar_discos.php");
+        die();
     }
 
-    function editarDisco($idDisco){
+    function editarDisco($disco){
+        $discosJSON = decodificarDiscos();
 
+        foreach ($discosJSON as &$discoJson) {
+            // Verificar si el ID coincide
+            if ($discoJson["id"] == $disco->getID()) {
+
+                $discoJson["titulo"] = $disco->getTitulo();
+                $discoJson["artista"] = $disco->getArtista();
+                $discoJson["anio"] = $disco->getAnio();
+                $discoJson["canciones"] = $disco->getCanciones();
+                $discoJson["imagen"] = $disco->getRutaImagen();
+            }
+        }
+
+        $jsonString = json_encode($discosJSON, JSON_PRETTY_PRINT);
+        file_put_contents("./json/Discos.json", $jsonString);
+        
+        header("Location: Mostrar_discos.php");
+        exit();
+    }
+
+    //MOSTRAR DISCO POR ID DEL ARRAY DISCOS
+    function mostrarDisco_ID($arrayDiscos, $idDisco){
+        foreach($arrayDiscos as $disco){
+            if($disco->getID() == $idDisco){
+                $imagen = $disco->getRutaImagen() != "" ? $disco->getRutaImagen() : "../assets/imagenes/imagen_defecto.jpg"; 
+
+                echo "<div class='cancion'>
+                        <img src='$imagen'/>
+                        <p>" . $disco->getTitulo() . "</p> 
+                        <p>" . $disco->getArtista() . "</p> 
+                        <p>Año: " . $disco->getAnio() . "</p>
+                        <details>
+                            <summary>Canciones</summary>";
+                        
+                        $contador = 1;
+                        foreach($disco->getCanciones() as $cancion){
+                            echo "<p>" . $contador . ". " . $cancion . "</p>";
+                            $contador++;
+                        }
+
+                    echo "</details>
+                    </div>"; 
+                
+                return $disco;
+            }
+        } 
     }
 
     function eliminarDisco($idDisco){
@@ -651,6 +769,4 @@
             }
         }
     }
-
-
 ?>

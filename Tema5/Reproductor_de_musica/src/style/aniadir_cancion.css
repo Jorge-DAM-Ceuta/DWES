@@ -32,6 +32,13 @@ label {
     color: #555;
 }
 
+h1{
+    position: absolute;
+    padding: 10px 10px;
+    top: 20px;
+    left: 45.5vw;
+}
+
 input {
     width: 100%;
     padding: 10px;

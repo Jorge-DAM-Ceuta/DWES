@@ -20,12 +20,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./style/aniadir_lista.css">
-        <title>Añadir lista de reproducción</title>
+        <title>Editar lista de reproducción</title>
     </head>
 
     <body>
         <a href="Listas_reproduccion.php" class="enlace-volver">Cancelar y volver</a>
 
+        <h1>Editar lista</h1>
+        
         <form action="" method='POST' enctype='multipart/form-data'>
             <label>Nuevo nombre para lista de reproducción: <input type='text' name='nombre' required></label>
             
