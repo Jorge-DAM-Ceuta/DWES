@@ -22,7 +22,7 @@
                 <li><a href="Cerrar_sesion.php">Cerrar sesión</a></li>
                 <li><a href="Aniadir_lista.php">Añadir lista de reproducción</a></li>
                 <li><a href="Index.php">Canciones</a></li>
-                <li><a href="Discos.php">Discos</a></li>
+                <li><a href="Mostrar_discos.php">Discos</a></li>
             </ul>
         </nav>
 

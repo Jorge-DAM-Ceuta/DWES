@@ -4,6 +4,7 @@
         "titulo": "Punk",
         "artista": "Young thug",
         "anio": 4,
-        "canciones": []
+        "canciones": ["Contagious", "Stressed", "Shoot at the cops"],
+        "imagen": ""
     }
 ]

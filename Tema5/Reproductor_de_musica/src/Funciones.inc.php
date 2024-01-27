@@ -1,5 +1,6 @@
 <?php
-include_once("./clases/Cancion.php");
+    include_once("./clases/Cancion.php");
+    include_once("./clases/Disco.php");
 
 /*
     TERMINADO[
@@ -21,6 +22,8 @@ include_once("./clases/Cancion.php");
         ELIMINAR LISTA
         ACCEDER A UNA LISTA Y CARGAR CANCIONES
         ELIMINAR CANCIÓN DE LISTA
+
+        ELIMINAR UN DISCO
     ]
 
     FALTA[   
@@ -33,7 +36,7 @@ include_once("./clases/Cancion.php");
                 EDITAR CARATULA
                 CAMBIAR AUTOR
                 CAMBIAR DISCOGRAFIA
-            BORRAR UN DISCO
+            
     ]
 */
 
@@ -147,6 +150,17 @@ include_once("./clases/Cancion.php");
         $discos = json_decode(file_get_contents($ruta), true);
         
         return $discos;
+    }
+
+    function instanciarDiscos($discosJSON){
+        $arrayDiscos = array();
+
+        foreach($discosJSON as $discoJSON){
+            $disco = new Disco($discoJSON["id"], $discoJSON["titulo"], $discoJSON["artista"], $discoJSON["anio"], $discoJSON["imagen"], $discoJSON["canciones"]);
+            array_push($arrayDiscos, $disco);
+        }
+
+        return $arrayDiscos;
     }
 
 //CANCIONES
@@ -574,4 +588,69 @@ include_once("./clases/Cancion.php");
         die();
     }
     
+//DISCOS
+    function mostrarDiscos(){
+        $discos = instanciarDiscos(decodificarDiscos());
+
+        echo "<div class='contenedorCanciones'>"; 
+
+        foreach($discos as $disco){
+            $imagen = $disco->getRutaImagen() != "" ? $disco->getRutaImagen() : "../assets/imagenes/imagen_defecto.jpg"; 
+
+            echo "<div class='cancion'>
+                    <img src='$imagen'/>
+                    <p>" . $disco->getTitulo() . "</p> 
+                    <p>" . $disco->getArtista() . "</p> 
+                    <p>Año: " . $disco->getAnio() . " minutos</p>
+                    <details>
+                        <summary>Canciones</summary>";
+                    
+                    $contador = 1;
+                    foreach($disco->getCanciones() as $cancion){
+                        echo "<p>" . $contador . ". " . $cancion . "</p>";
+                        $contador++;
+                    }
+
+                echo "</details>
+                    <div class='botones-accion'> 
+                        <a class='boton' href='Editar_disco.php?id=" . urlencode($disco->getID()) . "'>Editar</a> 
+                        <a class='boton' href='Eliminar_disco.php?id=" . urlencode($disco->getID()) . "'>Eliminar</a> 
+                    </div> 
+                </div>"; 
+        }
+        echo "</div>"; 
+    }
+
+    //OBTIENE EL ID DE LA ÚLTIMA CANCIÓN
+    function obtenerUltimoID_Disco($arrayJSON):int{
+        return end($arrayJSON)["id"];
+    }
+
+    function aniadirDisco(){
+
+    }
+
+    function editarDisco($idDisco){
+
+    }
+
+    function eliminarDisco($idDisco){
+        $rutaJSON = "./json/Discos.json";
+        $jsonString = file_get_contents($rutaJSON);
+        $discos = json_decode($jsonString, true);
+
+        foreach($discos as $key => $disco) {
+            if($disco['id'] == $idDisco) {
+                unset($discos[$key]);
+                
+                $jsonString = json_encode($discos, JSON_PRETTY_PRINT);
+                file_put_contents($rutaJSON, $jsonString);
+                
+                header("Location: Mostrar_discos.php");
+                exit();
+            }
+        }
+    }
+
+
 ?>
