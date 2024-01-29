@@ -138,10 +138,24 @@
                     "favorita": false,
                     "imagen": "",
                     "audio": "..\/assets\/canciones\/The Blanguage.mp3"
+                },
+                {
+                    "id": "6",
+                    "titulo": "Stop trying to be god",
+                    "artista": "Travis Scott",
+                    "colaboracion": [
+                        "James Blake",
+                        "Kid Cudi",
+                        "Stevie Wonder"
+                    ],
+                    "duracion": 5.39,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+                    "audio": "..\/assets\/canciones\/STOP TRYING TO BE GOD.mp3"
                 }
             ],
-            "Coche": [
-                {
+            "Coche": {
+                "0": {
                     "id": "19",
                     "titulo": "With Them",
                     "artista": "Young thug",
@@ -153,21 +167,7 @@
                     "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
                     "audio": "..\/assets\/canciones\/With Them.mp3"
                 },
-                {
-                    "id": "4",
-                    "titulo": "Sicko mode",
-                    "artista": "Travis Scott",
-                    "colaboracion": [
-                        "Drake",
-                        "Swae Lee",
-                        "Big Hawk"
-                    ],
-                    "duracion": 5.13,
-                    "favorita": false,
-                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
-                    "audio": "..\/assets\/canciones\/SICKO MODE.mp3"
-                },
-                {
+                "2": {
                     "id": "12",
                     "titulo": "Astrothunder",
                     "artista": "Travis Scott",
@@ -179,7 +179,7 @@
                     "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
                     "audio": "..\/assets\/canciones\/ASTROTHUNDER.mp3"
                 }
-            ]
+            }
         }
     },
     {
