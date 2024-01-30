@@ -14,12 +14,21 @@
         return $errores;
     }
 
-    //INSERTAR DATOS
-    function insertarDatos($dwes){
-        $resultado = $dwes->query("INSERT ");
+    function editarNumeroUnidadesTienda1($dwes){
+        $resultado = $dwes->query("UPDATE stock SET unidades=1 WHERE producto='3DSNG' and tienda=1");
 
         if($resultado == true){
-            print "<p>Se han insertado $dwes->affected_rows registros.</p>";
+            print "<p>Se han actualizado $dwes->affected_rows registros sobre unidades del stock en la tienda 1.</p>";
+        }else{
+            print "<p>No se ha realizado la operación correctamente.</p>";
+        }
+    }
+
+    function insertarProductoTienda3($dwes){
+        $resultado = $dwes->query("INSERT INTO stock (producto, tienda, unidades) VALUES ('3DSNG', 3, 1)");
+
+        if($resultado == true){
+            print "<p>Se ha insertado $dwes->affected_rows registros en el stock para la tienda 3.</p>";
         }else{
             print "<p>No se ha realizado la operación correctamente.</p>";
         }
@@ -35,7 +44,8 @@
         exit();
     }else{
         //Operaciones CRUD
-
+        editarNumeroUnidadesTienda1($dwes);
+        insertarProductoTienda3($dwes);
      
         //Cerrar conexión
         $dwes->close();

@@ -20,55 +20,44 @@
         exit();
     }else{
         //Operaciones CRUD
-
      
         //Cerrar conexión
         $dwes->close();
     }
 
-    //CONSULTAR DATOS
-    function consultarDatos($dwes){
-        $resultado = $dwes->query("SELECT * FROM stock;", MYSQLI_USE_RESULT);
+    function obtenerCodigosProductos($dwes){
+        $resultado = $dwes->query("SELECT cod FROM producto;", MYSQLI_USE_RESULT);
+        $productos = $resultado->fetch_array();
 
         if($resultado == false){
             print "<p>No se han recibido datos.</p>";
         }else{
-            $indice = 1;
+            $codigosProducto = array();
 
-            foreach($resultado as $fila){
-                echo "<p>Fila$indice: $fila</p>";
-                $indice++;
+            foreach($productos as $codigoProducto){
+                array_push($codigosProducto, $codigoProducto);
             }
         }
 
-        //Liberar los resultados obtenidos en memoria.
-        //$resultado->free();
+        return $codigosProducto;
     }
-
-    //INSERTAR DATOS
-    function insertarDatos($dwes){
-        $resultado = $dwes->query("");
-
-        if($resultado == true){
-            print "<p>Se han insertado $dwes->affected_rows registros.</p>";
-        }else{
-            print "<p>No se ha realizado la operación correctamente.</p>";
-        }
-    }
-
-    //ELIMINAR DATOS
-    function eliminarDatos($dwes){
-        $resultado = $dwes->query("DELETE FROM stock WHERE unidades=0;");
-
-        if($resultado == true){
-            print "<p>Se han eliminado $dwes->affected_rows registros.</p>";
-        }else{
-            print "<p>No se ha realizado la operación correctamente.</p>";
-        }
-    }
-
-    //Cambiar de conexión de base de datos
-    //$dwes->select_db("phpmyadmin");
-
-
 ?>
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ejercicio 6</title>
+    </head>
+    <body>
+        <select>
+            <?php
+                foreach(obtenerCodigosProductos($dwes) as $codigo){
+                    echo "<option value='$codigo'>$codigo</option>";
+                }
+            ?>
+        </select>
+    </body>
+</html>
+    
