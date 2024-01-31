@@ -1,5 +1,5 @@
 <?php 
-    $dwes = new mysqli('localhost', 'dwes', '000000', 'dwes');
+    $dwes = new mysqli('localhost', 'dwes', 'abc123.', 'dwes');
 
     //Comprobamos la conexión
     function comprobarConexion($dwes){    
@@ -29,8 +29,15 @@
 
             $informacionStock = obtenerStockProducto($dwes, $codigoProducto);
 
-            echo "<h2>Se ha encontrado el producto $codigoProducto en la tienda " . $informacionStock['tienda'] . "</h2>"
-            . "<h3>Hay " . $informacionStock['unidades'] . " unidades</h3>";
+            if(!empty($informacionStock)){
+                echo "<h2>Información del producto $codigoProducto:</h2>";
+    
+                foreach($informacionStock as $stock){
+                    echo "<p>En la tienda " . $stock['tienda'] . " hay " . $stock['unidades'] . " unidades.</p>";
+                }
+            }else{
+                echo "<p>No se encontraron registros para el producto $codigoProducto</p>";
+            }
         }
 
         //Cerrar conexión
@@ -38,7 +45,7 @@
     }
 
     function obtenerCodigosProductos($dwes){
-        $resultado = $dwes->query("SELECT cod FROM producto;", MYSQLI_USE_RESULT);
+        $resultado = $dwes->query("SELECT cod FROM producto;");
 
         if($resultado == false){
             print "<p>No se han recibido datos.</p>";
@@ -51,23 +58,25 @@
                 $codigosProductos[] = $fila["cod"];
             }
 
-            $resultado->close();
             return $codigosProductos;
         }
     }
 
     function obtenerStockProducto($dwes, $codigoProducto){
-        $resultado = $dwes->query("SELECT * FROM stock WHERE producto='$codigoProducto';", MYSQLI_USE_RESULT);
+        $resultado = $dwes->query("SELECT * FROM stock WHERE producto='$codigoProducto';");
 
         if($resultado == false){
             print "<p>No se han recibido datos.</p>";
             return array();
 
         }else{
-            $fila = $resultado->fetch_array();
+            $stocks = array();
 
-            $resultado->close();
-            return $fila;
+            while($fila = $resultado->fetch_array()){
+                $stocks[] = $fila;
+            }
+
+            return $stocks;
         }
     }
 ?>

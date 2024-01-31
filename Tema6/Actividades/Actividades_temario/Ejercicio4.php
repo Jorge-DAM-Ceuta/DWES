@@ -1,5 +1,5 @@
 <?php 
-    $dwes = new mysqli('localhost', 'dwes', '000000', 'dwes');
+    $dwes = new mysqli('localhost', 'dwes', 'abc123.', 'dwes');
 
     //Comprobamos la conexión
     function comprobarConexion($dwes){    
