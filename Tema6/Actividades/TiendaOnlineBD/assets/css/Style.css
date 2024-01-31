@@ -1,0 +1,25 @@
+.boton {
+    display: inline-block;
+    padding: 5px 10px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 97, 97);
+    border: 1px solid #000000;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.carrito{
+    float: right;
+    margin-right: 150px;
+    width: 200px;   
+}
+
+.botonCarrito{
+    display: inline-block;
+    padding: 5px 10px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 97, 97);
+    border: 1px solid #000000;
+    border-radius: 5px;
+}
