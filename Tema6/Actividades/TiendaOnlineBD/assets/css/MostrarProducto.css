@@ -1,0 +1,29 @@
+body{
+    text-align: center;
+}
+
+div {
+    width: 17vw;
+    padding: 20px;
+    text-align: center;
+    margin: 150px auto;
+    font-size: 16px;
+    border: 1px solid #ddd; 
+    background-color: #fff;
+
+    & img{
+        width: 10vw; 
+    }
+
+    & a{
+        display: block;
+        margin-top: 10px;
+        padding: 5px 10px;
+        background-color: rgb(255, 97, 97);
+        color: white;
+        border: 1px solid #000000;
+        border-radius: 5px;
+        text-decoration: none;
+    }    
+}
+

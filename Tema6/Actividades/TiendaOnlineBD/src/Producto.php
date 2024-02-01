@@ -1,6 +1,6 @@
 <?php
     include_once("./Funciones.inc.php");
-    $productos = decodificarJSON();
+    $productos = obtenerProductos();
 ?>
 
 <!DOCTYPE html>
@@ -8,18 +8,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../assets/css/Style.css">
+        <link rel="stylesheet" href="../assets/css/MostrarProducto.css">
         <title>Producto</title>
-        <style>
-            body {
-                background-image: url("background.jpg");
-                background-size: 100% 200%;
-                background-repeat: no-repeat;
-                text-align: center;
-                margin: 0 auto;
-                padding-top: 250px;
-            }
-        </style>
     </head>
     <body>
         <?php
