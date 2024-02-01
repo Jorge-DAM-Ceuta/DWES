@@ -11,6 +11,8 @@
         $producto = mostrarDetalles($productos);
     } 
 
+    /*Además de comprobar si se ha enviado el formulario comprobamos si los valores de los input contienen algo, 
+    en ese caso se setea el valor correspondiente al objeto. En caso contrario mantendrá el valor que ya tiene.*/
     if(isset($_POST["editar"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
 
         if(isset($_POST['nombre'])){
@@ -25,6 +27,7 @@
             $producto->setPrecio($_POST['precio'] . "€");
         }
 
+        //Se sube la imagen a la ruta determinada y si el proceso es correcto seteamos el valor con la ruta de la imagen.
         if(isset($_FILES['imagen']) && $_FILES['imagen']['error'] == UPLOAD_ERR_OK){
             $nombreArchivo = $_FILES['imagen']['name'];
             $rutaDestino = "../assets/images/" . $nombreArchivo;
@@ -36,35 +39,6 @@
 
         editarProducto($nombreProducto, $producto);
     }
+
+    include_once("../templates/EditarProductoForm.inc.php");
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../assets/css/EditarProducto.css">
-        <title>Editar producto</title>
-    </head>
-    <body>
-        <form action="" method='POST' enctype='multipart/form-data'>
-            <label class="nombre">Nombre: <input type='text' name='nombre' value='<?php echo $nombreProducto; ?>'></label>
-            
-            <br/>
-            
-            <label class="descripcion">Descripción: <input type='text' name='descripcion' value='<?php echo $producto->getDescripcion(); ?>'></label>
-            
-            <br/>
-            
-            <label class="precio">Precio: <input type='number' step='0.01' name='precio' value='<?php echo (float)$producto->getPrecio(); ?>'></label>
-            
-            <br/>
-
-            <label>Cambiar imagen: <input type='file' name='imagen'></label>
-            
-            <br/>
-
-            <input type='submit' name='editar' value='Editar información'>
-        </form>
-    </body>
-</html>

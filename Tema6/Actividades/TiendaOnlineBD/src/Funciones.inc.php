@@ -4,13 +4,12 @@
 
     /*
         FALTA: 
-            Introducir comentarios
             Usar fuente descargada / google fonts
-            Usar templates: Formularios CRUD
-
     */
 
 //USUARIOS
+
+    //Esta función recibe un objeto usuario.
     function registrarUsuario($usuario){
         $conexionBD = new mysqli("localhost", "root", "", "tiendaonline");
 
@@ -50,6 +49,7 @@
         }
     }
 
+    //Esta función recibe un objeto usuario.
     function iniciarSesion($usuario){
         $conexionBD = new mysqli("localhost", "root", "", "tiendaonline");
     
@@ -69,41 +69,33 @@
             if(password_verify($usuario->getPassword(), $registroUsuario['password']) == true){
                 session_start();
     
+                //Se crea el usuario en la sesión con el username y el role.
                 $_SESSION['usuario'] = [
                     'username' => $registroUsuario['username'],
                     'role' => $registroUsuario['role']
                 ];
     
+                //Se cierra la conexión de la base de datos y se redirige al index.
                 $conexionBD->close();
 
                 header("Location: Index.php");
                 die();
 
             }else{
-                // Cierre de la conexión y mensaje de error.
+                //Se cierra la conexión de la base de datos y muestra un mensaje de error.
                 $conexionBD->close();
                 echo "<h2 style='color: red;'>La contraseña no es correcta</h2>";
             }
         }else{
-            // Cierre de la conexión y mensaje de error.
+            //Se cierra la conexión de la base de datos y muestra un mensaje de error.
             $conexionBD->close();
             echo "<h2 style='color: red;'>No se ha podido encontrar el usuario</h2>";
         }
     }
 
 //TIENDA
-/*
-ADMIN:
-    INDEX -> MOSTRAR PRODUCTOS
-    PRODUCTO -> 
-        MOSTRAR PRODUCTO
-        INSERTAR PRODUCTO
-        EDITAR PRODUCTO
-        ELIMINAR PRODUCTO
 
-CLIENTE:
-*/
-
+    //Se obtienen los productos de la base de datos mediante una consulta.
     function obtenerProductos(){
         $conexionBD = new mysqli("localhost", "root", "", "tiendaonline");
     
@@ -119,10 +111,12 @@ CLIENTE:
         if($consultaProductos == true){
             $arrayProductos = array();
 
+            //Se crea un objeto Producto con los datos de cada registro de la base de datos y se añade al array.
             while($producto = $consultaProductos->fetch_assoc()){
                 array_push($arrayProductos, new Producto($producto["nombre"], $producto["descripcion"], $producto["precio"], $producto["imagen"]));
             }
             
+            //Se cierra la conexión y se devuelve el array con los productos.
             $conexionBD->close();
             return $arrayProductos;
         }else{
@@ -130,10 +124,9 @@ CLIENTE:
         }
     }
     
-    /*Esta función también recibe el array de productos y mediante un enlace se obtiene el 
-    nombre del producto en específico. Se recorre el array y encuentra la coincidencia con
-    dicho nombre para mostrar toda su información en una nueva instancia. Este solo 
-    incluirá un enlace para añadirlo al carrito.*/
+    /*Esta función recibe el array de productos y mediante un enlace se obtiene el nombre del producto en específico. 
+    Se recorre el array y encuentra la coincidencia con dicho nombre para mostrar toda su información en una nueva 
+    instancia. Incluyendo un enlace para volver al index y otro para añadirlo al carrito.*/
     function mostrarDetalles($productos){
         foreach($productos as $producto){
             $nombreProducto = $producto->getNombre();
@@ -156,6 +149,8 @@ CLIENTE:
     }
 
 //FUNCIONES DE ADMINISTRADOR
+
+    //Obtiene el array de productos y los muestra con las funciones de administrador mediante dos a href.
     function mostrarProductosAdmin($productos){
         echo "<div class='contenedor-productos'>";
         
@@ -183,6 +178,7 @@ CLIENTE:
         echo "</div>";
     }
 
+    //Se recibe un objeto Producto con los datos obtenidos del formulario.
     function insertarProducto($producto){
         $conexionBD = new mysqli("localhost", "root", "", "tiendaonline");
     
@@ -192,19 +188,22 @@ CLIENTE:
             $conexionBD->close();
         }
     
-        //Obtenemos los productos de la base de datos
+        //Se realiza la operación INSERT con los datos del producto.
         $insertarProducto = $conexionBD->query("INSERT INTO producto (`nombre`, `descripcion`, `precio`, `imagen`) VALUES ('" . $producto->getNombre() . "','" . $producto->getDescripcion() . "','" . $producto->getPrecio() . "','" . $producto->getImagen() . "');");
     
         if($insertarProducto == true){
+            //Se cierra la conexión de la base de datos y se redirige al index.
             $conexionBD->close();
             header("Location: Index.php");
             die();
-        }else{
-            echo "<h2 style='color: red;'>No se ha podido añadir el producto, inténtalo de nuevo.</h2>";
+        }else{            
+            //Se cierra la conexión y se muestra un mensaje de error.
             $conexionBD->close();
+            echo "<h2 style='color: red;'>No se ha podido añadir el producto, inténtalo de nuevo.</h2>";
         }
     }
 
+    //Se recibe el nombre del producto y el objeto producto con los nuevos valores obtenidos del formulario.
     function editarProducto($nombreProducto, $producto){
         $conexionBD = new mysqli("localhost", "root", "", "tiendaonline");
     
@@ -214,18 +213,22 @@ CLIENTE:
             $conexionBD->close();
         }
 
+        //Se realiza la operación UPDATE con los nuevos datos para el producto al que pertenece el nombre obtenido.
         $editarProducto = $conexionBD->query("UPDATE producto SET `nombre`='" . $producto->getNombre() . "',`descripcion`='" . $producto->getDescripcion() . "',`precio`='" . $producto->getPrecio() . "',`imagen`='" . $producto->getImagen() . "' WHERE nombre='$nombreProducto';");
 
         if($editarProducto == true){
+            //Se cierra la conexión de la base de datos y se redirige al index.
             $conexionBD->close();
             header("Location: Index.php");
             die();
         }else{
-            echo "<h2 style='color: red;'>No se ha podido editar el producto, inténtalo de nuevo.</h2>";
+            //Se cierra la conexión y se muestra un mensaje de error.
             $conexionBD->close();
+            echo "<h2 style='color: red;'>No se ha podido editar el producto, inténtalo de nuevo.</h2>";
         }
     }
 
+    //Se recibe el nombre del producto a eliminar.
     function eliminarProducto($nombreProducto){
         $conexionBD = new mysqli("localhost", "root", "", "tiendaonline");
     
@@ -235,19 +238,23 @@ CLIENTE:
             $conexionBD->close();
         }
 
+        //Se realiza la operación Delete para el nombre obtenido.
         $eliminarProducto = $conexionBD->query("DELETE FROM producto WHERE nombre='$nombreProducto';");
 
         if($eliminarProducto == true){
+            //Se cierra la conexión de la base de datos y se redirige al index.
             $conexionBD->close();
             header("Location: Index.php");
             die();
         }else{
-            echo "<h2 style='color: red;'>No se ha podido eliminar el producto, inténtalo de nuevo.</h2>";
+            //Se cierra la conexión y se muestra un mensaje de error.
             $conexionBD->close();
+            echo "<h2 style='color: red;'>No se ha podido eliminar el producto, inténtalo de nuevo.</h2>";
         }
     }
  
 //FUNCIONES DE CLIENTES
+
     /*Esta función que recibe el array de productos se encarga de recorrer mediante un foreach
     cada producto y mostrarlo mediante una estructura HTML en un div. Además de añadir dos 
     enlaces para cada producto que se encarguen de mostrar los detalles o añadir al carrito.*/
@@ -259,7 +266,7 @@ CLIENTE:
 
             echo "<div class='producto'>
                     <a class='visualizar' href='Producto.php?nombre=" . urlencode($nombreProducto) . "'>
-                        <img src='" . $producto->getImagen() . "' width='200' height='200'>
+                        <img src='" . $producto->getImagen() . "'/>
                         <br/>
                         <strong>" . $nombreProducto . "</strong>
                     </a>
@@ -293,7 +300,7 @@ CLIENTE:
                     foreach ($productos as $producto) {
                         if ($producto->getNombre() == $nombreProducto) {
                             echo "<div class='producto-carrito' style='margin-left: 3vw; margin-top: 2vh;'>
-                                    <img src='" . $producto->getImagen() . "' width='80' height='80'>
+                                    <img src='" . $producto->getImagen() . "' width='100' height='140'>
                                     <br/>
                                     <strong>" . $producto->getNombre() . "</strong>
                                     <br/>
@@ -301,11 +308,11 @@ CLIENTE:
                                     <br/>
                                 </div>
                                 <div>
-                                    <a class='botonCarrito' style='margin-left: 3vw; margin-bottom: 1.5vh; text-decoration-line: none; font-size: 1.25em;' href='EliminarUnidadCarrito.php?nombre=" . urlencode($nombreProducto) . "'>-</a>
+                                    <a class='botonCarrito1' href='EliminarUnidadCarrito.php?nombre=" . urlencode($nombreProducto) . "'>-</a>
                                     <span>&nbsp;</span>
                                     $cantidad
                                     <span>&nbsp;</span>
-                                    <a class='botonCarrito' style='margin-bottom: 1.5vh; text-decoration-line: none; font-size: 1.15em;' href='AniadirUnidadCarrito.php?nombre=" . urlencode($nombreProducto) . "'>+</a>
+                                    <a class='botonCarrito2' href='AniadirUnidadCarrito.php?nombre=" . urlencode($nombreProducto) . "'>+</a>
                                 </div>
                                 <br/>
                             ";

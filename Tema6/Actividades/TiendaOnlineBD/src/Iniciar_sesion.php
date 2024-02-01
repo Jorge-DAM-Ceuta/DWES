@@ -2,28 +2,36 @@
     include_once("./Funciones.inc.php");
     include_once("./Clases/Usuario.php");
 
+    //Se inicia la sesión
     session_start();
 
+    //Si la sesión está iniciada y contiene el valor usuario redirige al index.
     if(isset($_SESSION['usuario']) && $_SESSION['usuario']){
         header("Location: Index.php");
         exit();
     }
 
+    //Si se ha pulsado el botón iniciar sesión se obtiene el username y password.
     if(isset($_POST["iniciar"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
         $username = $_POST["username"];
         $password = $_POST["password"];
 
-        $usuario = new Usuario($username, $password, "Client");
+        //Se crea un objeto Usuario, el role no importa porque se obtiene de la base de datos, se le pasa una cadena vacía.
+        $usuario = new Usuario($username, $password, "");
         
+        //Se inicia la sesión obteniendo las credenciales de la base de datos.
         iniciarSesion($usuario);
     }
 
+    //Si se ha pulsado el botón registrar también se obtiene el username y password.
     if(isset($_POST["registrar"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
         $username = $_POST["username"];
         $password = $_POST["password"];
 
+        //En este caso se crea un objeto Usuario con el role Client.
         $usuario = new Usuario($username, $password, "Client");
 
+        //Se registra el usuario en la base de datos.
         registrarUsuario($usuario);
     }
 ?>

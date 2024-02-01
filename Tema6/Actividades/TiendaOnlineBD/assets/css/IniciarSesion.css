@@ -1,13 +1,25 @@
+@font-face {
+    font-family: "Honk";
+    src: url("../fonts/Honk-Regular.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: "SingleDay";
+    src: url("../fonts/SingleDay-Regular.ttf") format('truetype');
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     text-align: center;
     margin: 0;
     padding: 50px;
+    font-family: 'SingleDay', sans-serif;
 }
 
 h1 {
     color: #333;
+    font-family: 'Honk', sans-serif;
 }
 
 form{
@@ -42,6 +54,7 @@ form{
         padding: 10px 15px;
         cursor: pointer;
         font-size: 16px;
+        font-family: 'SingleDay', sans-serif;
     }
 
     & input[type="submit"]:hover{

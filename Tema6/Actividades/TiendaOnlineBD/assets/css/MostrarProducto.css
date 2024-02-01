@@ -1,5 +1,11 @@
+@font-face {
+    font-family: "SingleDay";
+    src: url("../fonts/SingleDay-Regular.ttf") format('truetype');
+}
+
 body{
     text-align: center;
+    font-family: "SingleDay", sans-serif;
 }
 
 div {
