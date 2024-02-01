@@ -2,6 +2,14 @@
     include_once("./Clases/Usuario.php");
     include_once("./Clases/Producto.php");
 
+    /*
+        FALTA: 
+            Introducir comentarios
+            Usar fuente descargada / google fonts
+            Usar templates: Formularios CRUD
+
+    */
+
 //USUARIOS
     function registrarUsuario($usuario){
         $conexionBD = new mysqli("localhost", "root", "", "tiendaonline");
