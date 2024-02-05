@@ -113,7 +113,7 @@
 
             //Se crea un objeto Producto con los datos de cada registro de la base de datos y se añade al array.
             while($producto = $consultaProductos->fetch_assoc()){
-                array_push($arrayProductos, new Producto($producto["nombre"], $producto["descripcion"], $producto["precio"], $producto["imagen"]));
+                array_push($arrayProductos, new Producto($producto["nombre"], $producto["descripcion"], $producto["precio"], $producto["idimagen"]));
             }
             
             //Se cierra la conexión y se devuelve el array con los productos.
@@ -127,26 +127,47 @@
     /*Esta función recibe el array de productos y mediante un enlace se obtiene el nombre del producto en específico. 
     Se recorre el array y encuentra la coincidencia con dicho nombre para mostrar toda su información en una nueva 
     instancia. Incluyendo un enlace para volver al index y otro para añadirlo al carrito.*/
-    function mostrarDetalles($productos){
+    function mostrarDetalles($productos) {
         foreach($productos as $producto){
             $nombreProducto = $producto->getNombre();
-
+    
             if($nombreProducto == $_GET['nombre']){
+                $conexionBD = new mysqli("localhost", "root", "", "tiendaonline");
+    
+                //Verifica si hay un error en la conexión.
+                if($conexionBD->connect_error){
+                    echo "Error de conexión: " . $conexionBD->connect_error;
+                    $conexionBD->close();
+                    die();
+                }
+    
+                //Realiza una consulta para obtener la imagen.
+                $consultaImagen = $conexionBD->query("SELECT imagen FROM imagen WHERE id = " . $producto->getImagen() . ";");
+                
+                if($consultaImagen == true){
+                    $fila = $consultaImagen->fetch_assoc();
+                    $imagen = $fila['imagen'];
+                }
+
+                //Muestra los detalles del producto con la imagen.
                 echo "<div>
-                        <img src='" . $producto->getImagen() . "'/>
+                        <img src='data:image/jpeg;base64," . base64_encode($imagen) . "'/>
                         <h1>" . $producto->getNombre() . "</h1>
                         <p>
                             Descripción: " . $producto->getDescripcion() . "</p>
                             Precio: " . $producto->getPrecio() . 
                         "</p>                 
                         <a href='Index.php'>Volver</a>
-                        <a href='Comprar.php?nombre=" . urlencode($nombreProducto) . "'>Comprar</a>
+                        <a href='AniadirUnidadCarrito.php?nombre=" . urlencode($nombreProducto) . "'>Comprar</a>
                     </div>";
 
+                //Cierra la conexión a la base de datos.
+                $conexionBD->close();
+                
                 return $producto;
             }
         }
-    }
+    }    
 
 //FUNCIONES DE ADMINISTRADOR
 
@@ -156,15 +177,32 @@
         
         foreach($productos as $producto){
             $nombreProducto = $producto->getNombre();
-    
+            
+            $conexionBD = new mysqli("localhost", "root", "", "tiendaonline");
+
+            //Verifica si hay un error en la conexión.
+            if($conexionBD->connect_error){
+                echo "Error de conexión: " . $conexionBD->connect_error;
+                $conexionBD->close();
+                die();
+            }
+
+            //Realiza una consulta para obtener la imagen del producto mediante el id de la imagen.
+            $consultaImagen = $conexionBD->query("SELECT imagen FROM imagen WHERE id = " . $producto->getImagen() . ";");
+            
+            if($consultaImagen == true){
+                $fila = $consultaImagen->fetch_assoc();
+                $imagen = $fila['imagen'];
+            }
+             
             echo "<div class='producto'>
                     <a class='visualizar' href='Producto.php?nombre=" . urlencode($nombreProducto) . "'>
-                        <img src='" . $producto->getImagen() . "'/>
+                        <img src='data:image/jpeg;base64," . base64_encode($imagen) . "'/>
                         <br/>
                         <strong>" . $nombreProducto . "</strong>
                     </a>
     
-                    <br/>
+                    <p>" . $producto->getDescripcion() . "</p>
     
                     " . $producto->getPrecio() . 
     
@@ -173,13 +211,47 @@
                     <a class='boton' href='EditarProducto.php?nombre=" . urlencode($nombreProducto) . "'>Editar</a>
                     <a class='boton' href='EliminarProducto.php?nombre=" . urlencode($nombreProducto) . "'>Eliminar</a>
                 </div>";
+            
+            
+            $conexionBD->close();
+
         }
         
         echo "</div>";
     }
 
+    function insertarImagen($producto){
+        $conexionBD = new mysqli("localhost", "root", "", "tiendaonline");
+    
+        //Si hay un error se muestra el error y se cierra la conexión.
+        if($conexionBD->connect_error){
+            echo "Error de conexión: " . $conexionBD->connect_error;
+            $conexionBD->close();
+        }
+    
+        //Se realiza la operación INSERT con el contenido de la imagen almacenado en el objeto $producto.
+        $insertarImagen = $conexionBD->query("INSERT INTO imagen (`imagen`) VALUES ('" . $producto->getImagen() . "');");
+    
+        if($insertarImagen == true){
+            //Se hace una consulta para obtener el último id generado.
+            $resultado = $conexionBD->query("SELECT LAST_INSERT_ID() as last_id;");
+            $fila = $resultado->fetch_assoc();
+            $id = $fila["last_id"];
+
+            //Se cierra la conexión de la base de datos
+            $conexionBD->close();
+
+            //Llamamos a insertar producto con el id de imagen que se ha insertado.
+            insertarProducto($producto, $id);
+        }else{            
+            //Se cierra la conexión y se muestra un mensaje de error.
+            $conexionBD->close();
+            echo "<h2 style='color: red;'>No se ha podido añadir la imagen, inténtalo de nuevo.</h2>";
+        }
+    }
+
     //Se recibe un objeto Producto con los datos obtenidos del formulario.
-    function insertarProducto($producto){
+    function insertarProducto($producto, $ultimoID){
         $conexionBD = new mysqli("localhost", "root", "", "tiendaonline");
     
         //Si hay un error se muestra el error y se cierra la conexión.
@@ -189,7 +261,7 @@
         }
     
         //Se realiza la operación INSERT con los datos del producto.
-        $insertarProducto = $conexionBD->query("INSERT INTO producto (`nombre`, `descripcion`, `precio`, `imagen`) VALUES ('" . $producto->getNombre() . "','" . $producto->getDescripcion() . "','" . $producto->getPrecio() . "','" . $producto->getImagen() . "');");
+        $insertarProducto = $conexionBD->query("INSERT INTO producto (`nombre`, `descripcion`, `precio`, `idimagen`) VALUES ('" . $producto->getNombre() . "','" . $producto->getDescripcion() . "','" . $producto->getPrecio() . "','" . $ultimoID . "');");
     
         if($insertarProducto == true){
             //Se cierra la conexión de la base de datos y se redirige al index.
@@ -213,19 +285,26 @@
             $conexionBD->close();
         }
 
-        //Se realiza la operación UPDATE con los nuevos datos para el producto al que pertenece el nombre obtenido.
-        $editarProducto = $conexionBD->query("UPDATE producto SET `nombre`='" . $producto->getNombre() . "',`descripcion`='" . $producto->getDescripcion() . "',`precio`='" . $producto->getPrecio() . "',`imagen`='" . $producto->getImagen() . "' WHERE nombre='$nombreProducto';");
+        // Obtén el ID de la imagen actual asociada al producto.
+        $consultaIdImagen = $conexionBD->query("SELECT idimagen FROM producto WHERE nombre='$nombreProducto';");
+        $filaIdImagen = $consultaIdImagen->fetch_assoc();
+        $idImagen = $filaIdImagen['idimagen'];
 
-        if($editarProducto == true){
+        //Se realiza la operación UPDATE al producto con los nuevos datos para el producto al que pertenece el nombre obtenido.
+        $editarProducto = $conexionBD->query("UPDATE producto SET `nombre`='" . $producto->getNombre() . "',`descripcion`='" . $producto->getDescripcion() . "',`precio`='" . $producto->getPrecio() . "' WHERE nombre='$nombreProducto';");
+        $actualizarImagen = $conexionBD->query("UPDATE imagen SET `imagen`='" . $producto->getImagen() . "' WHERE id='$idImagen';");
+
+        if($editarProducto == true && $actualizarImagen == true){
             //Se cierra la conexión de la base de datos y se redirige al index.
             $conexionBD->close();
-            header("Location: Index.php");
-            die();
         }else{
             //Se cierra la conexión y se muestra un mensaje de error.
             $conexionBD->close();
             echo "<h2 style='color: red;'>No se ha podido editar el producto, inténtalo de nuevo.</h2>";
         }
+
+        header("Location: Index.php");
+        die();
     }
 
     //Se recibe el nombre del producto a eliminar.
@@ -264,9 +343,26 @@
         foreach ($productos as $producto) {
             $nombreProducto = $producto->getNombre();
 
+            $conexionBD = new mysqli("localhost", "root", "", "tiendaonline");
+
+            //Verifica si hay un error en la conexión.
+            if($conexionBD->connect_error){
+                echo "Error de conexión: " . $conexionBD->connect_error;
+                $conexionBD->close();
+                die();
+            }
+
+            //Realiza una consulta para obtener la imagen del producto mediante el id de la imagen.
+            $consultaImagen = $conexionBD->query("SELECT imagen FROM imagen WHERE id = " . $producto->getImagen() . ";");
+            
+            if($consultaImagen == true){
+                $fila = $consultaImagen->fetch_assoc();
+                $imagen = $fila['imagen'];
+            }
+
             echo "<div class='producto'>
                     <a class='visualizar' href='Producto.php?nombre=" . urlencode($nombreProducto) . "'>
-                        <img src='" . $producto->getImagen() . "'/>
+                        <img src='data:image/jpeg;base64," . base64_encode($imagen) . "'/>
                         <br/>
                         <strong>" . $nombreProducto . "</strong>
                     </a>
@@ -280,6 +376,7 @@
                     <a class='boton' href='Producto.php?nombre=" . urlencode($nombreProducto) . "'>Detalle</a>
                     <a class='boton' href='AniadirUnidadCarrito.php?nombre=" . urlencode($nombreProducto) . "'>Comprar</a>
                 </div>";
+            
         }
         
         echo "</div>";
@@ -298,9 +395,26 @@
                 foreach ($carrito as $nombreProducto => $detalles) {
                     $cantidad = $detalles['cantidad'];
                     foreach ($productos as $producto) {
+                        $conexionBD = new mysqli("localhost", "root", "", "tiendaonline");
+
+                        //Verifica si hay un error en la conexión.
+                        if($conexionBD->connect_error){
+                            echo "Error de conexión: " . $conexionBD->connect_error;
+                            $conexionBD->close();
+                            die();
+                        }
+
+                        //Realiza una consulta para obtener la imagen del producto mediante el id de la imagen.
+                        $consultaImagen = $conexionBD->query("SELECT imagen FROM imagen WHERE id = " . $producto->getImagen() . ";");
+                        
+                        if($consultaImagen == true){
+                            $fila = $consultaImagen->fetch_assoc();
+                            $imagen = $fila['imagen'];
+                        }
+
                         if ($producto->getNombre() == $nombreProducto) {
                             echo "<div class='producto-carrito' style='margin-left: 3vw; margin-top: 2vh;'>
-                                    <img src='" . $producto->getImagen() . "' width='100' height='140'>
+                                    <img src='data:image/jpeg;base64," . base64_encode($imagen) . "' width='100' height='140'>
                                     <br/>
                                     <strong>" . $producto->getNombre() . "</strong>
                                     <br/>

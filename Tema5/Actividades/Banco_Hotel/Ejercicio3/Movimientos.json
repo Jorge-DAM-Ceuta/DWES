@@ -1,6 +1,6 @@
 [
     {
-        "saldoActual": 100,
+        "saldoActual": 93,
         "movimientos": [
             {
                 "tipo": "Ingreso",
@@ -61,6 +61,24 @@
                 "cantidad": 10,
                 "concepto": "tataa",
                 "fecha": "13\/1\/2024"
+            },
+            {
+                "tipo": "Ingreso",
+                "cantidad": 9,
+                "concepto": "Arreglo",
+                "fecha": "2\/2\/2024"
+            },
+            {
+                "tipo": "Retiro",
+                "cantidad": 9,
+                "concepto": "saedas",
+                "fecha": "2\/2\/2024"
+            },
+            {
+                "tipo": "Retiro",
+                "cantidad": 7,
+                "concepto": "saedas",
+                "fecha": "2\/2\/2024"
             }
         ]
     }

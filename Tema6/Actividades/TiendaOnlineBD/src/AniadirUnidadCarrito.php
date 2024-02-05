@@ -30,7 +30,7 @@
                 setcookie('carrito', $carritoJson, time() + 100000 * 60);
             
                 //Se redirige a la pestaña principal.
-                header("Location: ./Index.php");
+                header("Location: Index.php");
                 exit();
             }
         ?>

@@ -27,13 +27,16 @@
             $producto->setPrecio($_POST['precio'] . "€");
         }
 
-        //Se sube la imagen a la ruta determinada y si el proceso es correcto seteamos el valor con la ruta de la imagen.
-        if(isset($_FILES['imagen']) && $_FILES['imagen']['error'] == UPLOAD_ERR_OK){
-            $nombreArchivo = $_FILES['imagen']['name'];
-            $rutaDestino = "../assets/images/" . $nombreArchivo;
+        //Se obtiene el contenido de la imagen y se almacena en el objeto $producto.
+        if(isset($_FILES['imagen'])){
+            $check = getimagesize($_FILES["imagen"]["tmp_name"]);
+            
+            if($check !== false){
+                $image = $_FILES['imagen']['tmp_name'];
+                $imgContent = addslashes(file_get_contents($image));
 
-            if(move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)){
-                $producto->setImagen($rutaDestino);
+                //Se añade el contenido de la imagen al producto.
+                $producto->setImagen($imgContent);
             }
         }
 
