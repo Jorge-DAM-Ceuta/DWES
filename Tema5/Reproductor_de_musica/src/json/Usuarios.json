@@ -152,6 +152,43 @@
                     "favorita": false,
                     "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
                     "audio": "..\/assets\/canciones\/STOP TRYING TO BE GOD.mp3"
+                },
+                {
+                    "id": "9",
+                    "titulo": "Wake up",
+                    "artista": "Travis Scott",
+                    "colaboracion": [
+                        "The Weekend"
+                    ],
+                    "duracion": 3.52,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+                    "audio": "..\/assets\/canciones\/WAKE UP.mp3"
+                },
+                {
+                    "id": "13",
+                    "titulo": "Yosemite",
+                    "artista": "Travis Scott",
+                    "colaboracion": [
+                        "Gunna",
+                        "NAV"
+                    ],
+                    "duracion": 2.3,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+                    "audio": "..\/assets\/canciones\/YOSEMITE.mp3"
+                },
+                {
+                    "id": "24",
+                    "titulo": "Worth It",
+                    "artista": "Young thug",
+                    "colaboracion": [
+                        ""
+                    ],
+                    "duracion": 3.29,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
+                    "audio": "..\/assets\/canciones\/Worth It.mp3"
                 }
             ],
             "Coche": {
