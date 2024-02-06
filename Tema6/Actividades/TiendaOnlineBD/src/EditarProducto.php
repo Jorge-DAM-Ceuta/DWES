@@ -9,7 +9,7 @@
     if(isset($_GET['nombre'])){
         //Mostramos los detalles y obtenemos el producto por su nombre.
         $producto = mostrarDetalles($productos);
-    } 
+    }
 
     /*Además de comprobar si se ha enviado el formulario comprobamos si los valores de los input contienen algo, 
     en ese caso se setea el valor correspondiente al objeto. En caso contrario mantendrá el valor que ya tiene.*/

@@ -1,12 +1,7 @@
 <?php
     include_once("./Clases/Usuario.php");
     include_once("./Clases/Producto.php");
-
-    /*
-        FALTA: 
-            Usar fuente descargada / google fonts
-    */
-
+    
 //USUARIOS
 
     //Esta función recibe un objeto usuario.
@@ -144,19 +139,17 @@
                 //Realiza una consulta para obtener la imagen.
                 $consultaImagen = $conexionBD->query("SELECT imagen FROM imagen WHERE id = " . $producto->getImagen() . ";");
                 
-                if($consultaImagen == true){
+                if($consultaImagen == true  && isset($consultaImagen)){
                     $fila = $consultaImagen->fetch_assoc();
-                    $imagen = $fila['imagen'];
+                    $imagen = $fila['imagen'] != null ? $fila['imagen'] : "";
                 }
 
                 //Muestra los detalles del producto con la imagen.
                 echo "<div>
                         <img src='data:image/jpeg;base64," . base64_encode($imagen) . "'/>
                         <h1>" . $producto->getNombre() . "</h1>
-                        <p>
-                            Descripción: " . $producto->getDescripcion() . "</p>
-                            Precio: " . $producto->getPrecio() . 
-                        "</p>                 
+                        <p>Descripción: " . $producto->getDescripcion() . "</p>
+                        <p>Precio: " . $producto->getPrecio() . "</p>                 
                         <a href='Index.php'>Volver</a>
                         <a href='AniadirUnidadCarrito.php?nombre=" . urlencode($nombreProducto) . "'>Comprar</a>
                     </div>";
@@ -192,7 +185,7 @@
             
             if($consultaImagen == true){
                 $fila = $consultaImagen->fetch_assoc();
-                $imagen = $fila['imagen'];
+                $imagen = isset($fila) && $fila != null ? $fila['imagen'] : "";
             }
              
             echo "<div class='producto'>
@@ -303,6 +296,7 @@
             echo "<h2 style='color: red;'>No se ha podido editar el producto, inténtalo de nuevo.</h2>";
         }
 
+        ob_start();
         header("Location: Index.php");
         die();
     }
@@ -355,9 +349,9 @@
             //Realiza una consulta para obtener la imagen del producto mediante el id de la imagen.
             $consultaImagen = $conexionBD->query("SELECT imagen FROM imagen WHERE id = " . $producto->getImagen() . ";");
             
-            if($consultaImagen == true){
+            if($consultaImagen == true && isset($consultaImagen)){
                 $fila = $consultaImagen->fetch_assoc();
-                $imagen = $fila['imagen'];
+                $imagen = isset($fila) && $fila != null ? $fila['imagen'] : "";
             }
 
             echo "<div class='producto'>
@@ -409,7 +403,7 @@
                         
                         if($consultaImagen == true){
                             $fila = $consultaImagen->fetch_assoc();
-                            $imagen = $fila['imagen'];
+                            $imagen = isset($fila) && $fila != null ? $fila['imagen'] : "";
                         }
 
                         if ($producto->getNombre() == $nombreProducto) {
