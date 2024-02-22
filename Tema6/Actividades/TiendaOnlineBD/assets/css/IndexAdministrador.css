@@ -73,10 +73,10 @@ h1{
 .contenedor-productos {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    margin-top: 220px;
-    margin-left: 15vw;
-    margin-right: 15vw;
+    justify-content: center;
+    width: 90vw;
+    margin: 0 auto;
+    margin-top: 20vh;
 }
 
 .producto {
