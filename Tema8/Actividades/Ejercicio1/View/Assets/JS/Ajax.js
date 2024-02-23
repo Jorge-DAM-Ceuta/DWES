@@ -1,48 +1,62 @@
-function loadJSON(){
-    var movimientosJSON = "./View/Assets/JSON/Movimientos.json";
-    var http_request = new XMLHttpRequest();
-    
-    try{
-       // Opera 8.0+, Firefox, Chrome, Safari
-       http_request = new XMLHttpRequest();
-    }catch(error){
-       // Internet Explorer Browsers
-       try{
-          http_request = new ActiveXObject("Msxml2.XMLHTTP");  
-       }catch(error){
-          try{
-             http_request = new ActiveXObject("Microsoft.XMLHTTP");
-          }catch(error){
-            // Something went wrong
-            alert("Your browser broke!");
-            return false;
-          }
-            
-       }
-    }
-    
-    http_request.onreadystatechange = function(){
-       if(http_request.readyState == 4){
-          // Javascript function JSON.parse to parse JSON data
-          var jsonObj = JSON.parse(http_request.responseText);
+function loadJSON() {
+   // Obtenemos el fichero JSON.
+   var movimientosJSON = "./View/Assets/JSON/Movimientos.json";
 
-          // jsonObj variable now contains the data structure and can
-          // be accessed as jsonObj.name and jsonObj.country.
-          let movimientoContainer = document.getElementById("movimientos");
+   fetch(movimientosJSON)
+       .then(response => {
+           if (!response.ok) {
+               throw new Error("Error al cargar el archivo JSON");
+           }
+           return response.json();
+       })
+       .then(jsonArray => {
+           let movimientoContainer = document.getElementById("movimientos");
+           console.log(jsonArray);
 
-          console.log(movimientoContainer);
-          console.log(jsonObj[0]["movimientos"]);
-       }
-    }
-    
-    http_request.open("GET", movimientosJSON, true);
-    http_request.send();
+           // Verificar si el array de movimientos está definido y es un array
+           if (Array.isArray(jsonArray[0]?.movimientos)) {
+               // Llamada a la función cargarMovimientos con el array de movimientos obtenido
+               cargarMovimientos(jsonArray[0].movimientos);
+           } else {
+               console.error("El array de movimientos no está definido o no es un array.");
+           }
+       })
+       .catch(error => {
+           console.error(error.message);
+       });
 }
 
-function ingresarDinero(){
+function cargarMovimientos(movimientos) {
+   let movimientoContainer = document.getElementById("movimientos");
+   movimientoContainer.innerHTML = ""; // Limpiar el contenedor antes de agregar nuevos elementos
 
-}
+   var searchInput = document.getElementById('search').value.toLowerCase();
 
-function retirarDinero(){
-    
+   console.log(movimientos);
+  
+   // Verificar si 'movimientos' está definido y es un array
+   if (Array.isArray(movimientos)) {
+       movimientos.forEach(function (movimiento) {
+           // Mostrar todos los movimientos si el campo de búsqueda está vacío
+           if (
+               movimiento &&
+               movimiento['concepto'] &&
+               movimiento['fecha'] &&
+               (searchInput === '' || 
+               movimiento['concepto'].toLowerCase().includes(searchInput) ||
+               movimiento['fecha'].toLowerCase().includes(searchInput))
+           ) {
+               let tipo = (movimiento['tipo'] == 'Ingreso') ? 'ingreso' : 'retiro';
+               let movimientoDiv = document.createElement("div");
+               movimientoDiv.className = 'movimiento ' + tipo;
+               movimientoDiv.innerHTML = "<p>Tipo: " + movimiento['tipo'] + "<br>" +
+                   "Cantidad: " + movimiento['cantidad'] + " euros<br>" +
+                   "Concepto: " + movimiento['concepto'] + "<br>" +
+                   "Fecha: " + movimiento['fecha'] + "</p>";
+               movimientoContainer.appendChild(movimientoDiv);
+           }
+       });
+   } else {
+       console.error("El array de movimientos no está definido o no es un array.");
+   }
 }

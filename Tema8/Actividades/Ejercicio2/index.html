@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="ajax.js"></script>
+        <title>Selección de Provincias y Municipios</title>
+    </head>
+    <body>
+        <h1>Selección de Provincias y Municipios</h1>
+
+        <label for="provincias">Provincias:</label>
+        <select id="provincias">
+            <option value="" selected>Seleccione una provincia</option>
+        </select>
+
+        <label for="municipios">Municipios:</label>
+        <select id="municipios">
+            <option value="" selected>Seleccione un municipio</option>
+        </select>
+
+        <!-- Cargamos los datos -->
+        <script>cargarDatos();</script>
+    </body>
+</html>

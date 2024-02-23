@@ -1,6 +1,6 @@
 [
     {
-        "saldoActual": 193,
+        "saldoActual": 203,
         "movimientos": [
             {
                 "tipo": "Ingreso",
@@ -13,6 +13,12 @@
                 "cantidad": 100,
                 "concepto": "Retiro cumplea\u00f1os",
                 "fecha": "17\/11\/2023"
+            },
+            {
+                "tipo": "Ingreso",
+                "cantidad": 10,
+                "concepto": "Ruina",
+                "fecha": "23\/2\/2024"
             }
         ]
     }

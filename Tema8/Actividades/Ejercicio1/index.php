@@ -8,6 +8,8 @@
     $saldoActual = $estadoCuenta["saldoActual"];
     $movimientos = $estadoCuenta["movimientos"];
 
+    echo json_encode(array("movimientos" => $movimientos));
+
     //Creamos un objeto con los datos de la cuenta bancaria, con el saldo actual.
     $cuenta = new Cuenta("Jorge", "Muñoz García", "45124434K", $saldoActual, activa:true);
 
@@ -17,6 +19,9 @@
         $concepto = $_POST['concepto1'];
 
         $cuenta->ingresarDinero($cantidadIngreso, $concepto);
+        echo "<script>
+                loadJSON();
+            </script>";
         header("Location: ./index.php");
     }
 
@@ -25,13 +30,18 @@
         $concepto = $_POST['concepto2'];
         
         $cuenta->retirarDinero($cantidadRetiro, $concepto);
+        echo "<script>
+                loadJSON();
+            </script>";
         header("Location: ./index.php");
     }
 
     include_once("./View/Assets/Templates/Apertura.php");
 ?>
         <script>
-            loadJSON();
+            document.addEventListener("DOMContentLoaded", function() {
+                loadJSON();
+            });
         </script>
 
         <h1>Bienvenido de nuevo, <?php echo $cuenta->getNombre()?>!</h1>
@@ -40,8 +50,16 @@
 
 <?php   
         include_once("./View/Assets/Templates/MovimientosForm.php");
-        include_once("./View/Assets/Templates/MovimientosContainer.php");
-    
+?>
+    <h2>Movimientos</h2>
+
+    <div class='buscador'>
+        <input type='text' placeholder='Buscar movimientos por nombre o fecha' id='search' name='search' oninput='cargarMovimientos()'>
+    </div>
+
+    <div id="movimientos"></div>        
+  
+<?php
     include_once("./View/Assets/Templates/Cierre.php");
 ?>
 

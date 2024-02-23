@@ -29,27 +29,6 @@
             return $datos[0];
         }
 
-        
-        /*public static function buscarMovimientos($terminoBusqueda){
-            $movimientos = array();
-        
-            $select = "SELECT * FROM producto WHERE nombre LIKE :terminoBusqueda OR descripcion LIKE :terminoBusqueda OR categorias LIKE :terminoBusqueda OR talla LIKE :terminoBusqueda OR precio LIKE :terminoBusqueda OR tipo LIKE :terminoBusqueda;";
-            $stmt = $conexion->prepare($select);
-        
-            $terminoBusqueda = "%$terminoBusqueda%";
-            $stmt->bindParam(':terminoBusqueda', $terminoBusqueda, PDO::PARAM_STR);
-        
-            $stmt->execute();
-        
-            $filas = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-            foreach($filas as $fila){
-                //array_push($movimientos, );
-            }
-        
-            return $movimientos;
-        }*/
-
         public function getNombre():string{
             return $this->nombre;
         }
