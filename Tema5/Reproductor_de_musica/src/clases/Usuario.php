@@ -1,7 +1,5 @@
 <?php
-
     require_once("Cancion.php");
-
 
     class Usuario{
         private string $username;

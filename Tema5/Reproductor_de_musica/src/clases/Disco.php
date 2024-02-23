@@ -1,5 +1,4 @@
 <?php
-
     class Disco{
         private string $id;
         private string $titulo;
