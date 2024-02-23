@@ -1,6 +1,6 @@
 [
     {
-        "saldoActual": 203,
+        "saldoActual": 213,
         "movimientos": [
             {
                 "tipo": "Ingreso",
@@ -18,6 +18,12 @@
                 "tipo": "Ingreso",
                 "cantidad": 10,
                 "concepto": "Ruina",
+                "fecha": "23\/2\/2024"
+            },
+            {
+                "tipo": "Ingreso",
+                "cantidad": 10,
+                "concepto": "Arreglo",
                 "fecha": "23\/2\/2024"
             }
         ]
