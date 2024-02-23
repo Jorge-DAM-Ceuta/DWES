@@ -1,11 +1,10 @@
 <?php
-    include_once("./Funciones.inc.php");
+include_once("./clases/Cancion.php");
 
-    session_start();
+session_start();
 
-    if(isset($_GET['id'])) {
-        $idCancion = urldecode($_GET['id']);
+if (isset($_GET['id'])) {
+    $idCancion = urldecode($_GET['id']);
 
-        eliminarCancion($idCancion);
-    }
-?>
+    Cancion::eliminarCancion($idCancion);
+}

@@ -331,5 +331,29 @@
         "favorita": false,
         "imagen": "",
         "audio": "..\/assets\/canciones\/The Blanguage.mp3"
+    },
+    {
+        "id": "29",
+        "titulo": "Tu Sabes La que te gusta",
+        "artista": "Paco",
+        "colaboracion": [
+            "paco,mustafa"
+        ],
+        "duracion": 0.32,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+        "audio": "..\/assets\/canciones\/ASTROTHUNDER.mp3"
+    },
+    {
+        "id": "30",
+        "titulo": "remix butron",
+        "artista": "German",
+        "colaboracion": [
+            "tito"
+        ],
+        "duracion": 0.05,
+        "favorita": false,
+        "imagen": "..\/assets\/imagenes\/imagen_defecto.jpg",
+        "audio": "..\/assets\/canciones\/Out West feat. Young Thug - Lil Wayne.mp3"
     }
 ]

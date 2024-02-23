@@ -1,23 +1,22 @@
 <?php
-    include_once("./Funciones.inc.php");
+    include_once("./clases/Cancion.php");
+    include_once("./clases/Usuario.php");
 
     session_start();
 
-    if(isset($_GET['id'])) {
+    if (isset($_GET['id'])) {
         $idCancion = urldecode($_GET['id']);
     }
 
-    $arrayJSON = decodificarCanciones();
-    $cancionActual = obtenerCancionJSON($arrayJSON, $idCancion);
+    $arrayJSON = Cancion::decodificarCanciones();
+    $cancionActual = Cancion::obtenerCancionJSON($arrayJSON, $idCancion);
 
-    aniadirCancionAFavoritos($_SESSION['usuario']['username'], $cancionActual);
+    Usuario::aniadirCancionAFavoritos($_SESSION['usuario']['username'], $cancionActual);
 
-    if(isset($_GET["ubicacion"])){
+    if (isset($_GET["ubicacion"])) {
         header("Location: Index.php");
         exit();
-    }else if(isset($_GET["nombreLista"])){
+    } else if (isset($_GET["nombreLista"])) {
         header("Location: Mostrar_lista.php?nombreLista=" . $_GET["nombreLista"]);
         exit();
     }
-    
-?>

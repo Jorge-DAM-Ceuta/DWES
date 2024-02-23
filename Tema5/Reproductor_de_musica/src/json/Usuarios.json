@@ -4,22 +4,8 @@
         "email": "jorgemugar12@hotmail.com",
         "password": "$argon2i$v=19$m=65536,t=4,p=1$bUZtZFR3R0Z3eEJqVk4weg$zGRYW1aeE5nHOfBUuQN+EIHVvNx6uAAIlIQQlYP0Ezw",
         "listas_reproduccion": {
-            "Favoritos": [
-                {
-                    "id": "4",
-                    "titulo": "Sicko mode",
-                    "artista": "Travis Scott",
-                    "colaboracion": [
-                        "Drake",
-                        "Swae Lee",
-                        "Big Hawk"
-                    ],
-                    "duracion": 5.13,
-                    "favorita": false,
-                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
-                    "audio": "..\/assets\/canciones\/SICKO MODE.mp3"
-                },
-                {
+            "Favoritos": {
+                "1": {
                     "id": "5",
                     "titulo": "R.I.P. Screw",
                     "artista": "Travis Scott",
@@ -31,19 +17,7 @@
                     "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
                     "audio": "..\/assets\/canciones\/R.I.P. SCREW.mp3"
                 },
-                {
-                    "id": "12",
-                    "titulo": "Astrothunder",
-                    "artista": "Travis Scott",
-                    "colaboracion": [
-                        ""
-                    ],
-                    "duracion": 2.23,
-                    "favorita": false,
-                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
-                    "audio": "..\/assets\/canciones\/ASTROTHUNDER.mp3"
-                },
-                {
+                "3": {
                     "id": "17",
                     "titulo": "Houstonfornication",
                     "artista": "Young thug",
@@ -55,7 +29,7 @@
                     "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
                     "audio": "..\/assets\/canciones\/HOUSTONFORNICATION.mp3"
                 },
-                {
+                "4": {
                     "id": "14",
                     "titulo": "Can't say",
                     "artista": "Travis Scott",
@@ -67,7 +41,7 @@
                     "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
                     "audio": "..\/assets\/canciones\/CANT SAY.mp3"
                 },
-                {
+                "5": {
                     "id": "19",
                     "titulo": "With Them",
                     "artista": "Young thug",
@@ -79,7 +53,7 @@
                     "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
                     "audio": "..\/assets\/canciones\/With Them.mp3"
                 },
-                {
+                "6": {
                     "id": "20",
                     "titulo": "Memo",
                     "artista": "Young thug",
@@ -91,7 +65,7 @@
                     "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
                     "audio": "..\/assets\/canciones\/Memo.mp3"
                 },
-                {
+                "7": {
                     "id": "23",
                     "titulo": "Digits",
                     "artista": "Young thug",
@@ -103,7 +77,7 @@
                     "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
                     "audio": "..\/assets\/canciones\/Digits.mp3"
                 },
-                {
+                "8": {
                     "id": "26",
                     "titulo": "Problem",
                     "artista": "Young thug",
@@ -115,19 +89,7 @@
                     "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
                     "audio": "..\/assets\/canciones\/Problem.mp3"
                 },
-                {
-                    "id": "27",
-                    "titulo": "Out West",
-                    "artista": "Lil Wayne",
-                    "colaboracion": [
-                        "Young Thug"
-                    ],
-                    "duracion": 3.54,
-                    "favorita": false,
-                    "imagen": "..\/assets\/imagenes\/No ceilings 3.png",
-                    "audio": "..\/assets\/canciones\/Out West feat. Young Thug - Lil Wayne.mp3"
-                },
-                {
+                "10": {
                     "id": "28",
                     "titulo": "The Blanguage",
                     "artista": "Young thug",
@@ -139,7 +101,7 @@
                     "imagen": "",
                     "audio": "..\/assets\/canciones\/The Blanguage.mp3"
                 },
-                {
+                "11": {
                     "id": "6",
                     "titulo": "Stop trying to be god",
                     "artista": "Travis Scott",
@@ -153,7 +115,7 @@
                     "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
                     "audio": "..\/assets\/canciones\/STOP TRYING TO BE GOD.mp3"
                 },
-                {
+                "12": {
                     "id": "9",
                     "titulo": "Wake up",
                     "artista": "Travis Scott",
@@ -165,7 +127,7 @@
                     "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
                     "audio": "..\/assets\/canciones\/WAKE UP.mp3"
                 },
-                {
+                "13": {
                     "id": "13",
                     "titulo": "Yosemite",
                     "artista": "Travis Scott",
@@ -178,7 +140,7 @@
                     "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
                     "audio": "..\/assets\/canciones\/YOSEMITE.mp3"
                 },
-                {
+                "14": {
                     "id": "24",
                     "titulo": "Worth It",
                     "artista": "Young thug",
@@ -189,22 +151,8 @@
                     "favorita": false,
                     "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
                     "audio": "..\/assets\/canciones\/Worth It.mp3"
-                }
-            ],
-            "Coche": {
-                "0": {
-                    "id": "19",
-                    "titulo": "With Them",
-                    "artista": "Young thug",
-                    "colaboracion": [
-                        ""
-                    ],
-                    "duracion": 3.18,
-                    "favorita": false,
-                    "imagen": "..\/assets\/imagenes\/Slime Season 3.jpg",
-                    "audio": "..\/assets\/canciones\/With Them.mp3"
                 },
-                "2": {
+                "16": {
                     "id": "12",
                     "titulo": "Astrothunder",
                     "artista": "Travis Scott",
@@ -215,6 +163,20 @@
                     "favorita": false,
                     "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
                     "audio": "..\/assets\/canciones\/ASTROTHUNDER.mp3"
+                },
+                "17": {
+                    "id": "4",
+                    "titulo": "Sicko mode",
+                    "artista": "Travis Scott",
+                    "colaboracion": [
+                        "Drake",
+                        "Swae Lee",
+                        "Big Hawk"
+                    ],
+                    "duracion": 5.13,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+                    "audio": "..\/assets\/canciones\/SICKO MODE.mp3"
                 }
             }
         }
@@ -223,6 +185,64 @@
         "username": "Admin",
         "email": "10113@cifpceuta.es",
         "password": "$argon2i$v=19$m=65536,t=4,p=1$YzE4Q0ZjU0F0Li9mLnVsSQ$SmkO0V7e3t1bNr31cCn4spT1Rz+1iacaDzlH2vR9FLo",
+        "listas_reproduccion": {
+            "Favoritos": []
+        }
+    },
+    {
+        "username": "nuevousuario",
+        "email": "nuevo@gmail.com",
+        "password": "$argon2i$v=19$m=65536,t=4,p=1$RnVlcGZ2WWVjeVZKVThJcQ$z88e4X1WWCa00mAolmn8Ag8ZJQwxPtsIdDsPl0T3GRw",
+        "listas_reproduccion": {
+            "Favoritos": {
+                "3": {
+                    "id": "30",
+                    "titulo": "remix butron",
+                    "artista": "German",
+                    "colaboracion": [
+                        "tito"
+                    ],
+                    "duracion": 0.05,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/imagen_defecto.jpg",
+                    "audio": "..\/assets\/canciones\/Out West feat. Young Thug - Lil Wayne.mp3"
+                }
+            },
+            "paco": [],
+            "remix tucan": [
+                {
+                    "id": "3",
+                    "titulo": "Carousel",
+                    "artista": "Travis Scott",
+                    "colaboracion": [
+                        "Frank Ocean"
+                    ],
+                    "duracion": 3,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+                    "audio": "..\/assets\/canciones\/CAROUSEL.mp3"
+                },
+                {
+                    "id": "4",
+                    "titulo": "Sicko mode",
+                    "artista": "Travis Scott",
+                    "colaboracion": [
+                        "Drake",
+                        "Swae Lee",
+                        "Big Hawk"
+                    ],
+                    "duracion": 5.13,
+                    "favorita": false,
+                    "imagen": "..\/assets\/imagenes\/Astroworld.jpg",
+                    "audio": "..\/assets\/canciones\/SICKO MODE.mp3"
+                }
+            ]
+        }
+    },
+    {
+        "username": "ElPiezass",
+        "email": "diwi@hotmail.com",
+        "password": "$argon2i$v=19$m=65536,t=4,p=1$MWg5Z3JNTlE1SzQzNkZnYg$jZ1bMUmHZ26f908JcgLT79iA3\/zD7hlkYQrzAT8fVXI",
         "listas_reproduccion": {
             "Favoritos": []
         }

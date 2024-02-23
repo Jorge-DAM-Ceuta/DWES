@@ -1,9 +1,8 @@
 <?php
-    include_once("./Funciones.inc.php");
+include_once("./clases/Disco.php");
 
-    if(isset($_GET['id'])) {
-        $idDisco = urldecode($_GET['id']);
+if (isset($_GET['id'])) {
+    $idDisco = urldecode($_GET['id']);
 
-        eliminarDisco($idDisco);
-    }
-?>
+    Disco::eliminarDisco($idDisco);
+}
