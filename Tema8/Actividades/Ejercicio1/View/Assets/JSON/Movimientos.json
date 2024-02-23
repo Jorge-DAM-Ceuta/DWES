@@ -1,0 +1,19 @@
+[
+    {
+        "saldoActual": 193,
+        "movimientos": [
+            {
+                "tipo": "Ingreso",
+                "cantidad": 300,
+                "concepto": "Reserva M\u00e1ster",
+                "fecha": "17\/11\/2023"
+            },
+            {
+                "tipo": "Retiro",
+                "cantidad": 100,
+                "concepto": "Retiro cumplea\u00f1os",
+                "fecha": "17\/11\/2023"
+            }
+        ]
+    }
+]
