@@ -87,6 +87,24 @@ p {
     text-decoration: underline;
 }
 
+.paginacion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    line-height: 50px;
+    margin-top: -40px;
+
+    & a{
+        display: inline-block;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 1.5em;
+        font-weight: bold;
+        color: blue;
+    }
+}
+
 footer {
     text-align: center;
     padding: 10px;

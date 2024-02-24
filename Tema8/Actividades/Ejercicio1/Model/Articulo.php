@@ -15,23 +15,29 @@
             $this->fecha = $fecha;
         }
 
-        public static function getArticulos(){
+        public static function getArticulos($pagina = 1, $articulosPorPagina = 6){
             $conexion = BlogDB::conectarDB();
-            $articulos = array();
-            
-            $select = "SELECT * FROM articulo;";
-            $stmt = $conexion->prepare($select);
-            $stmt->execute();
 
+            $articulos = array();
+        
+            $inicio = ($pagina - 1) * $articulosPorPagina;
+        
+            $select = "SELECT * FROM articulo LIMIT :inicio, :articulosPorPagina;";
+
+            $stmt = $conexion->prepare($select);
+            $stmt->bindParam(':inicio', $inicio, PDO::PARAM_INT);
+            $stmt->bindParam(':articulosPorPagina', $articulosPorPagina, PDO::PARAM_INT);
+            $stmt->execute();
+        
             //Obtenemos todos los resultados en un array asociativo.
             $filas = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+        
             //Recorremos cada resultado para crear un objeto con los datos y guardarlos en el array.
             foreach($filas as $fila){
                 $articulo = new Articulo($fila['titulo'], $fila['contenido'], $fila['fecha'], $fila['id']);
                 array_push($articulos, $articulo);
             }
-
+        
             //Devolvemos el array de objetos.
             return $articulos;
         }
@@ -54,6 +60,18 @@
             }else{
                 return "No se ha encontrado ningún articulo con ese id.";
             }
+        }
+
+        public static function getNumeroArticulos(){
+            $conexion = BlogDB::conectarDB();
+
+            $select = "SELECT COUNT(id) as numeroArticulos FROM articulo;";
+
+            $stmt = $conexion->prepare($select);
+            $stmt->execute();
+        
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $resultado['numeroArticulos'];
         }
 
         public function insert(){
