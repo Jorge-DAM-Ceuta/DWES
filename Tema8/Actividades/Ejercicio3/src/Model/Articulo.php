@@ -1,6 +1,7 @@
 <?php
     namespace JorgeDwes\Blog\Model;
     use JorgeDwes\Blog\Model\BlogDB;
+    use PDO, PDOException;
 
     //Esta clase servirá como plantilla para realizar operaciones CRUD en su tabla correspondiente.
     class Articulo{
