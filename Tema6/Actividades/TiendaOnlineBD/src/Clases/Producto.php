@@ -1,4 +1,5 @@
 <?php
+    include_once("TiendaDB.php");
     include_once("Usuario.php");
 
     ob_start();
@@ -45,7 +46,7 @@
         }
         
         public static function obtenerProductos(){
-            $conexionBD = $conexionBD = Usuario::obtenerConexionBD();
+            $conexionBD = $conexionBD = TiendaDB::obtenerConexionBD();
             //Obtenemos los productos de la base de datos
             $consultaProductos = $conexionBD->query("SELECT * FROM producto;");
 
@@ -66,7 +67,7 @@
         }
 
         public static function mostrarDetalles($productos){
-            $conexionBD = Usuario::obtenerConexionBD();
+            $conexionBD = TiendaDB::obtenerConexionBD();
             $imagen = "";
 
             foreach ($productos as $producto) {
@@ -132,7 +133,7 @@
             foreach ($productos as $producto) {
                 $nombreProducto = $producto->getNombre();
 
-                $conexionBD = Usuario::obtenerConexionBD();
+                $conexionBD = TiendaDB::obtenerConexionBD();
 
                 //Realiza una consulta para obtener la imagen del producto mediante el id de la imagen.
                 $consultaImagen = $conexionBD->query("SELECT imagen FROM imagen WHERE id = " . $producto->getImagen() . ";");
@@ -167,7 +168,7 @@
         }
 
         public static function insertarImagen($producto){
-            $conexionBD = Usuario::obtenerConexionBD();
+            $conexionBD = TiendaDB::obtenerConexionBD();
 
             // Asegúrate de verificar si la imagen está presente antes de intentar insertar.
             if (!empty($producto->getImagen())) {
@@ -186,7 +187,7 @@
         }
 
         public static function insertarProducto($producto, $ultimoID){
-            $conexionBD = Usuario::obtenerConexionBD();
+            $conexionBD = TiendaDB::obtenerConexionBD();
             $insertarProducto = $conexionBD->query("INSERT INTO producto (`nombre`, `descripcion`, `precio`, `idimagen`) VALUES ('" . $producto->getNombre() . "','" . $producto->getDescripcion() . "','" . $producto->getPrecio() . "','" . $ultimoID . "');");
             if ($insertarProducto == true) {
                 $conexionBD->close();
@@ -200,7 +201,7 @@
         }
 
         public static function editarProducto($nombreProducto, $producto){
-            $conexionBD = Usuario::obtenerConexionBD();
+            $conexionBD = TiendaDB::obtenerConexionBD();
 
             // Obtén el ID de la imagen actual asociada al producto.
             $consultaIdImagen = $conexionBD->query("SELECT idimagen FROM producto WHERE nombre='$nombreProducto';");
@@ -238,7 +239,7 @@
 
 
         public static function eliminarProducto($nombreProducto){
-            $conexionBD = $conexionBD = Usuario::obtenerConexionBD();
+            $conexionBD = $conexionBD = TiendaDB::obtenerConexionBD();
 
             //Se realiza la operación Delete para el nombre obtenido.
             $eliminarProducto = $conexionBD->query("DELETE FROM producto WHERE nombre='$nombreProducto';");
@@ -261,7 +262,7 @@
             foreach ($productos as $producto) {
                 $nombreProducto = $producto->getNombre();
 
-                $conexionBD = $conexionBD = Usuario::obtenerConexionBD();
+                $conexionBD = $conexionBD = TiendaDB::obtenerConexionBD();
 
                 //Realiza una consulta para obtener la imagen del producto mediante el id de la imagen.
                 $consultaImagen = $conexionBD->query("SELECT imagen FROM imagen WHERE id = " . $producto->getImagen() . ";");
@@ -300,7 +301,7 @@
                     foreach ($carrito as $nombreProducto => $detalles) {
                         $cantidad = $detalles['cantidad'];
                         foreach ($productos as $producto) {
-                            $conexionBD = $conexionBD = Usuario::obtenerConexionBD();
+                            $conexionBD = $conexionBD = TiendaDB::obtenerConexionBD();
                             //Realiza una consulta para obtener la imagen del producto mediante el id de la imagen.
                             $consultaImagen = $conexionBD->query("SELECT imagen FROM imagen WHERE id = " . $producto->getImagen() . ";");
 
