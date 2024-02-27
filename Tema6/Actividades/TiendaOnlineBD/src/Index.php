@@ -1,11 +1,11 @@
 <?php
-    include_once("./Funciones.inc.php");
-    
+    require_once("./Clases/Producto.php");
+
     //Se inicia la sesión.
     session_start();
 
     //Si la sesión usuario no contiene nada se redirige a iniciar sesión.
-    if (!isset($_SESSION['usuario']) || !$_SESSION['usuario']) {
+    if(!isset($_SESSION['usuario']) || !$_SESSION['usuario']){
         header("Location: Iniciar_sesion.php");
         exit();
     }
@@ -14,8 +14,7 @@
     $rolUsuario = isset($_SESSION['usuario']['role']) ? $_SESSION['usuario']['role'] : '';
 
     //Se obtienen los productos de la base de datos para mostrarlos mediante la estructura del template.
-    $productos = obtenerProductos();
+    $productos = Producto::obtenerProductos();
 
     //Se incluye el template para mostrar la vista.
-    include_once("../templates/Index.inc.php");
-?>
+    include_once("Templates/Index.inc.php");
