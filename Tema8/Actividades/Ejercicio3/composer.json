@@ -1,0 +1,15 @@
+{
+    "name": "jorge_dwes/blog",
+    "description": "Blog",
+    "autoload": {
+        "psr-4": {
+            "JorgeDwes\\Blog\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jorge"
+        }
+    ],
+    "require": {}
+}
