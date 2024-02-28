@@ -15,14 +15,11 @@
             </header>
             
             <div id='filtro'>
-                <input type='text' id='busqueda' oninput='filtrarArticulos()' placeholder='Buscar artículo...'>
+                <input type='text' id='busqueda' oninput='filtrarArticulos()' placeholder='Buscar artículo por título, categoría o contenido...'>
                 <label>Categorías disponibles: </label>
                 <select id='categorias'>
-                    <option value='' selected>Selecciona una categoría</option>";
-
-            include_once("Views/Categorias.php");
-
-            echo "</select>
+                
+                </select>
             </div>
             
             <div id='articulos-lista'>";

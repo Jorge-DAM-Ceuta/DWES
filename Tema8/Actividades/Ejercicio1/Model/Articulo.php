@@ -44,7 +44,7 @@
             $conexion = BlogDB::conectarDB();
             $articulos = array();
 
-            $select = "SELECT * FROM articulo WHERE titulo LIKE :terminoBusqueda OR contenido LIKE :terminoBusqueda;";
+            $select = "SELECT * FROM articulo WHERE titulo LIKE :terminoBusqueda OR categoria LIKE :terminoBusqueda  OR contenido LIKE :terminoBusqueda;";
             $stmt = $conexion->prepare($select);
 
             $terminoBusqueda = "%$terminoBusqueda%";
@@ -83,16 +83,18 @@
         }
 
         public static function getCategorias(){
-            $conexion = BlogDB::conectarDB();
+            header('Content-Type: application/json');
 
+            $conexion = BlogDB::conectarDB();
+    
             $query = "SELECT DISTINCT categoria FROM articulo;";
             $stmt = $conexion->prepare($query);
             $stmt->execute();
-
+    
             $categorias = array();
-            
+    
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                $categorias[] = $row['categoria'];
+                array_push($categorias, $row['categoria']);
             }
 
             return $categorias;
