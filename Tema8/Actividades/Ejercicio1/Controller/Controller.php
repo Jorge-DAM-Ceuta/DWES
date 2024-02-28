@@ -29,12 +29,13 @@
     //Insertar un articulo
     if(isset($_POST["insertar"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
         $titulo = $_POST["titulo"];
+        $categoria = $_POST["categoria"];
         $contenido = $_POST["contenido"];
 
         $localtime = localtime(time(), true);
         $fechaActual = $localtime["tm_year"] + 1900 . "-" . $localtime["tm_mon"] + 1 . "-" . $localtime["tm_mday"] . " " . $localtime["tm_hour"] . ":" . $localtime["tm_min"] . ":" . $localtime["tm_sec"];
 
-        $articulo = new Articulo($titulo, $contenido, $fechaActual);
+        $articulo = new Articulo($titulo, $categoria, $contenido, $fechaActual);
         $articulo->insert();
 
         header("Location: ../Views/InsertarForm.php?ok=true");
