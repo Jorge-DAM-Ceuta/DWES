@@ -5,12 +5,14 @@
     class Articulo{
         private string $id;
         private string $titulo;
+        private string $categoria;
         private string $contenido;
         private string $fecha;
 
-        public function __construct($titulo, $contenido, $fecha, $id=""){
+        public function __construct($titulo, $categoria, $contenido, $fecha, $id=""){
             $this->id = $id;
             $this->titulo = $titulo;
+            $this->categoria = $categoria;
             $this->contenido = $contenido;
             $this->fecha = $fecha;
         }
@@ -30,7 +32,7 @@
         
             //Recorremos cada resultado para crear un objeto con los datos y guardarlos en el array.
             foreach($filas as $fila){
-                $articulo = new Articulo($fila['titulo'], $fila['contenido'], $fila['fecha'], $fila['id']);
+                $articulo = new Articulo($fila['titulo'], $fila['categoria'], $fila['contenido'], $fila['fecha'], $fila['id']);
                 array_push($articulos, $articulo);
             }
         
@@ -53,7 +55,7 @@
             $filas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             foreach($filas as $fila){
-                $articulo = new Articulo($fila['titulo'], $fila['contenido'], $fila['fecha'], $fila['id']);
+                $articulo = new Articulo($fila['titulo'], $fila['categoria'], $fila['contenido'], $fila['fecha'], $fila['id']);
                 array_push($articulos, $articulo);
             }
 
@@ -74,7 +76,7 @@
 
             //Si se ha encontrado un artículo con ese id devolvemos un nuevo objeto Articulo con los datos obtenidos.
             if($resultado){
-                return new Articulo($resultado['titulo'], $resultado['contenido'], $resultado['fecha'], $resultado['id']);
+                return new Articulo($resultado['titulo'], $resultado['categoria'], $resultado['contenido'], $resultado['fecha'], $resultado['id']);
             }else{
                 return "No se ha encontrado ningún articulo con ese id.";
             }
@@ -95,11 +97,12 @@
         public function insert(){
             $conexion = BlogDB::conectarDB();
             
-            $insert = "INSERT INTO articulo (titulo, contenido, fecha) VALUES (:titulo, :contenido, :fecha);";
+            $insert = "INSERT INTO articulo (titulo, categoria, contenido, fecha) VALUES (:titulo, :categoria, :contenido, :fecha);";
             
             try{
                 $stmt = $conexion->prepare($insert);
                 $stmt->bindParam(":titulo", $this->titulo);
+                $stmt->bindParam(":categoria", $this->categoria);
                 $stmt->bindParam(":contenido", $this->contenido);
                 $stmt->bindParam(":fecha", $this->fecha);
 
@@ -141,6 +144,13 @@
         }
         public function setTitulo($titulo){
             $this->titulo = $titulo;
+        }
+
+        public function getCategoria(){
+            return $this->categoria;
+        }
+        public function setCategoria($categoria){
+            $this->categoria = $categoria;
         }
 
         public function getContenido(){
