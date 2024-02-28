@@ -4,5 +4,8 @@
     // Obtenemos todas las categorías de los artículos.
     $categorias = Articulo::getCategorias();
 
-    echo json_encode($categorias);
+    // Generamos las opciones del select.
+    foreach($categorias as $categoria){
+        echo "<option value='" . $categoria . "'>" . $categoria . "</option>";
+    }
 ?>
