@@ -1,17 +1,27 @@
 function filtrarArticulos() {
     var input = document.getElementById("busqueda");
-    var filter = input.value.toUpperCase();
-    var articulos = document.getElementsByClassName("articulo");
+    var filter = input.value.trim();  
+    var contenedor = document.getElementById("articulos-lista"); 
 
-    for (var i = 0; i < articulos.length; i++) {
-        var titulo = articulos[i].getElementsByTagName("h2")[0].innerText.toUpperCase();
-        var contenido = articulos[i].getElementsByTagName("p")[0].innerText.toUpperCase();
-        var fecha = articulos[i].getElementsByClassName("fecha")[0].innerText.toUpperCase();
+    var scrollPosition = document.documentElement.scrollTop;
 
-        if (titulo.includes(filter) || contenido.includes(filter) || fecha.includes(filter)) {
-            articulos[i].style.display = "";
-        } else {
-            articulos[i].style.display = "none";
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                contenedor.innerHTML = xhr.responseText;
+
+                setTimeout(function() {
+                    document.documentElement.scrollTop = scrollPosition;
+                }, 0);
+            
+            } else {
+                console.error("Error en la solicitud AJAX");
+            }
         }
-    }
+    };
+
+    xhr.open("GET", "Views/Articulos.php?search=" + encodeURIComponent(filter), true);
+    xhr.send();
 }

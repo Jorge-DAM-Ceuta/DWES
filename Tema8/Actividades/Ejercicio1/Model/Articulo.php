@@ -15,18 +15,14 @@
             $this->fecha = $fecha;
         }
 
-        public static function getArticulos($pagina = 1, $articulosPorPagina = 6){
+        public static function getArticulos(){
             $conexion = BlogDB::conectarDB();
 
             $articulos = array();
         
-            $inicio = ($pagina - 1) * $articulosPorPagina;
-        
-            $select = "SELECT * FROM articulo LIMIT :inicio, :articulosPorPagina;";
+            $select = "SELECT * FROM articulo;";
 
             $stmt = $conexion->prepare($select);
-            $stmt->bindParam(':inicio', $inicio, PDO::PARAM_INT);
-            $stmt->bindParam(':articulosPorPagina', $articulosPorPagina, PDO::PARAM_INT);
             $stmt->execute();
         
             //Obtenemos todos los resultados en un array asociativo.
@@ -39,6 +35,28 @@
             }
         
             //Devolvemos el array de objetos.
+            return $articulos;
+        }
+
+        public static function buscarArticulos($terminoBusqueda){
+            $conexion = BlogDB::conectarDB();
+            $articulos = array();
+
+            $select = "SELECT * FROM articulo WHERE titulo LIKE :terminoBusqueda OR contenido LIKE :terminoBusqueda;";
+            $stmt = $conexion->prepare($select);
+
+            $terminoBusqueda = "%$terminoBusqueda%";
+            $stmt->bindParam(':terminoBusqueda', $terminoBusqueda, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            $filas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach($filas as $fila){
+                $articulo = new Articulo($fila['titulo'], $fila['contenido'], $fila['fecha'], $fila['id']);
+                array_push($articulos, $articulo);
+            }
+
             return $articulos;
         }
 

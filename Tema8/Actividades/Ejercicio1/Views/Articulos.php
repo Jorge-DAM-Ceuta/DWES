@@ -1,20 +1,17 @@
-<div class="articulos-container">
-    <div id="filtro">
-        <input type="text" id="busqueda" oninput="filtrarArticulos()" placeholder="Buscar artículo...">
-    </div>
-    
-    <div id="articulos-lista">
-        <?php include_once("Views/Paginacion.php"); ?>
-    </div>
+<?php 
+    include_once(__DIR__ . "/../Model/Articulo.php");
+?>
 
-    <?php
-        $totalArticulos = Articulo::getNumeroArticulos();
-        $totalPaginas = ceil($totalArticulos / 6);
+<?php 
+    $terminoBusqueda = isset($_GET['search']) ? trim($_GET['search']) : '';
+    $articulos = $terminoBusqueda ? Articulo::buscarArticulos($terminoBusqueda) : Articulo::getArticulos();
 
-        echo "<div class='paginacion'>";
-        for($i = 1; $i <= $totalPaginas; $i++){
-            echo "<a href='index.php?pagina=$i'>$i</a>";
-        }
-        echo "</div>";
-    ?>
-</div>
+    foreach($articulos as $articulo){
+        echo "<div class='articulo'>
+                <h2>" . $articulo->getTitulo() . "</h2>
+                <p>" . $articulo->getContenido() . "</p>
+                <p class='fecha'>" . $articulo->getFecha() . "</p>
+                <a class='eliminar' href='Controller/Controller.php?id=" . $articulo->getID() . "&numOperacion=2'>Eliminar artículo</a>
+            </div>";
+    }
+?>

@@ -1,5 +1,6 @@
 <?php    
-    echo "      <footer>MiBlog - Todos los derechos reservados © 2024</footer>
+    echo "      </div>
+                <footer>MiBlog - Todos los derechos reservados © 2024</footer>
             </body>
         </html>";
 ?>

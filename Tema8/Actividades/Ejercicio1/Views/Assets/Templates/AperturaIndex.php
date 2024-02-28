@@ -12,5 +12,11 @@
             <header>
                 <h1>Artículos de interés</h1>
                 <a class='publicar' href='Views/InsertarForm.php'>Publicar artículo</a>            
-            </header>";
+            </header>
+            
+            <div id='filtro'>
+                <input type='text' id='busqueda' oninput='filtrarArticulos()' placeholder='Buscar artículo...'>
+            </div>
+            
+            <div id='articulos-lista'>";
 ?>
