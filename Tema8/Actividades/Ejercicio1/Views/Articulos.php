@@ -1,8 +1,6 @@
 <?php 
     include_once(__DIR__ . "/../Model/Articulo.php");
-?>
 
-<?php 
     $terminoBusqueda = isset($_GET['search']) ? trim($_GET['search']) : '';
     $articulos = $terminoBusqueda ? Articulo::buscarArticulos($terminoBusqueda) : Articulo::getArticulos();
 

@@ -16,6 +16,13 @@
             
             <div id='filtro'>
                 <input type='text' id='busqueda' oninput='filtrarArticulos()' placeholder='Buscar artículo...'>
+                <label>Categorías disponibles: </label>
+                <select id='categorias'>
+                    <option value='' selected>Selecciona una categoría</option>";
+
+            include_once("Views/Categorias.php");
+
+            echo "</select>
             </div>
             
             <div id='articulos-lista'>";

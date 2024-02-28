@@ -82,6 +82,22 @@
             }
         }
 
+        public static function getCategorias(){
+            $conexion = BlogDB::conectarDB();
+
+            $query = "SELECT DISTINCT categoria FROM articulo;";
+            $stmt = $conexion->prepare($query);
+            $stmt->execute();
+
+            $categorias = array();
+            
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $categorias[] = $row['categoria'];
+            }
+
+            return $categorias;
+        }
+
         public static function getNumeroArticulos(){
             $conexion = BlogDB::conectarDB();
 
