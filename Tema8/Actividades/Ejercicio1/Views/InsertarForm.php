@@ -17,6 +17,12 @@
         </p>
 
         <p>
+            <label>Categoría:</label> 
+            <br/>
+            <input type="text" name="categoria">
+        </p>
+
+        <p>
             <label>Contenido:</label>
             <br/>
             <textarea type="text" name="contenido"></textarea>
